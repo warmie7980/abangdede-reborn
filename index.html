@@ -207,6 +207,18 @@ header{
     margin-top:15px;
     padding-top:5px;
 }
+.blink-red{
+    color:#FF0000;
+    font-family:'Courier New', monospace;
+    font-size:14px;
+    white-space:nowrap;
+    animation:blinkRed 0.8s infinite;
+}
+
+@keyframes blinkRed{
+    0%,50%,100%{opacity:1;}
+    25%,75%{opacity:0;}
+}
 <div class="video-dropdown">
     <button onclick="toggleMenu()">MENU ▼</button>
 
@@ -423,30 +435,14 @@ function simulateAccessSequence(element, callback){
   }
   next();
 }
-function startTypingLoop() {
+function startBlinkText(){
   const el = document.getElementById("typingText");
 
-  const text = "SISTEM MONITORING AKTIF... KONEKSI AMAN... MEMUAT DATA... ";
-  let i = 0;
-
-  function type() {
-    if (i <= text.length) {
-      el.textContent = text.substring(0, i);
-      i++;
-      setTimeout(type, 70);
-    } else {
-      // reset dan ulang lagi
-      setTimeout(() => {
-        i = 0;
-        el.textContent = "";
-        type();
-      }, 800);
-    }
-  }
-
-  type();
+  el.className = "blink-red";
+  el.textContent = "SISTEM MONITORING AKTIF... KONEKSI AMAN... MEMUAT DATA...";
 }
-window.addEventListener("load", startTypingLoop);
+
+window.addEventListener("load", startBlinkText);
 /* ---------- Tampilkan biodata saat klik ---------- */
 function displayAgent(agent){
   // convert some common fields safely
