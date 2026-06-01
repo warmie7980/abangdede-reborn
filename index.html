@@ -5,12 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>PORTAL MONITORING TERMINAL — DATABASE</title>
 <style>
-@font-face {
-    font-family: 'Brillotus';
-    src: url('Brillotus.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+/* ---------- STYLING (tetap sesuai desain kamu) ---------- */
 body{
     font-family: 'Courier New', monospace;        
     background-image:url('background2.jpg');
@@ -23,6 +18,10 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 150vh;
+@font-face {
+    font-family: 'Brillotus';
+    src: url('Brillotus.ttf') format('truetype');
+}
 }
 #bg-video { position: fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; opacity:0.6; }
 
@@ -81,9 +80,14 @@ input, select { background:transparent; border:1px solid #00FF00; color:#00FF00;
 }
 
 .box-kiri{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width:30%;
+    height:300px;
+    background:rgba(0,0,0,0.25);
+    border:1px solid rgba(0,255,0,0.4);
+    border-radius:5px;
+    backdrop-filter:blur(4px);
+    overflow:hidden; /* penting */
+    position:relative;
 }
 .typing-text{
     position:absolute;
@@ -94,11 +98,10 @@ input, select { background:transparent; border:1px solid #00FF00; color:#00FF00;
 }
 
 #monitor-video{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;   /* 🔥 ini bikin video tetap di tengah */
-    display: block;
-    background: #000;      /* biar kalau ada sisa ruang gak kosong putih */
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
 }
 
 .box-kanan{
@@ -209,13 +212,6 @@ header{
 @keyframes blinkRed{
     0%,50%,100%{opacity:1;}
     25%,75%{opacity:0;}
-}
-.text {
-    font-family: 'Brillotus', cursive;
-    font-size: 50px;
-    margin-bottom: 0;
-    line-height: 0.5;
-    color: #C0C0C0;
 }
 <div class="video-dropdown">
     <button onclick="toggleMenu()">MENU ▼</button>
