@@ -134,6 +134,34 @@ function tampilkanTanggal() {
 setInterval(tampilkanTanggal, 1000);
 tampilkanTanggal();
 </script>
+<script>
+function forceFullscreen(){
+    const elem = document.documentElement;
 
+    if(elem.requestFullscreen){
+        elem.requestFullscreen().catch(()=>{});
+    }else if(elem.webkitRequestFullscreen){
+        elem.webkitRequestFullscreen();
+    }else if(elem.msRequestFullscreen){
+        elem.msRequestFullscreen();
+    }
+}
+
+window.addEventListener("load", ()=>{
+    setTimeout(forceFullscreen,500);
+});
+
+document.addEventListener("click", ()=>{
+    forceFullscreen();
+},{once:true});
+
+document.addEventListener("touchstart", ()=>{
+    forceFullscreen();
+},{once:true});
+
+window.addEventListener("pageshow", ()=>{
+    setTimeout(forceFullscreen,300);
+});
+</script>
 </body>
 </html>
