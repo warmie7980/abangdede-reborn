@@ -68,112 +68,35 @@ input, select { background:transparent; border:1px solid #00FF00; color:#00FF00;
   width: 150px; /* sesuaikan ukuran */
   height: auto;
 }
-.dashboard-boxes{
+.menu-boxes{
     display:flex;
+    justify-content:center;
     gap:20px;
-    padding:20px;
+    margin-top:40px;
+    flex-wrap:wrap;
 }
 
-.box-kiri{
-    width:30%;
-    height:300px;
+.menu-box{
+    width:220px;
+    height:180px;
+    border:1px solid #00FF00;
     background:rgba(0,0,0,0.25);
-    border:1px solid rgba(0,255,0,0.4);
-    border-radius:5px;
     backdrop-filter:blur(4px);
-    overflow:hidden; /* penting */
-    position:relative;
-}
-.typing-text{
-    position:absolute;
-    top:10px;   /* atas video (ubah ke bottom:10px kalau mau bawah) */
-    left:10px;
-    right:10px;
-    z-index:5;
-    color:#00FF00;
-    font-family:'Courier New', monospace;
-    font-size:14px;
-    white-space:nowrap;
-    overflow:hidden;
-    border-right:2px solid #00FF00;
-}
-
-#monitor-video{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    display:block;
-}
-
-.box-kanan{
-    width:70%;
-    height:500px;
-    background:rgba(0,0,0,0.25);
-    border:1px solid rgba(0,255,0,0.4);
     border-radius:10px;
-    backdrop-filter:blur(4px);
-    position:relative; /* wajib */
-}
-
-.judul-box-kanan{
-    position:absolute;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-    color:#FFD500;
-    font-family:'Courier New', monospace;
-    font-size:30px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#00FF00;
+    font-size:20px;
     font-weight:bold;
-    text-align:center;    
-}
-.subjudul-box-kanan{
-    position:absolute;
-    top:60px; /* posisi di bawah judul */
-    left:50%;
-    transform:translateX(-50%);
-    color:#00FF00;
-    font-family:'Courier New', monospace;
-    font-size:14px; /* lebih kecil */
-    text-align:center;
-    letter-spacing:2px;
-    white-space:nowrap;
-}
-
-@media(max-width:768px){
-    .dashboard-boxes{
-        flex-direction:column;
-    }
-
-    .box-kiri,
-    .box-kanan{
-        width:100%;
-    }
-}
-.video-dropdown{
-    margin-top:10px;
-    position:relative;
-}
-
-.video-dropdown button{
-    width:100%;
-    padding:10px;
-    background:transparent;
-    border:1px solid #00FF00;
-    color:#00FF00;
     cursor:pointer;
+    transition:0.3s;
 }
 
-.dropdown-content{
-    display:none;
-    flex-direction:column;
-    gap:5px;
-    margin-top:5px;
-}
-
-.dropdown-content button{
-    background:rgba(0,0,0,0.3);
-    border:1px solid #00FF00;
-    color:#00FF00;
+.menu-box:hover{
+    background:#00FF00;
+    color:#000;
+    box-shadow:0 0 20px #00FF00;
 }
 <div class="video-dropdown">
     <button onclick="toggleMenu()">MENU ▼</button>
