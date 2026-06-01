@@ -76,6 +76,14 @@ input, select { background:transparent; border:1px solid #00FF00; color:#00FF00;
     flex-wrap:wrap;
 }
 
+.menu-boxes{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
 .menu-box{
     width:220px;
     height:180px;
@@ -98,15 +106,7 @@ input, select { background:transparent; border:1px solid #00FF00; color:#00FF00;
     color:#000;
     box-shadow:0 0 20px #00FF00;
 }
-<div class="video-dropdown">
-    <button onclick="toggleMenu()">MENU ▼</button>
 
-    <div id="menu" class="dropdown-content">
-        <button onclick="alert('Aksi 1')">Kontrol 1</button>
-        <button onclick="alert('Aksi 2')">Kontrol 2</button>
-        <button onclick="alert('Aksi 3')">Kontrol 3</button>
-    </div>
-</div>
 </style>
 </head>
 <body>
@@ -125,7 +125,30 @@ DATE/TIME : <span class="code-private" id="tanggal"></span></p>
 <header>
     <h1 class="text">WARMIE</h1>
     <h1 class="text">ABANG-DEDE REBORN</h1>
-    <h1 class="text1">MENU</h1>    
+    <h1 class="text1">MENU</h1>
+    <div class="menu-boxes">
+
+    <div class="menu-box" onclick="location.href='menu1.html'">
+        MENU 1
+    </div>
+
+    <div class="menu-box" onclick="location.href='menu2.html'">
+        MENU 2
+    </div>
+
+    <div class="menu-box" onclick="location.href='menu3.html'">
+        MENU 3
+    </div>
+
+    <div class="menu-box" onclick="location.href='menu4.html'">
+        MENU 4
+    </div>
+
+    <div class="menu-box" onclick="location.href='menu5.html'">
+        MENU 5
+    </div>
+
+</div>
 </header>
 <script>
 /* ---------- Util: navigate ---------- */
