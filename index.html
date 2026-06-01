@@ -273,8 +273,6 @@ DATE/TIME : <span class="code-private" id="tanggal"></span></p>
 <div class="dashboard-boxes">
 
     <div class="box-kiri">
-    <div class="typing-text" id="typingText"></div>
-
     <video id="monitor-video" autoplay muted loop playsinline>
         <source src="animasi.mp4" type="video/mp4">
         Browser tidak mendukung video.
@@ -437,14 +435,7 @@ function simulateAccessSequence(element, callback){
   }
   next();
 }
-function startBlinkText(){
-  const el = document.getElementById("typingText");
 
-  el.className = "blink-red";
-  el.textContent = "BEST SELLER !";
-}
-
-window.addEventListener("load", startBlinkText);
 /* ---------- Tampilkan biodata saat klik ---------- */
 function displayAgent(agent){
   // convert some common fields safely
