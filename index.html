@@ -176,6 +176,25 @@ input, select { background:transparent; border:1px solid #00FF00; color:#00FF00;
     border:1px solid #00FF00;
     color:#00FF00;
 }
+.running-text{
+    font-size:20px;
+    color:#FF0000;
+    white-space:nowrap;
+    overflow:hidden;
+    width:100%;
+    position:relative;
+    animation:jalan 12s linear infinite;
+    font-weight:bold;
+}
+
+@keyframes jalan{
+    0%{
+        transform:translateX(100%);
+    }
+    100%{
+        transform:translateX(-100%);
+    }
+}
 <div class="video-dropdown">
     <button onclick="toggleMenu()">MENU ▼</button>
 
@@ -203,7 +222,9 @@ DATE/TIME : <span class="code-private" id="tanggal"></span></p>
 <header>
     <h1 class="text">WARMIE</h1>
     <h1 class="text">ABANG-DEDE REBORN</h1>
-    <h1 class="text1">JL PULO INDAH 1A NO.15 RT001/RW004 PETIR, CIPONDOH-BANTEN</h1>
+    <div class="running-text">
+    JL PULO INDAH 1A NO.15 RT001/RW004 PETIR, CIPONDOH - BANTEN
+    </div>
     <div class="header-buttons">
         <button onclick="goTo('informasi.html')">INFORMASI</button>
         <button onclick="goTo('menu.html')">DAFTAR MENU</button>
