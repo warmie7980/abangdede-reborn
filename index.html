@@ -81,14 +81,20 @@ input, select { background:transparent; border:1px solid #00FF00; color:#00FF00;
 }
 
 .box-kiri{
-    width:30%;
-    height:300px;
-    background:rgba(0,0,0,0.25);
-    border:1px solid rgba(0,255,0,0.4);
-    border-radius:5px;
-    backdrop-filter:blur(4px);
-    overflow:hidden; /* penting */
-    position:relative;
+    width: 30%;
+    height: 300px;          /* tetap fix */
+    min-height: 300px;
+    max-height: 300px;
+
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(0,255,0,0.4);
+    border-radius: 5px;
+
+    backdrop-filter: blur(4px);
+    overflow: hidden;
+    position: relative;
+
+    flex-shrink: 0;         /* 🔥 ini penting supaya tidak mengecil */
 }
 .typing-text{
     position:absolute;
@@ -99,10 +105,10 @@ input, select { background:transparent; border:1px solid #00FF00; color:#00FF00;
 }
 
 #monitor-video{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    display:block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* bukan contain lagi */
+    display: block;
 }
 
 .box-kanan{
