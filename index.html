@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PORTAL MONITORING TERMINAL — DATABASE</title>
+<style>
+/* ---------- STYLING (tetap sesuai desain kamu) ---------- */
+body{
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.85)), url('BT5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #00FF00;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 150vh;
+}
+#bg-video { position: fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; opacity:0.6; }
+
+header { padding:10px 0 10px 0; text-align:center; line-height:1; border-bottom:none; }
+.text { font-size:75px; margin-bottom:0; line-height:0.5; color:#00FF00; }
+.text1 { font-size:30px; margin-top:0.7; color:#FF0000; animation:blinkText 1s infinite; }
+    
+.header-buttons { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:8px; }
+.header-buttons button {
+    background:transparent; border:1px solid #00FF00; color:#00FF00; padding:8px 12px; cursor:pointer; border-radius:4px;
+    font-family:'Courier New',monospace; transition:background .25s, color .25s;
+}
+.header-buttons button:hover { background:#00FF00; color:#000; }
+
+.main-container { display:flex; flex:1; border-top:none; min-height:0; }
+.search-panel { width:35%; padding:20px; display:flex; flex-direction:column; border-right:none; overflow:auto; }
+.search-panel h2 { text-align:center; margin-bottom:10px; color: #ffff00; }
+input, select { background:transparent; border:1px solid #00FF00; color:#00FF00; padding:10px; margin-bottom:12px; font-size:16px; border-radius:4px; outline:none; }
+.info-text { font-size:14px; text-align:center; margin-top:6px; }
+#member-buttons { display:flex; flex-direction:column; gap:8px; margin-top:6px; }
+
+.output-panel { flex:1; padding:20px; overflow:auto; border-left:none; }
+.agent-profile { display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+.agent-profile pre { flex:1; white-space:pre-wrap; line-height:1.4; color:#00FF00; background:transparent; border:none; }
+.agent-profile img { width:135px; height:185px; object-fit:cover; border:2px solid #00FF00; border-radius:8px; display:none; opacity:0; transition:opacity 0.8s; }
+
+.doc-buttons { display:flex; gap:10px; margin-top:15px; flex-wrap:wrap; }
+.not-found { color:#FF0000; font-weight:bold; }
+
+.recording-indicator { position:fixed; top:40px; left:15px; font-family:'Courier New', monospace; font-size:15px; font-weight:bold; color:#FF0000; animation:blinkRecording 1s infinite; z-index:9999; user-select:none; }
+
+@media(max-width:768px){ .main-container{flex-direction:column;} .search-panel,.output-panel{width:100%; border:none; border-bottom:1px solid #00FF00;} .agent-profile{flex-direction:column; align-items:center;} }
+.agent-profile pre::after { content:"_"; animation:blink 1s infinite; }
+@keyframes blinkText{0%,50%,100%{opacity:1}25%,75%{opacity:0}}
+@keyframes blinkRecording{0%,50%,100%{opacity:1}25%,75%{opacity:0}}
+
+.pro-badge {
+    position:fixed; bottom:15px; right:20px; background:rgba(0,255,0,0.06); border:1px solid #00FF00; padding:8px 12px; color:#00FF00;
+    font-family:'Courier New',monospace; font-size:13px; border-radius:6px; backdrop-filter: blur(3px);
+}
+.date-time { position:fixed; top:10px; left:15px; }
+.logo-top-right {
+  position: fixed;
+  top: 0px;
+  right: 10px;
+  z-index: 10000; /* di atas semua elemen */
+}
+.logo-top-right img {
+  width: 150px; /* sesuaikan ukuran */
+  height: auto;
+}
+.dashboard-boxes{
+    display:flex;
+    gap:20px;
+    padding:20px;
+}
+
+.box-kiri{
+    width:30%;
+    height:300px;
+    background:rgba(0,0,0,0.25);
+    border:1px solid rgba(0,255,0,0.4);
+    border-radius:5px;
+    backdrop-filter:blur(4px);
+    overflow:hidden; /* penting */
+    position:relative;
+}
+.typing-text{
+    position:absolute;
+    top:10px;   /* atas video (ubah ke bottom:10px kalau mau bawah) */
+    left:10px;
+    right:10px;
+    z-index:5;
+    color:#00FF00;
+    font-family:'Courier New', monospace;
+    font-size:14px;
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:2px solid #00FF00;
+}
+
+#monitor-video{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+.box-kanan{
+    width:70%;
+    height:500px;
+    background:rgba(0,0,0,0.25);
+    border:1px solid rgba(0,255,0,0.4);
+    border-radius:10px;
+    backdrop-filter:blur(4px);
+    position:relative; /* wajib */
+}
+
+.judul-box-kanan{
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#FFD500;
+    font-family:'Courier New', monospace;
+    font-size:30px;
+    font-weight:bold;
+    text-align:center;    
+}
+.subjudul-box-kanan{
+    position:absolute;
+    top:60px; /* posisi di bawah judul */
+    left:50%;
+    transform:translateX(-50%);
+    color:#00FF00;
+    font-family:'Courier New', monospace;
+    font-size:14px; /* lebih kecil */
+    text-align:center;
+    letter-spacing:2px;
+    white-space:nowrap;
+}
+
+@media(max-width:768px){
+    .dashboard-boxes{
+        flex-direction:column;
+    }
+
+    .box-kiri,
+    .box-kanan{
+        width:100%;
+    }
+}
+.video-dropdown{
+    margin-top:10px;
+    position:relative;
+}
+
+.video-dropdown button{
+    width:100%;
+    padding:10px;
+    background:transparent;
+    border:1px solid #00FF00;
+    color:#00FF00;
+    cursor:pointer;
+}
+
+.dropdown-content{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    margin-top:5px;
+}
+
+.dropdown-content button{
+    background:rgba(0,0,0,0.3);
+    border:1px solid #00FF00;
+    color:#00FF00;
+}
+<div class="video-dropdown">
+    <button onclick="toggleMenu()">MENU ▼</button>
+
+    <div id="menu" class="dropdown-content">
+        <button onclick="alert('Aksi 1')">Kontrol 1</button>
+        <button onclick="alert('Aksi 2')">Kontrol 2</button>
+        <button onclick="alert('Aksi 3')">Kontrol 3</button>
+    </div>
+</div>
+</style>
+</head>
+<body>
+
+<video autoplay muted loop id="bg-video">
+<source src="" type="video/mp4">Browser Anda tidak mendukung video tag.</video>
+<div class="recording-indicator">● RECORDING</span>
+</div>
+<div class="logo-top-right">
+  <img src="logopuslat.png" alt="Logo">    
+</div>
+<div class="date-time">
+<p style="font-size:12px;color:#ffff00">
+DATE/TIME : <span class="code-private" id="tanggal"></span></p>
+</div>
+<header>
+    <h1 class="text">WARMIE</h1>
+    <h1 class="text">ABANG-DEDE REBORN</h1>
+    <h1 class="text1">DASHBOARD RT/001 DURI KOSAMBI</h1>
+    <div class="header-buttons">
+        <button onclick="goTo('informasi.html')">INFORMASI</button>
+        <button onclick="goTo('masakemasa.html')">masa ke MASA</button>
+        <button onclick="goTo('strukturorganisasinew.html')">struktur ORGANISASI</button>
+        <button onclick="goTo('Program Kerja.html')">PROGRAM KERJA</button>
+        <button onclick="goTo('daftarwargart001.html')">DAFTAR WARGA RT001</button>
+        <button onclick="goTo('pemuktahirandata.html')">pemuktahiran DATA</button>
+        <button onclick="goTo('iuranrt.html')">IURAN RT</button>        
+        <button onclick="goTo('riwayathidup.html')">riwayat HIDUP</button>
+        <button onclick="goTo('ku1.html')">KU-1</button>
+        <button onclick="goTo('jarkombra.html')">JARKOMBRA</button>
+        <button onclick="goTo('bankdata.html')">PUSDATIN</button>
+        <button onclick="goTo('sisteminformasi.html')">LIBRARY</button>
+        <button onclick="goTo('emergencybox.html')">EMERGENCY BOX</button>        
+        <button onclick="goTo('index.html')">LOGOUT</button>
+        <button onclick="showOnlineUsers()">USER ONLINE (PRO)</button>        
+    </div>
+</header>
+
+<div class="dashboard-boxes">
+
+    <div class="box-kiri">
+    <div class="typing-text" id="typingText"></div>
+
+    <video id="monitor-video" autoplay muted loop playsinline>
+        <source src="animasi.mp4" type="video/mp4">
+        Browser tidak mendukung video.
+    </video>
+
+</div>
+
+    <div class="box-kanan">
+
+    <div class="judul-box-kanan">
+        MEDIA INFORMASI
+    </div>
+
+    <div class="subjudul-box-kanan">
+        RT001/RW004 PETIR CIPONDOH TANGERANG BANTEN
+    </div>
+
+</div>
+
+<!-- ===========================
+     SCRIPT (FINAL RAPI)
+     =========================== -->
+<script>
+/* ---------- Util: navigate ---------- */
+function goTo(url){ window.location.href = url; }
+
+/* ---------- JSONP loader (anti-CORS) ---------- */
+function fetchJSONP(url, callback, timeout = 12000){
+  const cbName = "jsonp_cb_" + Math.random().toString(36).substr(2,9);
+  const script = document.createElement("script");
+  let timedOut = false;
+
+  window[cbName] = function(data){
+    if(timedOut) return;
+    clearTimeout(to);
+    cleanup();
+    callback(data);
+  };
+
+  function cleanup(){
+    try{ delete window[cbName]; }catch(e){ window[cbName]=undefined; }
+    if(script.parentNode) script.parentNode.removeChild(script);
+  }
+
+  script.src = url + (url.indexOf('?')>-1 ? '&' : '?') + 'callback=' + cbName;
+  script.onerror = function(){ cleanup(); console.error("JSONP script error"); };
+  document.body.appendChild(script);
+
+  const to = setTimeout(()=>{ timedOut = true; cleanup(); console.error("JSONP timeout"); }, timeout);
+}
+
+/* ---------- GLOBAL DB & CONFIG (GANTI URL INI JIKA PERLU) ---------- */
+let personnelDB = [];
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyRplg_WxH6EstYiYCP47K623f6APA03ADcZ3w0pbtvI_vLCXWndhMczlshnocYnLpw/exec"; // data personel (tetap seperti sebelumnya)
+const ONLINE_API = "https://script.google.com/macros/s/AKfycbyF_gSpfz7ZZsQzdppAfXXUEETQOnYEgBwY2NfNoPXHxZmJp_l0UWoh6n-llFtnGdwY/exec"; // online users API (yang kamu kirim)
+
+/* ---------- Load DB dari Google Sheet via JSONP ---------- */
+function initData(){
+  if(!WEBAPP_URL || WEBAPP_URL.indexOf("PASTE")!==-1){
+    console.warn("WEBAPP_URL belum diset. Ganti WEBAPP_URL di script.");
+    return;
+  }
+
+  fetchJSONP(WEBAPP_URL, data => {
+    if(!Array.isArray(data)){
+      console.warn("Data bukan array — periksa Apps Script (pastikan mengembalikan array JSON).", data);
+      return;
+    }
+    personnelDB = data;
+    console.log("✔ personnelDB loaded:", personnelDB);
+    populateCategoryDropdown();
+  });
+}
+
+/* ---------- Populate categories ---------- */
+function populateCategoryDropdown(){
+  const categorySelect = document.getElementById("category-filter");
+  // clear previous except first
+  while(categorySelect.options.length>1) categorySelect.remove(1);
+
+  const cats = [...new Set(personnelDB.map(p => (p.kategori||"").toString().trim()).filter(Boolean))];
+  cats.sort();
+  cats.forEach(cat=>{
+    const opt = document.createElement("option");
+    opt.value = cat; opt.textContent = cat;
+    categorySelect.appendChild(opt);
+  });
+}
+
+/* ---------- Elements ---------- */
+const searchInput = document.getElementById("search");
+const memberBtnContainer = document.getElementById("member-buttons");
+const dossierEl = document.getElementById("agent-dossier");
+const photoEl = document.getElementById("agent-photo");
+const agentContainer = document.getElementById("agent-container");
+const outputPanel = document.getElementById("output");
+
+/* ---------- Helpers tanggal/umur/masa ---------- */
+function formatTanggalIndonesia(dateStr){
+  if(!dateStr) return "-";
+  const tryParse = (s)=>{
+    const d = new Date(s);
+    if(!isNaN(d)) return d;
+    // try DD/MM/YYYY or DD-MM-YYYY
+    let parts = s.includes("/")? s.split("/") : s.split("-");
+    if(parts.length===3){
+      const [d1,m1,y1] = parts.map(Number);
+      return new Date(y1, m1-1, d1);
+    }
+    return null;
+  };
+  const dt = tryParse(dateStr);
+  if(!dt) return dateStr;
+  const d = String(dt.getDate()).padStart(2,"0");
+  const m = String(dt.getMonth()+1).padStart(2,"0");
+  const y = dt.getFullYear();
+  return `${d}/${m}/${y}`;
+}
+
+function calculateAge(birthDateStr){
+  if(!birthDateStr) return "-";
+  const d = new Date(birthDateStr);
+  if(isNaN(d)) return "-";
+  const today = new Date();
+  let age = today.getFullYear() - d.getFullYear();
+  if (today.getMonth() < d.getMonth() || (today.getMonth()===d.getMonth() && today.getDate()<d.getDate())) age--;
+  return age;
+}
+
+function getMasaKerja(tmtStr){
+  if(!tmtStr) return "-";
+  const tmt = new Date(tmtStr);
+  if(isNaN(tmt)) return "-";
+  const today = new Date();
+  let years = today.getFullYear() - tmt.getFullYear();
+  let months = today.getMonth() - tmt.getMonth();
+  let days = today.getDate() - tmt.getDate();
+  if(days < 0){ months--; const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0); days += prevMonth.getDate(); }
+  if(months < 0){ years--; months += 12; }
+  return `${years} Tahun ${months} Bulan ${days} Hari`;
+}
+
+/* ---------- Animasi teks sederhana ---------- */
+function simulateAccessSequence(element, callback){
+  const steps = [
+    ">>> initializing connection...",
+    ">>> accessing database node...",
+    ">>> verifying security clearance...",
+    ">>> clearance level verified ✔",
+    ">>> retrieving personnel data..."
+  ];
+  let i=0;
+  element.textContent = "";
+  function next(){
+    if(i<steps.length){
+      element.textContent += steps[i] + "\n";
+      outputPanel.scrollTop = outputPanel.scrollHeight;
+      i++; setTimeout(next, 450);
+    } else callback();
+  }
+  next();
+}
+function startTypingLoop() {
+  const el = document.getElementById("typingText");
+
+  const text = "SISTEM MONITORING AKTIF... KONEKSI AMAN... MEMUAT DATA... ";
+  let i = 0;
+
+  function type() {
+    if (i <= text.length) {
+      el.textContent = text.substring(0, i);
+      i++;
+      setTimeout(type, 70);
+    } else {
+      // reset dan ulang lagi
+      setTimeout(() => {
+        i = 0;
+        el.textContent = "";
+        type();
+      }, 800);
+    }
+  }
+
+  type();
+}
+window.addEventListener("load", startTypingLoop);
+/* ---------- Tampilkan biodata saat klik ---------- */
+function displayAgent(agent){
+  // convert some common fields safely
+  const nama = agent.nama_lengkap || agent.nama || "-";
+  const pangkat = agent.pangkat || "-";
+  const nrp_nip = agent.nrp_nip || agent.nrp || agent.nip || "-";
+  const jabatan = agent.jabatan || "-";
+  const satker = agent.satker || "-";
+  const tempat_lahir = agent.tempat_lahir || "-";
+  const tanggal_lahir = agent.tanggal_lahir || "-";
+
+  // foto handling (Google Drive direct link conversion)
+  let photoURL = (agent.photo || agent.foto || "").toString();
+  if(photoURL.includes("drive.google.com")){
+    const m = photoURL.match(/[-\w]{25,}/);
+    if(m) photoURL = "https://drive.google.com/uc?export=view&id=" + m[0];
+  }
+  if(!photoURL) photoURL = "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
+
+  photoEl.src = photoURL;
+  photoEl.style.display = "block";
+  photoEl.style.opacity = 1;
+
+  simulateAccessSequence(dossierEl, ()=>{
+    const usia = calculateAge(tanggal_lahir);
+    const masa = getMasaKerja(agent.tmt_jabatan);
+    const dossier = `
+========================================
+|   FILE: PERSONEL PUSLAT KODIKLATAU   |
+|   CLASSIFICATION: RAHASIA            |
+========================================
+
+[DATA IDENTITAS]
+NAMA LENGKAP       : ${nama}
+PANGKAT            : ${pangkat}
+NRP/NIP            : ${nrp_nip}
+JABATAN            : ${jabatan}
+SATKER             : ${satker}
+TEMPAT/TGL LAHIR   : ${tempat_lahir}, ${formatTanggalIndonesia(tanggal_lahir)}
+USIA               : ${usia} Tahun
+
+[DATA JABATAN]
+NOMOR SKEP         : ${agent.nomer_skep || "-"}
+TMT JABATAN        : ${formatTanggalIndonesia(agent.tmt_jabatan)}
+MASA JABATAN       : ${masa}
+
+[SECURITY FOOTNOTE]
+This dossier is property of PUSLAT KODIKLATAU.
+Unauthorized access or duplication is punishable under applicable law.
+
+<END OF FILE>
+========================================
+Retrieved on: ${new Date().toLocaleString()}
+`;
+    typeWriter(dossierEl, dossier);
+    // create doc buttons
+    const old = agentContainer.querySelector(".doc-buttons");
+    if(old) old.remove();
+    const docContainer = document.createElement("div");
+    docContainer.className = "doc-buttons";
+    const docs = [
+      {label:"Pemuktahiran Data", url: agent["Merged Doc URL - PEMUKTAHIRAN DATA"] || "#"},
+      {label:"Riwayat Hidup", url: "#"},
+      {label:"KU-1", url: "#"}
+    ];
+    docs.forEach(d=>{
+      const btn = document.createElement("button");
+      btn.textContent = d.label;
+      btn.onclick = ()=> {
+        if(!d.url || d.url === "#") return alert("❌ File belum tersedia untuk personel ini.");
+        window.open(d.url, "_blank");
+      };
+      docContainer.appendChild(btn);
+    });
+    agentContainer.appendChild(docContainer);
+  });
+}
+
+/* ---------- Cari & tampil daftar tombol anggota ---------- */
+function showMemberButtons(keyword){
+  memberBtnContainer.innerHTML = "";
+  const selectedCategory = (document.getElementById("category-filter").value || "").toString();
+  const kw = (keyword || "").toLowerCase();
+
+  const filtered = personnelDB.filter(p=>{
+    const matchKeyword = (p.nama_lengkap && p.nama_lengkap.toString().toLowerCase().includes(kw)) ||
+                         (p.satker && p.satker.toString().toLowerCase().includes(kw)) ||
+                         (p.nama && p.nama.toString().toLowerCase().includes(kw));
+    const matchCategory = !selectedCategory || (p.kategori && p.kategori === selectedCategory);
+    return matchKeyword && matchCategory;
+  });
+
+  if(filtered.length === 0){
+    memberBtnContainer.innerHTML = '<span class="not-found">❌ No members found for this filter</span>';
+    return;
+  }
+
+  filtered.forEach(agent => {
+    const btn = document.createElement("button");
+    btn.textContent = agent.nama_lengkap || agent.nama || "(no name)";
+    btn.onclick = ()=> displayAgent(agent);
+    memberBtnContainer.appendChild(btn);
+  });
+}
+
+/* ---------- Events: search & category change ---------- */
+searchInput.addEventListener("keydown", e=>{
+  if(e.key === "Enter"){
+    const q = searchInput.value.trim();
+    if(q) showMemberButtons(q);
+  }
+});
+document.getElementById("category-filter").addEventListener("change", ()=>{
+  const q = searchInput.value.trim();
+  if(q) showMemberButtons(q);
+});
+
+/* ---------- USER ONLINE (PRO) ---------- */
+// generate persistent user id for this browser/device
+let localUserID = localStorage.getItem("portalUserID");
+if(!localUserID){
+  localUserID = "USR-" + Math.random().toString(36).substring(2,10).toUpperCase();
+  localStorage.setItem("portalUserID", localUserID);
+}
+
+// store client IP (get once)
+let clientIP = localStorage.getItem("clientIP") || "";
+if(!clientIP){
+  fetch("https://api.ipify.org?format=json")
+    .then(r=>r.json())
+    .then(j=>{
+      clientIP = j.ip;
+      localStorage.setItem("clientIP", clientIP);
+    })
+    .catch(()=>{ clientIP = ""; });
+}
+
+// send ping (userID, ip, ua)
+function sendOnlinePing(){
+  if(!ONLINE_API || ONLINE_API.indexOf("PASTE")>-1) return;
+  const ua = navigator.userAgent || "";
+  const ip = clientIP || "";
+  // best-effort, no waiting
+  navigator.sendBeacon
+    ? navigator.sendBeacon(ONLINE_API + "?action=ping&userID=" + encodeURIComponent(localUserID) + "&ip=" + encodeURIComponent(ip) + "&ua=" + encodeURIComponent(ua))
+    : fetch(ONLINE_API + "?action=ping&userID=" + encodeURIComponent(localUserID) + "&ip=" + encodeURIComponent(ip) + "&ua=" + encodeURIComponent(ua)).catch(()=>{});
+}
+setInterval(sendOnlinePing, 10000);
+sendOnlinePing(); // immediate
+
+function showOnlineUsers(){
+  if(!ONLINE_API || ONLINE_API.indexOf("PASTE")>-1){
+    alert("Online API belum diset.");
+    return;
+  }
+
+  const url = ONLINE_API + "?action=getOnline";
+
+  fetchJSONP(url, data => {
+    if(!Array.isArray(data)){
+      alert("Response SALAH dari API Online.\nPeriksa Apps Script kamu.");
+      return;
+    }
+
+    let html = "===== USER ONLINE =====\n";
+    if(data.length === 0) html += "(tidak ada user aktif)\n";
+    else data.forEach((u,i)=> html += `${i+1}. ${u.userID}  (${u.lastSeen})\n`);
+
+    alert(html);
+  });
+}
+function toggleMenu(){
+    const menu = document.getElementById("menu");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+}
+
+</script>
+<script>
+// ===== FULLSCREEN ENGINE untuk Tablet / WebView / Android =====
+
+// Paksa fullscreen
+function forceFullscreen() {
+  const elem = document.documentElement;
+  if (elem.requestFullscreen) elem.requestFullscreen().catch(()=>{});
+  else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+  else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+}
+
+// Deteksi mode aplikasi
+function isAppMode() {
+  return (
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true ||
+    navigator.userAgent.includes("wv") ||
+    navigator.userAgent.includes("Android") ||
+    navigator.userAgent.includes("Tablet")
+  );
+}
+
+// =====================================
+// 1) AUTO FULLSCREEN saat halaman dibuka
+// =====================================
+window.addEventListener("load", () => {
+  if (isAppMode()) {
+    setTimeout(forceFullscreen, 500);
+  }
+});
+
+// ===================================================
+// 2) FULLSCREEN saat TAP PERTAMA (syarat browser modern)
+// ===================================================
+document.addEventListener("click", () => {
+  forceFullscreen();
+}, { once: true });
+
+// =======================================================
+// 3) FULLSCREEN saat pindah halaman melalui function goTo()
+// =======================================================
+const originalGoTo = window.goTo;
+window.goTo = function(url){
+  forceFullscreen();                // masuk fullscreen dulu
+  setTimeout(()=> { originalGoTo(url); }, 200); // baru pindah halaman
+};
+
+// =================================================================
+// 4) FULLSCREEN saat pindah halaman via link <a> (kalau suatu hari kamu pakai)
+// =================================================================
+document.querySelectorAll("a").forEach(a=>{
+  a.addEventListener("click", ()=>{
+    forceFullscreen();
+  });
+});
+
+// =============================================
+// 5) FULLSCREEN saat halaman kembali tampil (pageshow)
+// =============================================
+window.addEventListener("pageshow", () => {
+  if (isAppMode()) setTimeout(forceFullscreen, 400);
+});
+</script>
+<!-- ===========================
+     EMERGENCY BOX ALERT SYSTEM
+     =========================== -->
+<script>
+/* ---------------------------
+   CEK FOLDER EMERGENCY
+--------------------------- */
+
+/*  
+   SYSTEM:
+   — Mengecek file “emergency.txt” di Google Drive (via Apps Script)
+   — Jika ada tulisan "ON", alarm aktif
+   — Jika "OFF" alarm mati
+   — Dicek otomatis setiap 4 detik
+*/
+
+const EMERGENCY_API = "https://script.google.com/macros/s/AKfycbyP3MyiNRHb5WuFhqo3pJLcHdbQ21Ic90ScWJpv4_RB7iWZlgA/exec";  // <<< GANTI PUNYA MU
+
+let emergencyState = false;
+let alarmAudio = null;
+
+/* Ambil status emergency */
+function checkEmergency(){
+  fetch(EMERGENCY_API + "?action=status")
+    .then(r => r.json())
+    .then(res => {
+      if(!res || !res.status) return;
+
+      const newState = (res.status === "ON");
+
+      // kalau status berubah
+      if(newState !== emergencyState){
+        emergencyState = newState;
+        handleEmergency(newState);
+      }
+    })
+    .catch(()=>{});
+}
+
+/* ---------------------------
+   Handle tampilan & suara
+--------------------------- */
+function handleEmergency(active){
+  if(active){
+    blinkButton(true);
+    playAlarm();
+    console.warn("🚨 EMERGENCY BOX ACTIVE");
+  } else {
+    blinkButton(false);
+    stopAlarm();
+    console.log("✔ EMERGENCY CLEARED");
+  }
+}
+
+/* ---------------------------
+   Efek tombol berkedip
+--------------------------- */
+function blinkButton(active){
+  const btn = document.querySelector("button[onclick=\"goTo('emergencybox.html')\"]");
+  if(!btn) return;
+
+  if(active){
+    btn.style.animation = "blinkText 0.5s infinite";
+    btn.style.borderColor = "#FF0000";
+    btn.style.color = "#FF0000";
+  } else {
+    btn.style.animation = "";
+    btn.style.borderColor = "#00FF00";
+    btn.style.color = "#00FF00";
+  }
+}
+
+/* ---------------------------
+   Suara alarm
+--------------------------- */
+function playAlarm(){
+  if(!alarmAudio){
+    alarmAudio = new Audio("alarm.mp3"); // ====> siapkan file alarm.mp3 di root
+    alarmAudio.loop = true;
+  }
+  alarmAudio.volume = 1;
+  alarmAudio.play().catch(()=>{});
+}
+
+function stopAlarm(){
+  if(alarmAudio){
+    alarmAudio.pause();
+    alarmAudio.currentTime = 0;
+  }
+}
+
+/* ---------------------------
+   Stop manual via server
+--------------------------- */
+function stopEmergency(){
+  fetch(EMERGENCY_API + "?action=off")
+    .then(r=>r.json())
+    .then(res=>{
+      alert("✔ EMERGENCY OFF (SERVER)");
+    })
+    .catch(()=>{ alert("Gagal kirim OFF"); });
+}
+
+/* ---------------------------
+   AUTO TIAP 4 DETIK
+--------------------------- */
+setInterval(checkEmergency, 4000);
+window.addEventListener("load", checkEmergency);
+checkEmergency(); // cek langsung saat load
+</script>
+<!-- AUDIO ALARM -->
+<audio id="alarm-sound" loop>
+  <source src="biohazard-alarm-143105.mp3" type="audio/ogg">
+</audio>
+
+<script>
+const API = "https://script.google.com/macros/s/AKfycbyXCYqf8Sw_3spi8zEz8g3diC7yW8IGbpPKNIxIt1bTQd9920IW1lgyLiYt-ztpvwxSlg/exec";
+const btn = document.querySelector("button[onclick=\"goTo('emergencybox.html')\"]");
+const alarm = document.getElementById("alarm-sound");
+
+// nilai saat terakhir user sudah lihat
+let lastSeen = localStorage.getItem("emergency_last_seen") || "0";
+
+function check() {
+  fetch(API + "?action=fileCount", { cache: "no-store" })
+    .then(r => r.text())
+    .then(count => {
+      count = count.trim();
+
+      if (count !== lastSeen) {
+        // ada file baru
+        btn.style.background = "#FF0000";
+        btn.style.animation = "blink 1s infinite";
+        alarm.play();
+      } else {
+        // tidak ada file baru
+        btn.style.background = "transparent";
+        btn.style.animation = "none";
+        alarm.pause();
+        alarm.currentTime = 0;
+      }
+    });
+}
+
+setInterval(check, 5000);
+check();
+
+// css blink
+const style = document.createElement("style");
+style.textContent = `
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+`;
+document.head.appendChild(style);
+
+const emergencyBtn = document.querySelector("button[onclick=\"goTo('emergencybox.html')\"]");
+const alarmAudio = new Audio("biohazard-alarm-143105.mp3");
+alarmAudio.loop = true;
+let lastSeen = localStorage.getItem("emergency_last_seen") || "0";
+
+// cek file baru tiap 5 detik
+setInterval(() => {
+    fetch("API_EMERGENCYBOX_URL?action=fileCount", { cache: "no-store" })
+      .then(r => r.text())
+      .then(count => {
+          count = count.trim();
+          if (count !== lastSeen) {
+              emergencyBtn.style.background = "#FF0000";
+              emergencyBtn.style.animation = "blink 1s infinite";
+              alarmAudio.play();
+          } else {
+              emergencyBtn.style.background = "transparent";
+              emergencyBtn.style.animation = "none";
+              alarmAudio.pause();
+              alarmAudio.currentTime = 0;
+          }
+      }).catch(()=>{});
+}, 5000);
+
+// klik tombol → alarm berhenti & tombol normal
+emergencyBtn.addEventListener("click", () => {
+    alarmAudio.pause();
+    alarmAudio.currentTime = 0;
+    emergencyBtn.style.animation = "none";
+    emergencyBtn.style.background = "transparent";
+    emergencyBtn.style.borderColor = "#00FF00";
+    emergencyBtn.style.color = "#00FF00";
+
+    lastSeen = Date.now();
+    localStorage.setItem("emergency_last_seen", lastSeen);
+
+    goTo('emergencybox.html');
+});
+
+</script>
+    <script>
+function tampilkanTanggal() {
+  const now = new Date();
+
+  const hari = String(now.getDate()).padStart(2, '0');
+  const bulan = String(now.getMonth() + 1).padStart(2, '0');
+  const tahun = now.getFullYear();
+
+  const jam = String(now.getHours()).padStart(2, '0');
+  const menit = String(now.getMinutes()).padStart(2, '0');
+  const detik = String(now.getSeconds()).padStart(2, '0');
+
+  const format = `${hari}-${bulan}-${tahun} ${jam}:${menit}:${detik}`;
+
+  document.getElementById("tanggal").textContent = format;
+}
+
+// update tiap detik biar live
+setInterval(tampilkanTanggal, 1000);
+tampilkanTanggal();
+const monitorVideo = document.getElementById("monitor-video");
+
+function openFullscreen(el) {
+  if (el.requestFullscreen) {
+    el.requestFullscreen();
+  } else if (el.webkitRequestFullscreen) { // Safari
+    el.webkitRequestFullscreen();
+  } else if (el.msRequestFullscreen) { // IE/Edge lama
+    el.msRequestFullscreen();
+  }
+}
+
+monitorVideo.addEventListener("click", () => {
+  openFullscreen(monitorVideo);
+});
+</script>
+</body>
+</html>
