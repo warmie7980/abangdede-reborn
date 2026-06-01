@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WARMIE ABANG-DEDE REBORN</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:#000;
+    color:#00FF00;
+    font-family:'Courier New', monospace;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+/* DATE/TIME */
+.date-time{
+    position:fixed;
+    top:10px;
+    left:15px;
+    color:#FFFF00;
+    font-size:12px;
+}
+
+/* RECORDING */
+.recording{
+    position:fixed;
+    top:35px;
+    left:15px;
+    color:#FF0000;
+    font-weight:bold;
+    animation:blink 1s infinite;
+}
+
+/* JUDUL */
+.container{
+    padding:20px;
+}
+
+.title{
+    font-size:60px;
+    line-height:1;
+    margin:0;
+}
+
+.subtitle{
+    font-size:60px;
+    line-height:1;
+    margin:10px 0;
+}
+
+.address{
+    color:#FF0000;
+    font-size:18px;
+    margin-top:20px;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    0%,50%,100%{opacity:1;}
+    25%,75%{opacity:0;}
+}
+
+@media(max-width:768px){
+    .title,
+    .subtitle{
+        font-size:36px;
+    }
+
+    .address{
+        font-size:14px;
+        padding:0 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="date-time">
+    DATE/TIME : <span id="tanggal"></span>
+</div>
+
+<div class="recording">
+    ● RECORDING
+</div>
+
+<div class="container">
+    <h1 class="title">WARMIE</h1>
+    <h1 class="subtitle">ABANG-DEDE REBORN</h1>
+
+    <div class="address">
+        JL PULO INDAH 1A NO.15 RT001/RW004 PETIR, CIPONDOH-BANTEN
+    </div>
+</div>
+
+<script>
+function tampilkanTanggal() {
+    const now = new Date();
+
+    const hari = String(now.getDate()).padStart(2,'0');
+    const bulan = String(now.getMonth()+1).padStart(2,'0');
+    const tahun = now.getFullYear();
+
+    const jam = String(now.getHours()).padStart(2,'0');
+    const menit = String(now.getMinutes()).padStart(2,'0');
+    const detik = String(now.getSeconds()).padStart(2,'0');
+
+    document.getElementById("tanggal").textContent =
+        `${hari}-${bulan}-${tahun} ${jam}:${menit}:${detik}`;
+}
+
+setInterval(tampilkanTanggal,1000);
+tampilkanTanggal();
+</script>
+
+</body>
+</html>
