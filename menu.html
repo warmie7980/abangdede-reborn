@@ -6,81 +6,94 @@
 <title>WARMIE ABANG-DEDE REBORN</title>
 
 <style>
-body{
+*{
     margin:0;
-    height:50vh;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     background:#000;
     color:#00FF00;
     font-family:'Courier New', monospace;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+    height:100vh;
     overflow:hidden;
 }
 
-/* DATE/TIME */
+/* DATE/TIME kiri atas */
 .date-time{
     position:fixed;
     top:10px;
     left:15px;
     color:#FFFF00;
     font-size:12px;
+    z-index:1000;
 }
 
-/* RECORDING */
+/* RECORDING kiri atas */
 .recording{
     position:fixed;
-    top:35px;
+    top:30px;
     left:15px;
     color:#FF0000;
+    font-size:15px;
     font-weight:bold;
     animation:blink 1s infinite;
+    z-index:1000;
 }
 
-/* JUDUL */
-.container{
-    padding:20px;
+/* Teks utama naik ke atas tapi tetap tengah */
+.header-center{
+    position:absolute;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    width:100%;
 }
 
 .title{
     font-size:60px;
-    line-height:1;
-    margin:0;
+    line-height:0.9;
+    color:#00FF00;
 }
 
 .subtitle{
     font-size:60px;
-    line-height:1;
-    margin:10px 0;
+    line-height:0.9;
+    color:#00FF00;
 }
 
 .address{
-    color:#FF0000;
+    margin-top:8px;
     font-size:18px;
-    margin-top:20px;
+    color:#FF0000;
     animation:blink 1s infinite;
 }
 
 @keyframes blink{
-    0%,50%,100%{opacity:1;}
-    25%,75%{opacity:0;}
+    0%,50%,100%{
+        opacity:1;
+    }
+    25%,75%{
+        opacity:0;
+    }
 }
 
 @media(max-width:768px){
+
     .title,
     .subtitle{
-        font-size:36px;
+        font-size:32px;
     }
 
     .address{
-        font-size:14px;
-        padding:0 15px;
+        font-size:13px;
+        padding:0 10px;
     }
 }
 </style>
 </head>
-
 <body>
 
 <div class="date-time">
@@ -91,7 +104,7 @@ body{
     ● RECORDING
 </div>
 
-<div class="container">
+<div class="header-center">
     <h1 class="title">WARMIE</h1>
     <h1 class="subtitle">ABANG-DEDE REBORN</h1>
 
@@ -104,19 +117,21 @@ body{
 function tampilkanTanggal() {
     const now = new Date();
 
-    const hari = String(now.getDate()).padStart(2,'0');
-    const bulan = String(now.getMonth()+1).padStart(2,'0');
+    const hari = String(now.getDate()).padStart(2, '0');
+    const bulan = String(now.getMonth() + 1).padStart(2, '0');
     const tahun = now.getFullYear();
 
-    const jam = String(now.getHours()).padStart(2,'0');
-    const menit = String(now.getMinutes()).padStart(2,'0');
-    const detik = String(now.getSeconds()).padStart(2,'0');
+    const jam = String(now.getHours()).padStart(2, '0');
+    const menit = String(now.getMinutes()).padStart(2, '0');
+    const detik = String(now.getSeconds()).padStart(2, '0');
 
-    document.getElementById("tanggal").textContent =
+    const format =
         `${hari}-${bulan}-${tahun} ${jam}:${menit}:${detik}`;
+
+    document.getElementById("tanggal").textContent = format;
 }
 
-setInterval(tampilkanTanggal,1000);
+setInterval(tampilkanTanggal, 1000);
 tampilkanTanggal();
 </script>
 
