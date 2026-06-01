@@ -221,6 +221,46 @@ header{
     line-height: 0.5;
     color: #C0C0C0;
 }
+.kolom-kiri{
+    width:30%;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.box-kiri{
+    width:100%;
+    height:300px;
+    background:rgba(0,0,0,0.25);
+    border:1px solid rgba(0,255,0,0.4);
+    border-radius:5px;
+    overflow:hidden;
+    position:relative;
+}
+
+.box-bawah{
+    width:100%;
+    height:180px;
+    background:rgba(0,0,0,0.25);
+    border:1px solid rgba(0,255,0,0.4);
+    border-radius:5px;
+    backdrop-filter:blur(4px);
+    color:#00FF00;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Courier New', monospace;
+}
+
+.box-kanan{
+    width:70%;
+    height:500px;
+    background:rgba(0,0,0,0.25);
+    border:1px solid rgba(0,255,0,0.4);
+    border-radius:10px;
+    backdrop-filter:blur(4px);
+    position:relative;
+}
 <div class="video-dropdown">
     <button onclick="toggleMenu()">MENU ▼</button>
 
@@ -272,22 +312,31 @@ DATE/TIME : <span class="code-private" id="tanggal"></span></p>
 
 <div class="dashboard-boxes">
 
-    <div class="box-kiri">
-    <video id="monitor-video" autoplay muted loop playsinline>
-        <source src="animasi.mp4" type="video/mp4">
-        Browser tidak mendukung video.
-    </video>
+    <div class="kolom-kiri">
 
-</div>
+        <!-- BOX VIDEO -->
+        <div class="box-kiri">
+            <video id="monitor-video" autoplay muted loop playsinline>
+                <source src="animasi.mp4" type="video/mp4">
+            </video>
+        </div>
 
-    <div class="box-kanan">
+        <!-- BOX BARU DI BAWAH VIDEO -->
+        <div class="box-bawah">
+            KONTEN BARU
+        </div>
 
-    <div class="judul-box-kanan">
-        MEDIA INFORMASI
     </div>
 
-    <div class="subjudul-box-kanan">
-        RT001/RW004 PETIR CIPONDOH TANGERANG BANTEN
+    <!-- BOX KANAN -->
+    <div class="box-kanan">
+        <div class="judul-box-kanan">
+            MEDIA INFORMASI
+        </div>
+
+        <div class="subjudul-box-kanan">
+            RT001/RW004 PETIR CIPONDOH TANGERANG BANTEN
+        </div>
     </div>
 
 </div>
