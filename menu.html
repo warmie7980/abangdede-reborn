@@ -135,32 +135,39 @@ setInterval(tampilkanTanggal, 1000);
 tampilkanTanggal();
 </script>
 <script>
-function forceFullscreen(){
-    const elem = document.documentElement;
+function tampilkanTanggal() {
+  const now = new Date();
 
-    if(elem.requestFullscreen){
-        elem.requestFullscreen().catch(()=>{});
-    }else if(elem.webkitRequestFullscreen){
-        elem.webkitRequestFullscreen();
-    }else if(elem.msRequestFullscreen){
-        elem.msRequestFullscreen();
-    }
+  const hari = String(now.getDate()).padStart(2, '0');
+  const bulan = String(now.getMonth() + 1).padStart(2, '0');
+  const tahun = now.getFullYear();
+
+  const jam = String(now.getHours()).padStart(2, '0');
+  const menit = String(now.getMinutes()).padStart(2, '0');
+  const detik = String(now.getSeconds()).padStart(2, '0');
+
+  const format = `${hari}-${bulan}-${tahun} ${jam}:${menit}:${detik}`;
+
+  document.getElementById("tanggal").textContent = format;
 }
 
-window.addEventListener("load", ()=>{
-    setTimeout(forceFullscreen,500);
-});
+// update tiap detik biar live
+setInterval(tampilkanTanggal, 1000);
+tampilkanTanggal();
+const monitorVideo = document.getElementById("monitor-video");
 
-document.addEventListener("click", ()=>{
-    forceFullscreen();
-},{once:true});
+function openFullscreen(el) {
+  if (el.requestFullscreen) {
+    el.requestFullscreen();
+  } else if (el.webkitRequestFullscreen) { // Safari
+    el.webkitRequestFullscreen();
+  } else if (el.msRequestFullscreen) { // IE/Edge lama
+    el.msRequestFullscreen();
+  }
+}
 
-document.addEventListener("touchstart", ()=>{
-    forceFullscreen();
-},{once:true});
-
-window.addEventListener("pageshow", ()=>{
-    setTimeout(forceFullscreen,300);
+monitorVideo.addEventListener("click", () => {
+  openFullscreen(monitorVideo);
 });
 </script>
 </body>
