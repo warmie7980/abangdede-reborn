@@ -104,51 +104,6 @@ input, select { background:transparent; border:1px solid #00FF00; color:#00FF00;
     object-fit:contain;
     display:block;
 }
-
-.box-kanan{
-    width:70%;
-    height:500px;
-    background:rgba(0,0,0,0.25);
-    border:1px solid rgba(0,255,0,0.4);
-    border-radius:10px;
-    backdrop-filter:blur(0px);
-    position:relative; /* wajib */
-}
-
-.judul-box-kanan{
-    position:absolute;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-    color:#FFD500;
-    font-family:'Courier New', monospace;
-    font-size:30px;
-    font-weight:bold;
-    text-align:center;    
-}
-.subjudul-box-kanan{
-    position:absolute;
-    top:60px; /* posisi di bawah judul */
-    left:50%;
-    transform:translateX(-50%);
-    color:#00FF00;
-    font-family:'Courier New', monospace;
-    font-size:14px; /* lebih kecil */
-    text-align:center;
-    letter-spacing:2px;
-    white-space:nowrap;
-}
-
-@media(max-width:768px){
-    .dashboard-boxes{
-        flex-direction:column;
-    }
-
-    .box-kiri,
-    .box-kanan{
-        width:100%;
-    }
-}
 .video-dropdown{
     margin-top:10px;
     position:relative;
@@ -235,30 +190,6 @@ header{
     border:1px solid rgba(0,255,0,0.4);
     border-radius:5px;
     overflow:hidden;
-    position:relative;
-}
-
-.box-bawah{
-    width:100%;
-    height:180px;
-    background:rgba(0,0,0,0.25);
-    border:1px solid rgba(0,255,0,0.4);
-    border-radius:5px;
-    backdrop-filter:blur(4px);
-    color:#00FF00;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:'Courier New', monospace;
-}
-
-.box-kanan{
-    width:70%;
-    height:500px;
-    background:rgba(0,0,0,0.25);
-    border:1px solid rgba(0,255,0,0.4);
-    border-radius:10px;
-    backdrop-filter:blur(0px);
     position:relative;
 }
 <div class="video-dropdown">
