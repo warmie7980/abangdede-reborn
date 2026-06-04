@@ -14,9 +14,11 @@
         button { margin-top: 20px; padding: 10px 20px; background: #fff;  color: #000;  border: none;   border-radius: 5px;
         cursor: pointer; font-weight: bold; display: flex; gap: 10px; }
         button:hover { background: #ccc; }
+        .datetime { position: fixed; top: 10px; left: 10px; color: yellow; font-size: 16px; font-weight: bold; z-index: 1000; }
     </style>
 </head>
 <body>
+    <div class="datetime" id="datetime"></div>
     <header>
         <h1>WARMIE</h1>
         <h1>ABANG-DEDE REBORN</h1>
@@ -28,5 +30,21 @@
             <button>MIE JEBEW</button><button>MIE YAMIN</button><button>MIE ORIGINAL</button>
         </div>
     </main>
-</body>
+<script>
+function updateDateTime() {
+    const now = new Date();
+    const tanggal = now.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    });
+    const waktu = now.toLocaleTimeString('id-ID');
+    document.getElementById('datetime').innerHTML =
+        `${tanggal}<br>${waktu}`;
+}
+updateDateTime();
+setInterval(updateDateTime, 1000);
+</script>
+</body>    
 </html>
