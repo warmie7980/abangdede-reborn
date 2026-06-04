@@ -170,25 +170,11 @@ header{
     overflow:hidden;
     position:relative;
 }
-<div class="video-dropdown">
-    <button onclick="toggleMenu()">MENU ▼</button>
-
-    <div id="menu" class="dropdown-content">
-        <button onclick="alert('Aksi 1')">Kontrol 1</button>
-        <button onclick="alert('Aksi 2')">Kontrol 2</button>
-        <button onclick="alert('Aksi 3')">Kontrol 3</button>
-    </div>
-</div>
 </style>
 </head>
 <body>
-
-<video autoplay muted loop id="bg-video">
-<source src="" type="video/mp4">Browser Anda tidak mendukung video tag.</video>
-<div class="recording-indicator">● RECORDING</span>
-</div>
 <div class="logo-top-right">
-  <img src="logopuslat.png" alt="Logo">    
+  <img src="logo.png" alt="Logo">    
 </div>
 <div class="date-time">
 <p style="font-size:12px;color:#ffff00">
@@ -201,41 +187,13 @@ DATE/TIME : <span class="code-private" id="tanggal"></span></p>
     JL PULO INDAH 1A NO.15 RT001/RW004 PETIR, CIPONDOH - BANTEN
     </div>    
 </header>
-
 <div class="dashboard-boxes">
-
-    <div class="kolom-kiri">
-
-        <!-- BOX VIDEO -->
-        <div class="box-kiri">
-            <video id="monitor-video" autoplay muted loop playsinline>
-                <source src="animasi.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <!-- BOX BARU DI BAWAH VIDEO -->
-        <div class="box-bawah">
-            KONTEN BARU
-        </div>
-
-    </div>
-
-    <!-- BOX KANAN -->
-    <div class="box-kanan">
-        <div class="judul-box-kanan">
-            MEDIA INFORMASI
-        </div>
-
-        <div class="subjudul-box-kanan">
-            RT001/RW004 PETIR CIPONDOH TANGERANG BANTEN
-        </div>
-    </div>
-
+<div class="kolom-kiri">  
+<div class="box-kiri">
+<video id="monitor-video" autoplay muted loop playsinline>
+<source src="animasi.mp4" type="video/mp4">
+</video>
 </div>
-
-<!-- ===========================
-     SCRIPT (FINAL RAPI)
-     =========================== -->
 <script>
 /* ---------- Util: navigate ---------- */
 function goTo(url){ window.location.href = url; }
