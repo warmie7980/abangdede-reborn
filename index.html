@@ -247,7 +247,10 @@ button:hover {
         <p>
             Mie Yamin dengan rasa manis gurih khas, mie kenyal dipadukan dengan bumbu spesial yang lembut di lidah dan bikin nagih.
         </p>
-        <button class="pesan" onclick="bukaForm('MIE YAMIN', this)">
+        <button class="pesan" onclick="bukaForm('MIE YAMIN')">PESAN</button>
+        <button class="minus" onclick="kurang('MIE YAMIN')">-</button>
+        <span class="qty" id="qty-yamin">0</span>
+        <button class="plus" onclick="tambah('MIE YAMIN')">+</button>
 
         <!-- MENU 3 -->
         <div class="image-box">
@@ -258,7 +261,10 @@ button:hover {
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
-        <button class="pesan" onclick="bukaForm('MIE ORIGINAL', this)">
+        <button class="pesan" onclick="bukaForm('MIE ORIGINAL')">PESAN</button>
+        <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
+        <span class="qty" id="qty-original">0</span>
+        <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
 
     </div>
 </main>
@@ -454,19 +460,44 @@ Terima kasih 🙏`;
 // ================= RESET =================
 function resetAll() {
 
-    cart = {
-        "MIE JEBEW": 0,
-        "MIE YAMIN": 0,
-        "MIE ORIGINAL": 0
-    };
+    <script>
+let cart = {
+    "MIE JEBEW": 0,
+    "MIE YAMIN": 0,
+    "MIE ORIGINAL": 0
+};
 
-    document.querySelectorAll(".qty").forEach(q => q.textContent = "0");
+function tambah(menu) {
+    cart[menu]++;
+    updateQty(menu);
+}
 
-    document.getElementById("popupStruk").style.display = "none";
+function kurang(menu) {
+    if (cart[menu] > 0) cart[menu]--;
+    updateQty(menu);
+}
 
-    document.getElementById("nama").value = "";
-    document.getElementById("alamat").value = "";
-    document.getElementById("telp").value = "";
+function updateQty(menu) {
+    if (menu === "MIE JEBEW") {
+        document.getElementById("qty-jebew").innerText = cart[menu];
+    }
+    if (menu === "MIE YAMIN") {
+        document.getElementById("qty-yamin").innerText = cart[menu];
+    }
+    if (menu === "MIE ORIGINAL") {
+        document.getElementById("qty-original").innerText = cart[menu];
+    }
+}
+
+function bukaForm(menu) {
+    let total = cart["MIE JEBEW"] + cart["MIE YAMIN"] + cart["MIE ORIGINAL"];
+
+    if (total === 0) {
+        alert("Pilih jumlah pesanan dulu!");
+        return;
+    }
+
+    document.getElementById("popupForm").style.display = "flex";
 }
 </script>
 </body>    
