@@ -152,6 +152,36 @@ button:hover {
     font-size: 20px;
     font-family: "Courier New", monospace;
 }
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 9999;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    width: 350px;
+    background: #111;
+    border: 2px solid #00ff00;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: "Courier New", monospace;
+}
+
+.popup-content h2 {
+    text-align: center;
+    color: #ffd700;
+    margin-bottom: 15px;
+}
+
+.popup-content hr {
+    border: 1px dashed #555;
+    margin: 10px 0;
+}
 </style>
 </head>
 <body>
@@ -179,7 +209,9 @@ button:hover {
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
         <div class="menu-action">
-    <button class="pesan">PESAN</button>
+    <button class="pesan" onclick="tampilStruk('MIE JEBEW', this)">
+    PESAN
+</button>
     <button class="minus" onclick="kurang(this)">-</button>
     <span class="qty">0</span>
     <button class="plus" onclick="tambah(this)">+</button>
@@ -238,6 +270,51 @@ function kurang(btn) {
     if (nilai > 0) {
         qty.textContent = nilai - 1;
     }
+}
+</script>
+<div id="popupStruk" class="popup">
+    <div class="popup-content">
+        <h2>STRUK PEMBELIAN</h2>
+
+        <hr>
+
+        <p id="namaMenu"></p>
+        <p id="jumlahMenu"></p>
+        <p id="hargaMenu"></p>
+
+        <hr>
+
+        <h3 id="totalMenu"></h3>
+
+        <button onclick="tutupStruk()">TUTUP</button>
+    </div>
+</div>
+<script>
+function tampilStruk(menu, tombol) {
+
+    let qty =
+        tombol.parentElement.querySelector(".qty").textContent;
+
+    let harga = 12000;
+    let total = qty * harga;
+
+    document.getElementById("namaMenu").innerHTML =
+        "Menu : " + menu;
+
+    document.getElementById("jumlahMenu").innerHTML =
+        "Qty  : " + qty;
+
+    document.getElementById("hargaMenu").innerHTML =
+        "Harga: Rp " + harga.toLocaleString("id-ID");
+
+    document.getElementById("totalMenu").innerHTML =
+        "TOTAL : Rp " + total.toLocaleString("id-ID");
+
+    document.getElementById("popupStruk").style.display = "flex";
+}
+
+function tutupStruk() {
+    document.getElementById("popupStruk").style.display = "none";
 }
 </script>
 </body>    
