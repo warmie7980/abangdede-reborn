@@ -378,6 +378,29 @@ Terima kasih sudah order 🙏`;
     let waUrl = "https://wa.me/628211747988?text=" + encodeURIComponent(pesan);
 
     window.open(waUrl, "_blank");
+
+    // 🔥 RESET SEMUA SETELAH KIRIM
+    resetSemua();
+}
+function resetSemua() {
+    // tutup semua popup
+    document.getElementById("popupStruk").style.display = "none";
+    document.getElementById("popupForm").style.display = "none";
+
+    // kosongkan input
+    document.getElementById("nama").value = "";
+    document.getElementById("alamat").value = "";
+    document.getElementById("telp").value = "";
+
+    // reset qty semua menu
+    document.querySelectorAll(".qty").forEach(q => {
+        q.textContent = "0";
+    });
+
+    // reset variabel
+    selectedMenu = "";
+    selectedQty = 0;
+    selectedTombol = null;
 }
 </script>
 </body>    
