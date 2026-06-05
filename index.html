@@ -124,7 +124,13 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+}
+
+.pesan {
+    background: #0000FF;
+    color: #F0F8FF;
+    margin: 0;
 }
 
 .minus,
@@ -132,21 +138,19 @@ button:hover {
     width: 40px;
     height: 40px;
     padding: 0;
-    font-size: 22px;
+    margin: 0;
     background: #444;
     color: white;
-}
-.qty {
-    width: 30px;
-    text-align: center;
-    font-size: 20px;
-    font-family: "Courier New", monospace;
-    color: #ffd700;
+    font-size: 22px;
+    font-weight: bold;
 }
 
-.pesan {
-    background: #0000FF;
-    color: #F0F8FF;
+.qty {
+    min-width: 25px;
+    text-align: center;
+    color: #ffd700;
+    font-size: 20px;
+    font-family: "Courier New", monospace;
 }
 </style>
 </head>
@@ -175,10 +179,10 @@ button:hover {
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
         <div class="menu-action">
+    <button class="pesan">PESAN</button>
     <button class="minus" onclick="kurang(this)">-</button>
     <span class="qty">0</span>
     <button class="plus" onclick="tambah(this)">+</button>
-    <button class="pesan">PESAN</button>
 </div>
 
         <!-- MENU 2 -->
