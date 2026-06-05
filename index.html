@@ -218,9 +218,10 @@ button:hover {
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
         <div class="menu-action">
-    <button class="pesan" onclick="bukaForm('MIE JEBEW', this)">
-    PESAN
-</button>
+    <button class="pesan" onclick="bukaForm('MIE JEBEW')">PESAN</button>
+<button class="minus" onclick="kurang('MIE JEBEW')">-</button>
+<span class="qty" id="qty-jebew">0</span>
+<button class="plus" onclick="tambah('MIE JEBEW')">+</button>
     <button class="minus" onclick="kurang(this)">-</button>
     <span class="qty">0</span>
     <button class="plus" onclick="tambah(this)">+</button>
@@ -248,9 +249,9 @@ button:hover {
             Mie Yamin dengan rasa manis gurih khas, mie kenyal dipadukan dengan bumbu spesial yang lembut di lidah dan bikin nagih.
         </p>
         <button class="pesan" onclick="bukaForm('MIE YAMIN')">PESAN</button>
-        <button class="minus" onclick="kurang('MIE YAMIN')">-</button>
-        <span class="qty" id="qty-yamin">0</span>
-        <button class="plus" onclick="tambah('MIE YAMIN')">+</button>
+<button class="minus" onclick="kurang('MIE YAMIN')">-</button>
+<span class="qty" id="qty-yamin">0</span>
+<button class="plus" onclick="tambah('MIE YAMIN')">+</button>
 
         <!-- MENU 3 -->
         <div class="image-box">
@@ -262,9 +263,9 @@ button:hover {
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
         <button class="pesan" onclick="bukaForm('MIE ORIGINAL')">PESAN</button>
-        <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
-        <span class="qty" id="qty-original">0</span>
-        <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
+<button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
+<span class="qty" id="qty-original">0</span>
+<button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
 
     </div>
 </main>
@@ -326,147 +327,6 @@ let cart = {
 let harga = 12000;
 
 // ================= QTY =================
-function tambah(btn) {
-    let menu = getMenuName(btn);
-    cart[menu]++;
-    updateUI(menu);
-}
-
-function kurang(btn) {
-    let menu = getMenuName(btn);
-    if (cart[menu] > 0) cart[menu]--;
-    updateUI(menu);
-}
-
-function getMenuName(btn) {
-    const title = btn.closest(".container").querySelector("h2").innerText;
-    return title;
-}
-
-function updateUI(menu) {
-    let containers = document.querySelectorAll(".container");
-
-    containers.forEach(c => {
-        let name = c.querySelector("h2").innerText;
-        if (name === menu) {
-            c.querySelector(".qty").textContent = cart[menu];
-        }
-    });
-}
-
-// ================= CHECKOUT =================
-function bukaForm(menu, tombol) {
-    let totalQty = getTotalQty();
-
-    if (totalQty == 0) {
-        alert("Pilih jumlah pesanan dulu!");
-        return;
-    }
-
-    document.getElementById("popupForm").style.display = "flex";
-}
-
-function getTotalQty() {
-    return cart["MIE JEBEW"] + cart["MIE YAMIN"] + cart["MIE ORIGINAL"];
-}
-
-// ================= STRUK + WA =================
-function lanjutStruk() {
-
-    let nama = document.getElementById("nama").value.trim();
-    let alamat = document.getElementById("alamat").value.trim();
-    let telp = document.getElementById("telp").value.trim();
-
-    if (nama === "" || alamat === "" || telp === "") {
-        alert("Isi semua data dulu!");
-        return;
-    }
-
-    let pesanStruk = "";
-    let total = 0;
-
-    for (let menu in cart) {
-        if (cart[menu] > 0) {
-            let subtotal = cart[menu] * harga;
-            total += subtotal;
-
-            pesanStruk += `
-${menu}
-Qty : ${cart[menu]}
-Subtotal : Rp ${subtotal.toLocaleString("id-ID")}
-`;
-        }
-    }
-
-    if (total == 0) {
-        alert("Tidak ada pesanan!");
-        return;
-    }
-
-    document.getElementById("popupForm").style.display = "none";
-
-    document.getElementById("namaMenu").innerHTML = "Nama : " + nama;
-    document.getElementById("jumlahMenu").innerHTML =
-        "Alamat : " + alamat + "<br>No HP : " + telp + "<br><br>" + pesanStruk;
-
-    document.getElementById("totalMenu").innerHTML =
-        "TOTAL : Rp " + total.toLocaleString("id-ID");
-
-    document.getElementById("popupStruk").style.display = "flex";
-}
-
-function kirimWa() {
-
-    let nama = document.getElementById("nama").value;
-    let alamat = document.getElementById("alamat").value;
-    let telp = document.getElementById("telp").value;
-
-    let pesan = `*WARMIE - STRUK PEMBELIAN*
-
-Nama   : ${nama}
-Alamat : ${alamat}
-No HP  : ${telp}
-
-----------------------`;
-
-    let total = 0;
-
-    for (let menu in cart) {
-        if (cart[menu] > 0) {
-            let subtotal = cart[menu] * harga;
-            total += subtotal;
-
-            pesan += `
-${menu}
-Qty : ${cart[menu]}
-Subtotal : Rp ${subtotal.toLocaleString("id-ID")}
-`;
-        }
-    }
-
-    pesan += `
-----------------------
-TOTAL : Rp ${total.toLocaleString("id-ID")}
-----------------------
-Terima kasih 🙏`;
-
-    let url = "https://wa.me/628211747988?text=" + encodeURIComponent(pesan);
-
-    window.open(url, "_blank");
-
-    resetAll();
-}
-
-// ================= RESET =================
-function resetAll() {
-
-    <script>
-let cart = {
-    "MIE JEBEW": 0,
-    "MIE YAMIN": 0,
-    "MIE ORIGINAL": 0
-};
-
 function tambah(menu) {
     cart[menu]++;
     updateQty(menu);
@@ -478,26 +338,110 @@ function kurang(menu) {
 }
 
 function updateQty(menu) {
-    if (menu === "MIE JEBEW") {
-        document.getElementById("qty-jebew").innerText = cart[menu];
-    }
-    if (menu === "MIE YAMIN") {
-        document.getElementById("qty-yamin").innerText = cart[menu];
-    }
-    if (menu === "MIE ORIGINAL") {
-        document.getElementById("qty-original").innerText = cart[menu];
-    }
+    document.getElementById("qty-jebew").innerText = cart["MIE JEBEW"];
+    document.getElementById("qty-yamin").innerText = cart["MIE YAMIN"];
+    document.getElementById("qty-original").innerText = cart["MIE ORIGINAL"];
 }
 
+// ================= OPEN FORM =================
 function bukaForm(menu) {
     let total = cart["MIE JEBEW"] + cart["MIE YAMIN"] + cart["MIE ORIGINAL"];
 
     if (total === 0) {
-        alert("Pilih jumlah pesanan dulu!");
+        alert("Pilih menu dulu!");
         return;
     }
 
     document.getElementById("popupForm").style.display = "flex";
+}
+
+// ================= STRUK =================
+function lanjutStruk() {
+
+    let nama = document.getElementById("nama").value.trim();
+    let alamat = document.getElementById("alamat").value.trim();
+    let telp = document.getElementById("telp").value.trim();
+
+    if (!nama || !alamat || !telp) {
+        alert("Lengkapi data!");
+        return;
+    }
+
+    let detail = "";
+    let total = 0;
+
+    for (let m in cart) {
+        if (cart[m] > 0) {
+            let sub = cart[m] * harga;
+            total += sub;
+
+            detail += `\n${m}\nQty: ${cart[m]}\nSubtotal: Rp ${sub.toLocaleString("id-ID")}\n`;
+        }
+    }
+
+    document.getElementById("popupForm").style.display = "none";
+
+    document.getElementById("namaMenu").innerText = "Nama: " + nama;
+    document.getElementById("jumlahMenu").innerText =
+        "Alamat: " + alamat + "\nNo HP: " + telp + "\n" + detail;
+
+    document.getElementById("totalMenu").innerText =
+        "TOTAL: Rp " + total.toLocaleString("id-ID");
+
+    document.getElementById("popupStruk").style.display = "flex";
+}
+
+// ================= WHATSAPP =================
+function kirimWa() {
+
+    let nama = document.getElementById("nama").value;
+    let alamat = document.getElementById("alamat").value;
+    let telp = document.getElementById("telp").value;
+
+    let msg = `*WARMIE ORDER*
+
+Nama: ${nama}
+Alamat: ${alamat}
+No HP: ${telp}
+
+--------------------`;
+
+    let total = 0;
+
+    for (let m in cart) {
+        if (cart[m] > 0) {
+            let sub = cart[m] * harga;
+            total += sub;
+
+            msg += `\n${m} - Qty: ${cart[m]} - Rp ${sub.toLocaleString("id-ID")}`;
+        }
+    }
+
+    msg += `\n\nTOTAL: Rp ${total.toLocaleString("id-ID")}`;
+
+    let url = "https://wa.me/628211747988?text=" + encodeURIComponent(msg);
+
+    window.open(url, "_blank");
+
+    resetAll();
+}
+
+// ================= RESET =================
+function resetAll() {
+
+    cart = {
+        "MIE JEBEW": 0,
+        "MIE YAMIN": 0,
+        "MIE ORIGINAL": 0
+    };
+
+    updateQty();
+
+    document.getElementById("popupStruk").style.display = "none";
+
+    document.getElementById("nama").value = "";
+    document.getElementById("alamat").value = "";
+    document.getElementById("telp").value = "";
 }
 </script>
 </body>    
