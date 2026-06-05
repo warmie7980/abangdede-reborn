@@ -218,10 +218,13 @@ button:hover {
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
         <div class="menu-action">
-        <button class="pesan" onclick="bukaForm('MIE JEBEW')">PESAN</button>
+    <button class="pesan" onclick="bukaForm('MIE JEBEW')">PESAN</button>
+
+    <div class="qty-box">
         <button class="minus" onclick="kurang('MIE JEBEW')">-</button>
         <span class="qty" id="qty-jebew">0</span>
-        <button class="plus" onclick="tambah('MIE JEBEW')">+</button>        
+        <button class="plus" onclick="tambah('MIE JEBEW')">+</button>
+    </div>
 </div>
 <div id="popupForm" class="popup">
     <div class="popup-content">
@@ -245,10 +248,15 @@ button:hover {
         <p>
             Mie Yamin dengan rasa manis gurih khas, mie kenyal dipadukan dengan bumbu spesial yang lembut di lidah dan bikin nagih.
         </p>
-        <button class="pesan" onclick="bukaForm('MIE YAMIN')">PESAN</button>
-<button class="minus" onclick="kurang('MIE YAMIN')">-</button>
-<span class="qty" id="qty-yamin">0</span>
-<button class="plus" onclick="tambah('MIE YAMIN')">+</button>
+        <div class="menu-action">
+    <button class="pesan" onclick="bukaForm('MIE YAMIN')">PESAN</button>
+
+    <div class="qty-box">
+        <button class="minus" onclick="kurang('MIE YAMIN')">-</button>
+        <span class="qty" id="qty-yamin">0</span>
+        <button class="plus" onclick="tambah('MIE YAMIN')">+</button>
+    </div>
+</div>
 
         <!-- MENU 3 -->
         <div class="image-box">
@@ -259,12 +267,15 @@ button:hover {
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
-        <button class="pesan" onclick="bukaForm('MIE ORIGINAL')">PESAN</button>
-<button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
-<span class="qty" id="qty-original">0</span>
-<button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
+        <div class="menu-action">
+    <button class="pesan" onclick="bukaForm('MIE ORIGINAL')">PESAN</button>
 
+    <div class="qty-box">
+        <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
+        <span class="qty" id="qty-original">0</span>
+        <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
     </div>
+</div>
 </main>
 <script>
 function updateDateTime() {
