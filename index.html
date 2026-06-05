@@ -327,10 +327,17 @@ function bukaForm(menu, tombol) {
 
 function lanjutStruk() {
 
-    let nama = document.getElementById("nama").value;
-    let alamat = document.getElementById("alamat").value;
-    let telp = document.getElementById("telp").value;
+    let nama = document.getElementById("nama").value.trim();
+    let alamat = document.getElementById("alamat").value.trim();
+    let telp = document.getElementById("telp").value.trim();
 
+    // ❌ VALIDASI DATA PEMBELI
+    if (nama === "" || alamat === "" || telp === "") {
+        alert("Harap isi Nama, Alamat, dan No HP terlebih dahulu!");
+        return;
+    }
+
+    // lanjut ke struk
     let harga = 12000;
     let total = selectedQty * harga;
 
@@ -349,11 +356,13 @@ function lanjutStruk() {
     document.getElementById("popupForm").style.display = "none";
     document.getElementById("popupStruk").style.display = "flex";
 }
-
-function tutupStruk() {
-    document.getElementById("popupStruk").style.display = "none";
-}
 function kirimWa() {
+
+    if (selectedQty == 0) {
+        alert("Silakan pilih jumlah pesanan terlebih dahulu!");
+        return;
+    }
+
     let nama = document.getElementById("nama").value;
     let alamat = document.getElementById("alamat").value;
     let telp = document.getElementById("telp").value;
@@ -379,7 +388,6 @@ Terima kasih sudah order 🙏`;
 
     window.open(waUrl, "_blank");
 
-    // 🔥 RESET SEMUA SETELAH KIRIM
     resetSemua();
 }
 function resetSemua() {
