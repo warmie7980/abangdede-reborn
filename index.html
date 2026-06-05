@@ -120,6 +120,34 @@ button:hover {
     background: #111;
     padding: 8px;    
 }
+.menu-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.minus,
+.plus {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 22px;
+    background: #444;
+    color: white;
+}
+.qty {
+    width: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Courier New", monospace;
+    color: #ffd700;
+}
+
+.pesan {
+    background: #0000FF;
+    color: #F0F8FF;
+}
 </style>
 </head>
 <body>
@@ -146,7 +174,12 @@ button:hover {
             Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
-        <button>PESAN</button>
+        <div class="menu-action">
+    <button class="minus" onclick="kurang(this)">-</button>
+    <span class="qty">0</span>
+    <button class="plus" onclick="tambah(this)">+</button>
+    <button class="pesan">PESAN</button>
+</div>
 
         <!-- MENU 2 -->
         <div class="image-box">
@@ -187,6 +220,21 @@ function updateDateTime() {
 }
 updateDateTime();
 setInterval(updateDateTime, 1000);
+</script>
+<script>
+function tambah(btn) {
+    let qty = btn.parentElement.querySelector(".qty");
+    qty.textContent = parseInt(qty.textContent) + 1;
+}
+
+function kurang(btn) {
+    let qty = btn.parentElement.querySelector(".qty");
+    let nilai = parseInt(qty.textContent);
+
+    if (nilai > 0) {
+        qty.textContent = nilai - 1;
+    }
+}
 </script>
 </body>    
 </html>
