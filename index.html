@@ -6,19 +6,92 @@
     <title>Halaman Background Hitam</title>
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; min-height: 100vh; }
-        header { background-color: #111; padding: 20px; border-bottom: 1px solid #333; }
-        .judul { text-align: right; font-size: 50px; font-family: Courier new; colour: #00ff00; magrgin: 0px }
-        .subjudul { text-align: right; font-size: 75px; font-family: Courier new; colour: #00ff00; magrgin: 0px }
-        main { display: flex; justify-content: left; align-items: center; height: calc(100vh - 80px); text-align: left; }
-        .container { max-width: 600px; padding: 0px; font-family: courier new; font-size: 75px; }
-        button { margin-top: 20px; padding: 10px 20px; background: #fff;  color: #000;  border: none;   border-radius: 5px;
-        cursor: pointer; font-weight: bold; display: flex; gap: 10px; }
-        button:hover { background: #ccc; }
-        .datetime { position: fixed; top: 10px; left: 10px; color: yellow; font-size: 12px; font-weight: bold; z-index: 1000;
-        white-space: nowrap; font-family: Courier new; }
-    </style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+/* DATE TIME */
+.datetime {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: yellow;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "Courier New", monospace;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+/* HEADER */
+header {
+    background-color: #111;
+    padding: 30px;
+    border-bottom: 1px solid #333;
+    text-align: right;
+}
+
+.judul {
+    font-family: "Courier New", monospace;
+    font-size: 40px;
+    color: #00ff00;
+    margin: 0;
+}
+
+.subjudul {
+    font-family: "Courier New", monospace;
+    font-size: 60px;
+    color: #00ff00;
+    margin: 0;
+}
+
+/* CONTENT */
+main {
+    padding: 50px;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.container h2 {
+    font-family: "Courier New", monospace;
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: #ffd700;
+}
+
+.container p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* BUTTON */
+button {
+    padding: 12px 24px;
+    margin-right: 10px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #ccc;
+}
+</style>
 </head>
 <body>
     <div class="datetime" id="datetime"></div>
@@ -27,12 +100,20 @@
         <h1 class="subjudul">ABANG-DEDE REBORN</h1>
     </header>
     <main>
-        <div class="container">
-            <h2>MIE JEBEW</h2>
-            <p> Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE, dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.</p>
-            <button>MIE JEBEW</button><button>MIE YAMIN</button><button>MIE ORIGINAL</button>
-        </div>
-    </main>
+    <div class="container">
+        <h2>MIE JEBEW</h2>
+
+        <p>
+            Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
+            dan topping pilihan yang menghasilkan sensasi pedas, nikmat,
+            dan bikin ketagihan.
+        </p>
+
+        <button>MIE JEBEW</button>
+        <button>MIE YAMIN</button>
+        <button>MIE ORIGINAL</button>
+    </div>
+</main>
 <script>
 function updateDateTime() {
     const now = new Date();
