@@ -307,7 +307,7 @@ function kurang(btn) {
 
         <h3 id="totalMenu"></h3>
 
-        <button onclick="tutupStruk()">TUTUP</button>
+        <button onclick="kirimWa()">KIRIM KE WHATSAPP</button>
     </div>
 </div>
 <script>
@@ -352,6 +352,32 @@ function lanjutStruk() {
 
 function tutupStruk() {
     document.getElementById("popupStruk").style.display = "none";
+}
+function kirimWa() {
+    let nama = document.getElementById("nama").value;
+    let alamat = document.getElementById("alamat").value;
+    let telp = document.getElementById("telp").value;
+
+    let pesan =
+`*WARMIE - STRUK PEMBELIAN*
+
+Nama   : ${nama}
+Alamat : ${alamat}
+No HP  : ${telp}
+
+----------------------
+Menu   : ${selectedMenu}
+Qty    : ${selectedQty}
+Harga  : Rp 12.000
+
+TOTAL  : Rp ${selectedQty * 12000}
+----------------------
+
+Terima kasih sudah order 🙏`;
+
+    let waUrl = "https://wa.me/628211747988?text=" + encodeURIComponent(pesan);
+
+    window.open(waUrl, "_blank");
 }
 </script>
 </body>    
