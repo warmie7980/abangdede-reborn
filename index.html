@@ -218,26 +218,20 @@ button:hover {
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
         <div class="menu-action">
-    <button class="pesan" onclick="bukaForm('MIE JEBEW', this)">
-    PESAN
-</button>
-    <button class="minus" onclick="kurang(this)">-</button>
-    <span class="qty">0</span>
-    <button class="plus" onclick="tambah(this)">+</button>
-</div>
+            <button class="pesan" onclick="addCart('MIE JEBEW')">PESAN</button>
+            <button class="minus" onclick="kurangCart('MIE JEBEW')">-</button>
+            <span class="qty" id="qty-jebew">0</span>
+            <button class="plus" onclick="tambahCart('MIE JEBEW')">+</button>
+        </div>
 <div id="popupForm" class="popup">
     <div class="popup-content">
-
         <h2>DATA PEMBELI</h2>
-
         <input id="nama" placeholder="Nama">
         <input id="alamat" placeholder="Alamat">
         <input id="telp" placeholder="No HP">
-
         <button onclick="lanjutStruk()">OK</button>
     </div>
 </div>
-
         <!-- MENU 2 -->
         <div class="image-box">
             <img src="mie yamin.jpg" alt="Mie Yamin">
@@ -247,22 +241,52 @@ button:hover {
         <p>
             Mie Yamin dengan rasa manis gurih khas, mie kenyal dipadukan dengan bumbu spesial yang lembut di lidah dan bikin nagih.
         </p>
-        <button>PESAN</button>
-
+        <div class="menu-action">
+            <button class="pesan" onclick="addCart('MIE JEBEW')">PESAN</button>
+            <button class="minus" onclick="kurangCart('MIE JEBEW')">-</button>
+            <span class="qty" id="qty-jebew">0</span>
+            <button class="plus" onclick="tambahCart('MIE JEBEW')">+</button>
+        </div>
+<div id="popupForm" class="popup">
+    <div class="popup-content">
+        <h2>DATA PEMBELI</h2>
+        <input id="nama" placeholder="Nama">
+        <input id="alamat" placeholder="Alamat">
+        <input id="telp" placeholder="No HP">
+        <button onclick="lanjutStruk()">OK</button>
+    </div>
+</div>
         <!-- MENU 3 -->
         <div class="image-box">
             <img src="mie original.jpg" alt="Mie Original">
         </div>
-
         <h2>MIE ORIGINAL</h2>
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
-        <button>PESAN</button>
-
+        <div class="menu-action">
+            <button class="pesan" onclick="addCart('MIE JEBEW')">PESAN</button>
+            <button class="minus" onclick="kurangCart('MIE JEBEW')">-</button>
+            <span class="qty" id="qty-jebew">0</span>
+            <button class="plus" onclick="tambahCart('MIE JEBEW')">+</button>
+        </div>
+<div id="popupForm" class="popup">
+    <div class="popup-content">
+        <h2>DATA PEMBELI</h2>
+        <input id="nama" placeholder="Nama">
+        <input id="alamat" placeholder="Alamat">
+        <input id="telp" placeholder="No HP">
+        <button onclick="lanjutStruk()">OK</button>
+    </div>
+</div>
     </div>
 </main>
 <script>
+let cart = {
+    "MIE JEBEW": 0,
+    "MIE YAMIN": 0,
+    "MIE ORIGINAL": 0
+};
 function updateDateTime() {
     const now = new Date();
     const tanggal = now.toLocaleDateString('id-ID', {
@@ -358,58 +382,87 @@ function lanjutStruk() {
 }
 function kirimWa() {
 
-    if (selectedQty == 0) {
-        alert("Silakan pilih jumlah pesanan terlebih dahulu!");
-        return;
-    }
-
     let nama = document.getElementById("nama").value;
     let alamat = document.getElementById("alamat").value;
     let telp = document.getElementById("telp").value;
 
-    let pesan =
-`*WARMIE - STRUK PEMBELIAN*
+    let pesan = `*WARMIE - STRUK PEMBELIAN*
 
 Nama   : ${nama}
 Alamat : ${alamat}
 No HP  : ${telp}
 
+----------------------`;
+
+    let totalAll = 0;
+    let harga = 12000;
+
+    for (let menu in cart) {
+        if (cart[menu] > 0) {
+            let subtotal = cart[menu] * harga;
+            totalAll += subtotal;
+
+            pesan += `
+${menu}
+Qty  : ${cart[menu]}
+Subtotal : Rp ${subtotal.toLocaleString("id-ID")}
+`;
+        }
+    }
+
+    if (totalAll == 0) {
+        alert("Belum ada menu yang dipesan!");
+        return;
+    }
+
+    pesan += `
 ----------------------
-Menu   : ${selectedMenu}
-Qty    : ${selectedQty}
-Harga  : Rp 12.000
+TOTAL : Rp ${totalAll.toLocaleString("id-ID")}
 
-TOTAL  : Rp ${selectedQty * 12000}
-----------------------
+Terima kasih 🙏`;
 
-Terima kasih sudah order 🙏`;
-
-    let waUrl = "https://wa.me/628211747988?text=" + encodeURIComponent(pesan);
+    let waUrl = "https://wa.me/62XXXXXXXXXX?text=" + encodeURIComponent(pesan);
 
     window.open(waUrl, "_blank");
 
     resetSemua();
 }
 function resetSemua() {
-    // tutup semua popup
-    document.getElementById("popupStruk").style.display = "none";
-    document.getElementById("popupForm").style.display = "none";
+    for (let menu in cart) {
+        cart[menu] = 0;
+    }
 
-    // kosongkan input
+    document.getElementById("qty-jebew").textContent = "0";
+    document.getElementById("qty-yamin").textContent = "0";
+    document.getElementById("qty-original").textContent = "0";
+
+    document.getElementById("popupStruk").style.display = "none";
+
     document.getElementById("nama").value = "";
     document.getElementById("alamat").value = "";
     document.getElementById("telp").value = "";
-
-    // reset qty semua menu
-    document.querySelectorAll(".qty").forEach(q => {
-        q.textContent = "0";
-    });
-
-    // reset variabel
-    selectedMenu = "";
-    selectedQty = 0;
-    selectedTombol = null;
 }
 </script>
+function tambahCart(menu) {
+    cart[menu]++;
+    updateQty(menu);
+}
+
+function kurangCart(menu) {
+    if (cart[menu] > 0) {
+        cart[menu]--;
+    }
+    updateQty(menu);
+}
+
+function updateQty(menu) {
+    let id = "";
+
+    if (menu === "MIE JEBEW") id = "qty-jebew";
+    if (menu === "MIE YAMIN") id = "qty-yamin";
+    if (menu === "MIE ORIGINAL") id = "qty-original";
+
+    document.getElementById(id).textContent = cart[menu];
+}
 </body>    
 </html>
