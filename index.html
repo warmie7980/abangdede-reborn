@@ -1,468 +1,226 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Background Hitam</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WARMIE CART</title>
 
-    <style>
-        * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    background-color: #000;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-}
-
-/* DATE TIME */
-.datetime {
-    position: fixed;
-    top: 10px;
-    left: 15px;
-    color: yellow;
-    font-size: 14px;
-    font-weight: bold;
-    font-family: "Courier New", monospace;
-    white-space: nowrap;
-    z-index: 9999;
+body{
+    background:#000;
+    color:#fff;
+    font-family:Courier New;
 }
 
 /* HEADER */
-header {
-    background-color: #111;
-    padding: 10px;
-    border-bottom: 1px solid #333;
-    text-align: right;
+header{
+    background:#111;
+    padding:20px;
+    text-align:right;
+    border-bottom:1px solid #333;
 }
 
-.judul {
-    font-family: "Courier New", monospace;
-    font-size: 60px;
-    color: #FFFFFF;
-    margin: 0;
+.judul{font-size:40px;}
+.subjudul{font-size:50px;color:#aaa;}
+
+/* MENU */
+.container{
+    max-width:800px;
+    margin:auto;
+    padding:30px;
 }
 
-.subjudul {
-    font-family: "Courier New", monospace;
-    font-size: 60px;
-    color: #A9A9A9;
-    margin: 0;
+.image-box{
+    width:100%;
+    height:220px;
+    border:2px solid #00ff00;
+    margin:15px 0;
 }
 
-/* CONTENT */
-main {
-    padding: 50px;
+.image-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-.container {
-    max-width: 800px;
+/* ACTION */
+.menu-action{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-bottom:30px;
 }
 
-.container h2 {
-    font-family: "Courier New", monospace;
-    font-size: 42px;
-    margin-bottom: 20px;
-    color: #ffd700;
+button{
+    padding:10px;
+    cursor:pointer;
+    border:none;
 }
 
-.container p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    font-family: Courier New;
+.pesan{background:#1e90ff;color:#fff;}
+
+.minus,.plus{
+    width:40px;
+    height:40px;
+    background:#444;
+    color:#fff;
 }
 
-/* BUTTON */
-button {
-    padding: 12px 24px;
-    margin-right: 10px;
-    background: #0000FF;
-    color: #F0F8FF;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 25px;
-    display: block;
+.qty{
+    color:yellow;
+    min-width:20px;
+    text-align:center;
 }
 
-button:hover {
-    background: #ccc;
-}
-.image-box {
-    width: 400px;
-    height: 250px;
-    border: 2px solid #00ff00;
-    background-color: #111;
-    color: #666;
-    font-family: "Courier New", monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 25px;
-}
-.image-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.running-text {
-    margin-top: 10px;
-    font-family: "Courier New", monospace;
-    font-size: 16px;
-    color: #ffd700;
-    background: #111;
-    padding: 8px;    
-}
-.menu-action {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 25px;
+/* POPUP */
+.popup{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
 }
 
-.pesan {
-    background: #0000FF;
-    color: #F0F8FF;
-    margin: 0;
+.popup-content{
+    background:#111;
+    padding:20px;
+    border:1px solid #00ff00;
+    width:300px;
 }
 
-.minus,
-.plus {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    margin: 0;
-    background: #444;
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.qty {
-    min-width: 25px;
-    text-align: center;
-    color: #ffd700;
-    font-size: 20px;
-    font-family: "Courier New", monospace;
-}
-.popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 9999;
-
-    justify-content: center;
-    align-items: center;
-}
-
-.popup-content {
-    width: 350px;
-    background: #111;
-    border: 2px solid #00ff00;
-    padding: 20px;
-    border-radius: 10px;
-    font-family: "Courier New", monospace;
-}
-
-.popup-content h2 {
-    text-align: center;
-    color: #ffd700;
-    margin-bottom: 15px;
-}
-
-.popup-content hr {
-    border: 1px dashed #555;
-    margin: 10px 0;
-}
-.popup-content input {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    background: #000;
-    border: 1px solid #00ff00;
-    color: white;
-    font-family: "Courier New", monospace;
+.popup-content input{
+    width:100%;
+    margin:5px 0;
+    padding:8px;
+    background:#000;
+    color:#fff;
+    border:1px solid #333;
 }
 </style>
 </head>
+
 <body>
-    <div class="datetime" id="datetime"></div>
-    <header>
-        <h1 class="judul">WARMIE</h1>
-        <h1 class="subjudul">ABANG-DEDE REBORN</h1>
-        <div class="running-text">
-    <marquee behavior="scroll" direction="left">
-        🔥 SELAMAT DATANG DI WARMIE - MIE PEDAS & GURIH - COBA SEMUA MENU FAVORIT KAMI 🔥
-    </marquee>
-</div>
-    </header>
-    <main>
-    <div class="container">
 
-        <!-- MENU 1 -->
-        <div class="image-box">
-            <img src="mie jebew.jpg" alt="Mie Jebew">
-        </div>
+<header>
+    <div class="judul">WARMIE</div>
+    <div class="subjudul">ABANG-DEDE REBORN</div>
+</header>
 
-        <h2>MIE JEBEW</h2>
-        <p>
-            Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
-            dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
-        </p>
-        <div class="menu-action">
-            <button class="pesan" onclick="addCart('MIE JEBEW')">PESAN</button>
-            <button class="minus" onclick="kurangCart('MIE JEBEW')">-</button>
-            <span class="qty" id="qty-jebew">0</span>
-            <button class="plus" onclick="tambahCart('MIE JEBEW')">+</button>
-        </div>
-<div id="popupForm" class="popup">
-    <div class="popup-content">
-        <h2>DATA PEMBELI</h2>
-        <input id="nama" placeholder="Nama">
-        <input id="alamat" placeholder="Alamat">
-        <input id="telp" placeholder="No HP">
-        <button onclick="lanjutStruk()">OK</button>
-    </div>
-</div>
-        <!-- MENU 2 -->
-        <div class="image-box">
-            <img src="mie yamin.jpg" alt="Mie Yamin">
-        </div>
+<div class="container">
 
-        <h2>MIE YAMIN</h2>
-        <p>
-            Mie Yamin dengan rasa manis gurih khas, mie kenyal dipadukan dengan bumbu spesial yang lembut di lidah dan bikin nagih.
-        </p>
-        <div class="menu-action">
-            <button class="pesan" onclick="addCart('MIE YAMIN')">PESAN</button>
-            <button class="minus" onclick="kurangCart('MIE YAMIN')">-</button>
-            <span class="qty" id="qty-yamin">0</span>
-            <button class="plus" onclick="tambahCart('MIE YAMIN')">+</button>
-        </div>
-<div id="popupForm" class="popup">
-    <div class="popup-content">
-        <h2>DATA PEMBELI</h2>
-        <input id="nama" placeholder="Nama">
-        <input id="alamat" placeholder="Alamat">
-        <input id="telp" placeholder="No HP">
-        <button onclick="lanjutStruk()">OK</button>
-    </div>
+<!-- MIE JEBEW -->
+<h2>MIE JEBEW</h2>
+<div class="image-box"><img src="mie jebew.jpg"></div>
+<div class="menu-action">
+<button class="pesan" onclick="tambah('MIE JEBEW')">PESAN</button>
+<button class="minus" onclick="kurang('MIE JEBEW')">-</button>
+<div class="qty" id="q-jebew">0</div>
+<button class="plus" onclick="tambah('MIE JEBEW')">+</button>
 </div>
-        <!-- MENU 3 -->
-        <div class="image-box">
-            <img src="mie original.jpg" alt="Mie Original">
-        </div>
-        <h2>MIE ORIGINAL</h2>
-        <p>
-            Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
-        </p>
-        <div class="menu-action">
-            <button class="pesan" onclick="addCart('MIE ORIGINAL')">PESAN</button>
-            <button class="minus" onclick="kurangCart('MIE ORIGINAL')">-</button>
-            <span class="qty" id="qty-original">0</span>
-            <button class="plus" onclick="tambahCart('MIE ORIGINal')">+</button>
-        </div>
-<div id="popupForm" class="popup">
-    <div class="popup-content">
-        <h2>DATA PEMBELI</h2>
-        <input id="nama" placeholder="Nama">
-        <input id="alamat" placeholder="Alamat">
-        <input id="telp" placeholder="No HP">
-        <button onclick="lanjutStruk()">OK</button>
-    </div>
+
+<!-- MIE YAMIN -->
+<h2>MIE YAMIN</h2>
+<div class="image-box"><img src="mie yamin.jpg"></div>
+<div class="menu-action">
+<button class="pesan" onclick="tambah('MIE YAMIN')">PESAN</button>
+<button class="minus" onclick="kurang('MIE YAMIN')">-</button>
+<div class="qty" id="q-yamin">0</div>
+<button class="plus" onclick="tambah('MIE YAMIN')">+</button>
 </div>
-    </div>
-</main>
+
+<!-- MIE ORIGINAL -->
+<h2>MIE ORIGINAL</h2>
+<div class="image-box"><img src="mie original.jpg"></div>
+<div class="menu-action">
+<button class="pesan" onclick="tambah('MIE ORIGINAL')">PESAN</button>
+<button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
+<div class="qty" id="q-original">0</div>
+<button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
+</div>
+
+</div>
+
+<!-- POPUP FORM -->
+<div class="popup" id="form">
+<div class="popup-content">
+<h3>DATA PEMBELI</h3>
+<input id="nama" placeholder="Nama">
+<input id="alamat" placeholder="Alamat">
+<input id="telp" placeholder="No HP">
+<button onclick="lanjut()">OK</button>
+</div>
+</div>
+
 <script>
 let cart = {
-    "MIE JEBEW": 0,
-    "MIE YAMIN": 0,
-    "MIE ORIGINAL": 0
+"MIE JEBEW":0,
+"MIE YAMIN":0,
+"MIE ORIGINAL":0
 };
-function updateDateTime() {
-    const now = new Date();
-    const tanggal = now.toLocaleDateString('id-ID', {
-        weekday: 'long',
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-    });
-    const waktu = now.toLocaleTimeString('id-ID');
-    document.getElementById('datetime').textContent =
-        `${tanggal} | ${waktu}`;
-}
-updateDateTime();
-setInterval(updateDateTime, 1000);
-</script>
-<script>
-function tambah(btn) {
-    let qty = btn.parentElement.querySelector(".qty");
-    qty.textContent = parseInt(qty.textContent) + 1;
+
+let selected="";
+
+function tambah(menu){
+cart[menu]++;
+update(menu);
+selected=menu;
+document.getElementById("form").style.display="flex";
 }
 
-function kurang(btn) {
-    let qty = btn.parentElement.querySelector(".qty");
-    let nilai = parseInt(qty.textContent);
-
-    if (nilai > 0) {
-        qty.textContent = nilai - 1;
-    }
-}
-</script>
-<div id="popupStruk" class="popup">
-    <div class="popup-content">
-        <h2>STRUK PEMBELIAN</h2>
-
-        <hr>
-
-        <p id="namaMenu"></p>
-        <p id="jumlahMenu"></p>
-        <p id="hargaMenu"></p>
-
-        <hr>
-
-        <h3 id="totalMenu"></h3>
-
-        <button onclick="kirimWa()">KIRIM KE WHATSAPP</button>
-    </div>
-</div>
-<script>
-let selectedMenu = "";
-let selectedQty = 0;
-let selectedTombol = null;
-
-function bukaForm(menu, tombol) {
-    selectedMenu = menu;
-    selectedTombol = tombol;
-
-    selectedQty =
-        tombol.parentElement.querySelector(".qty").textContent;
-
-    document.getElementById("popupForm").style.display = "flex";
+function kurang(menu){
+if(cart[menu]>0) cart[menu]--;
+update(menu);
 }
 
-function lanjutStruk() {
-
-    let nama = document.getElementById("nama").value.trim();
-    let alamat = document.getElementById("alamat").value.trim();
-    let telp = document.getElementById("telp").value.trim();
-
-    // ❌ VALIDASI DATA PEMBELI
-    if (nama === "" || alamat === "" || telp === "") {
-        alert("Harap isi Nama, Alamat, dan No HP terlebih dahulu!");
-        return;
-    }
-
-    // lanjut ke struk
-    let harga = 12000;
-    let total = selectedQty * harga;
-
-    document.getElementById("namaMenu").innerHTML =
-        "Nama   : " + nama;
-
-    document.getElementById("jumlahMenu").innerHTML =
-        "Alamat : " + alamat + "<br>No HP : " + telp + "<br><br>Menu : " + selectedMenu;
-
-    document.getElementById("hargaMenu").innerHTML =
-        "Qty    : " + selectedQty + "<br>Harga  : Rp " + harga.toLocaleString("id-ID");
-
-    document.getElementById("totalMenu").innerHTML =
-        "TOTAL  : Rp " + total.toLocaleString("id-ID");
-
-    document.getElementById("popupForm").style.display = "none";
-    document.getElementById("popupStruk").style.display = "flex";
-}
-function kirimWa() {
-
-    let nama = document.getElementById("nama").value;
-    let alamat = document.getElementById("alamat").value;
-    let telp = document.getElementById("telp").value;
-
-    let pesan = `*WARMIE - STRUK PEMBELIAN*
-
-Nama   : ${nama}
-Alamat : ${alamat}
-No HP  : ${telp}
-
-----------------------`;
-
-    let totalAll = 0;
-    let harga = 12000;
-
-    for (let menu in cart) {
-        if (cart[menu] > 0) {
-            let subtotal = cart[menu] * harga;
-            totalAll += subtotal;
-
-            pesan += `
-${menu}
-Qty  : ${cart[menu]}
-Subtotal : Rp ${subtotal.toLocaleString("id-ID")}
-`;
-        }
-    }
-
-    if (totalAll == 0) {
-        alert("Belum ada menu yang dipesan!");
-        return;
-    }
-
-    pesan += `
-----------------------
-TOTAL : Rp ${totalAll.toLocaleString("id-ID")}
-
-Terima kasih 🙏`;
-
-    let waUrl = "https://wa.me/62XXXXXXXXXX?text=" + encodeURIComponent(pesan);
-
-    window.open(waUrl, "_blank");
-
-    resetSemua();
-}
-function resetSemua() {
-    for (let menu in cart) {
-        cart[menu] = 0;
-    }
-
-    document.getElementById("qty-jebew").textContent = "0";
-    document.getElementById("qty-yamin").textContent = "0";
-    document.getElementById("qty-original").textContent = "0";
-
-    document.getElementById("popupStruk").style.display = "none";
-
-    document.getElementById("nama").value = "";
-    document.getElementById("alamat").value = "";
-    document.getElementById("telp").value = "";
-}
-function tambahCart(menu) {
-    cart[menu]++;
-    updateQty(menu);
+function update(menu){
+if(menu==="MIE JEBEW") document.getElementById("q-jebew").innerText=cart[menu];
+if(menu==="MIE YAMIN") document.getElementById("q-yamin").innerText=cart[menu];
+if(menu==="MIE ORIGINAL") document.getElementById("q-original").innerText=cart[menu];
 }
 
-function kurangCart(menu) {
-    if (cart[menu] > 0) {
-        cart[menu]--;
-    }
-    updateQty(menu);
+function lanjut(){
+let nama=document.getElementById("nama").value;
+let alamat=document.getElementById("alamat").value;
+let telp=document.getElementById("telp").value;
+
+if(!nama||!alamat||!telp){
+alert("ISI LENGKAP!");
+return;
 }
 
-function updateQty(menu) {
-    let id = "";
+let pesan=`WARMIE ORDER\n\nNama:${nama}\nAlamat:${alamat}\nTelp:${telp}\n\n`;
 
-    if (menu === "MIE JEBEW") id = "qty-jebew";
-    if (menu === "MIE YAMIN") id = "qty-yamin";
-    if (menu === "MIE ORIGINAL") id = "qty-original";
+let total=0;
+for(let m in cart){
+if(cart[m]>0){
+pesan+=`${m} x${cart[m]}\n`;
+total+=cart[m]*12000;
+}
+}
 
-    document.getElementById(id).textContent = cart[menu];
+pesan+=`\nTOTAL: Rp ${total}`;
+
+let url="https://wa.me/628XXXXXXXXXX?text="+encodeURIComponent(pesan);
+window.open(url,"_blank");
+
+reset();
+}
+
+function reset(){
+cart={"MIE JEBEW":0,"MIE YAMIN":0,"MIE ORIGINAL":0};
+update("MIE JEBEW");
+update("MIE YAMIN");
+update("MIE ORIGINAL");
+document.getElementById("form").style.display="none";
 }
 </script>
-</body>    
+
+</body>
 </html>
