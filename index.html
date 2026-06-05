@@ -191,6 +191,39 @@ button:hover {
     color: white;
     font-family: "Courier New", monospace;
 }
+.menu-action{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+/* tombol + qty - jadi satu group */
+.qty-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#222;
+    padding:5px 10px;
+    border-radius:8px;
+}
+
+.minus, .plus{
+    width:35px;
+    height:35px;
+    background:#444;
+    color:white;
+    border:none;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.qty{
+    min-width:25px;
+    text-align:center;
+    color:#ffd700;
+    font-weight:bold;
+}
 </style>
 </head>
 <body>
