@@ -260,7 +260,31 @@ button:hover {
     text-align:center;
     font-size: 30px;
     gap: 30px;
-
+}    
+.topping-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.qty-toping{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    margin-top:5px;
+}
+.qty-toping button{
+    width:25px;
+    height:25px;
+    padding:0;
+    margin:0;
+    background:#444;
+    color:white;
+}
+.qty-toping span{
+    min-width:20px;
+    text-align:center;
+    color:#ffd700;
+}
 </style>
 </head>
 <body>    
@@ -309,12 +333,51 @@ button:hover {
     </div>
     <div class="topping-box">
     <h3>EXTRA TOPING</h3>
-    <img src="bakso.png">
-    <img src="pangsit.png">
-    <img src="telurrebus.png">
-    <img src="kornet.png">
-    <img src="krupukpangsit.png">
-</div>
+
+    <div class="topping-item">
+        <img src="bakso.png">
+        <div class="qty-toping">
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+        </div>
+    </div>
+
+    <div class="topping-item">
+        <img src="pangsit.png">
+        <div class="qty-toping">
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+        </div>
+    </div>
+
+    <div class="topping-item">
+        <img src="telurrebus.png">
+        <div class="qty-toping">
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+        </div>
+    </div>
+
+    <div class="topping-item">
+        <img src="kornet.png">
+        <div class="qty-toping">
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+        </div>
+    </div>
+
+    <div class="topping-item">
+        <img src="krupukpangsit.png">
+        <div class="qty-toping">
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+        </div>
+    </div>
 </div>        
         <h2>MIE YAMIN</h2>
         <p>
