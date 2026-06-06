@@ -208,6 +208,12 @@ button:hover {
     align-items:50px;
     margin-bottom:25px;
 }
+.menu-action jebew{
+    display:flex;
+    justify-content: flex-start;
+    align-items:50px;
+    margin-bottom:25px;
+}
 
 /* tombol + qty - jadi satu group */
 .qty-box{
@@ -228,8 +234,7 @@ button:hover {
     position: absolute;
     left: 0;
     top: 50%;
-    transform: translateY(-50%);
-    margin-left: 500px;
+    transform: translateY(-50%);    
 }
 .minus, .plus{
     width:35px;
@@ -302,8 +307,8 @@ button:hover {
             Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
-        <div class="menu-action">
-    <div class="qty-box jebew">
+        <div class="menu-action-jebew">
+    <div class="qty-box-jebew">
         <button class="minus" onclick="kurang('MIE JEBEW')">-</button>
         <span class="qty" id="qty-jebew">0</span>
         <button class="plus" onclick="tambah('MIE JEBEW')">+</button>
