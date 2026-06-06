@@ -255,7 +255,6 @@ button:hover {
         <div class="image-box">
             <img src="mie jebew.jpg" alt="Mie Jebew">
         </div>
-
         <h2>MIE JEBEW</h2>
         <p>
             Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
@@ -270,13 +269,10 @@ button:hover {
 </div>
 <div id="popupForm" class="popup">
     <div class="popup-content">
-
         <h2>DATA PEMBELI</h2>
-
         <input id="nama" placeholder="Nama">
         <input id="alamat" placeholder="Alamat">
         <input id="telp" placeholder="No HP">
-
         <button onclick="lanjutStruk()">OK</button>
     </div>
 </div>
@@ -285,7 +281,6 @@ button:hover {
         <div class="image-box">
             <img src="mie yamin.jpg" alt="Mie Yamin">
         </div>
-
         <h2>MIE YAMIN</h2>
         <p>
             Mie Yamin dengan rasa manis gurih khas, mie kenyal dipadukan dengan bumbu spesial yang lembut di lidah dan bikin nagih.
@@ -302,14 +297,28 @@ button:hover {
         <div class="image-box">
             <img src="mie original.jpg" alt="Mie Original">
         </div>
-
         <h2>MIE ORIGINAL</h2>
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
         <div class="menu-action">
     <button class="pesan" onclick="bukaForm('MIE ORIGINAL')">PESAN</button>
-
+    <div class="qty-box">
+        <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
+        <span class="qty" id="qty-original">0</span>
+        <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
+    </div>
+</div>
+        <!-- MENU 4 -->
+        <div class="image-box">
+            <img src="mie original.jpg" alt="Mie Original">
+        </div>
+        <h2>MIE TELUR KORNET</h2>
+        <p>
+            Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
+        </p>
+        <div class="menu-action">
+    <button class="pesan" onclick="bukaForm('MIE ORIGINAL')">PESAN</button>
     <div class="qty-box">
         <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
         <span class="qty" id="qty-original">0</span>
