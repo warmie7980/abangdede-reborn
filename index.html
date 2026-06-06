@@ -220,6 +220,7 @@ button:hover {
     top: 50%;
     transform: translateY(-50%);       
 }
+
 .minus, .plus{
     width:35px;
     height:35px;
@@ -251,14 +252,15 @@ button:hover {
     height: 90px;
     object-fit:cover;
     margin-top:85px;
+    margin-left: 20px;
 }
 .topping-box h3{
     color:#ffd700;
     font-family:"Courier New", monospace;
     margin-top:42px;
-    text-align:center;
+    text-align:left;
     font-size: 30px;
-    gap: 30px;
+    gap: 10px;
 
 </style>
 </head>
@@ -278,19 +280,18 @@ button:hover {
         <!-- MIE JEBEW -->        
         <div class="image-box">
             <img src="mie jebew.jpg" alt="Mie Jebew">
-        </div>
-        <div class="topping-box">    
-    <img src="bakso.png">
-    <img src="pangsit.png">
-    <img src="telurrebus.png">
-    <img src="kornet.png">
-    <img src="krupukpangsit.png">
-</div>
+        </div>                    
         <h2>MIE JEBEW</h2>
         <p>
             Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
-        </p>       
+        </p>
+        <div class="menu-action">
+    <div class="qty-box">
+        <button class="minus" onclick="kurang('MIE JEBEW')">-</button>
+        <span class="qty" id="qty-jebew">0</span>
+        <button class="plus" onclick="tambah('MIE JEBEW')">+</button>
+    </div>
 </div>
 <div id="popupForm" class="popup">
     <div class="popup-content">
@@ -301,17 +302,14 @@ button:hover {
         <button onclick="lanjutStruk()">OK</button>
     </div>
 </div>
+
         <!-- MIE YAMIN -->
         <div class="menu-row">
     <div class="image-box">
         <img src="mie yamin.jpg">
     </div>
     <div class="topping-box">
-    <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE YAMIN')">-</button>
-        <span class="qty" id="qty-yamin">0</span>
-        <button class="plus" onclick="tambah('MIE YAMIN')">+</button>
-    </div>
+    <h3>EXTRA TOPING</h3>
     <img src="bakso.png">
     <img src="pangsit.png">
     <img src="telurrebus.png">
