@@ -260,6 +260,44 @@ button:hover {
     text-align:left;
     font-size: 20px;
     gap: 10px;
+}
+.topping-box{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.top-item{
+    text-align:center;
+}
+
+.top-item img{
+    width:90px;
+    height:90px;
+    object-fit:cover;
+    border:1px solid #00ff00;
+}
+
+.qty-control{
+    margin-top:5px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+}
+
+.qty-control button{
+    width:30px;
+    height:30px;
+    padding:0;
+    background:#222;
+    color:#fff;
+}
+
+.qty-control span{
+    color:#ffd700;
+    min-width:20px;
+}
 
 </style>
 </head>
@@ -277,17 +315,35 @@ button:hover {
     <main>    
     <div class="container">
         <!-- MIE JEBEW -->        
-        <div class="menu-row">        
-    <div class="image-box">
-        <img src="mie jebew.jpg">
-    </div>
-    <div class="topping-box">    
+        <div class="topping-box">
+
+  <div class="top-item">
     <img src="bakso.png">
+    <div class="qty-control">
+      <button onclick="kurangTop('bakso')">-</button>
+      <span id="qty-bakso">0</span>
+      <button onclick="tambahTop('bakso')">+</button>
+    </div>
+  </div>
+
+  <div class="top-item">
     <img src="pangsit.png">
+    <div class="qty-control">
+      <button onclick="kurangTop('pangsit')">-</button>
+      <span id="qty-pangsit">0</span>
+      <button onclick="tambahTop('pangsit')">+</button>
+    </div>
+  </div>
+
+  <div class="top-item">
     <img src="telurrebus.png">
-    <img src="kornet.png">
-    <img src="krupukpangsit.png">
-</div>
+    <div class="qty-control">
+      <button onclick="kurangTop('telur')">-</button>
+      <span id="qty-telur">0</span>
+      <button onclick="tambahTop('telur')">+</button>
+    </div>
+  </div>
+
 </div>    
         <h2>MIE JEBEW</h2>
         <p>
@@ -575,6 +631,23 @@ function resetAll() {
     document.getElementById("nama").value = "";
     document.getElementById("alamat").value = "";
     document.getElementById("telp").value = "";
+}
+let topping = {
+    bakso:0,
+    pangsit:0,
+    telur:0
+};
+
+function tambahTop(id){
+    topping[id]++;
+    document.getElementById("qty-"+id).innerText = topping[id];
+}
+
+function kurangTop(id){
+    if(topping[id] > 0){
+        topping[id]--;
+    }
+    document.getElementById("qty-"+id).innerText = topping[id];
 }
 </script>
 </body>    
