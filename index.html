@@ -252,19 +252,54 @@ button:hover {
     <main>    
     <div class="container">
         <!-- MIE JEBEW -->        
-        <div class="image-box">
-            <img src="mie jebew.jpg" alt="Mie Jebew">
-        </div>                    
-        <h2>MIE JEBEW</h2>
-        <p>
-            Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
-            dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
-        </p>
-        <div class="menu-action">
+        <div class="menu-block">
+
+    <!-- FOTO -->
+    <div class="image-box">
+        <img src="mie jebew.jpg">
+    </div>
+
+    <!-- TOPPING -->
+    <div class="topping-area">
+
+        <h3>EXTRA TOPING</h3>
+
+        <div class="topping-row">
+
+            <div class="topping-item">
+                <img src="bakso.jpg">
+                <div class="qty-box">
+                    <button>-</button>
+                    <span>0</span>
+                    <button>+</button>
+                </div>
+            </div>
+
+            <div class="topping-item">
+                <img src="telur.jpg">
+                <div class="qty-box">
+                    <button>-</button>
+                    <button>+</button>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="pesan-lagi">PESAN LAGI</button>
+
+    </div>
+
+</div>
+
+<!-- INI BARU DI BAWAHNYA -->
+<h2>MIE JEBEW</h2>
+<p>deskripsi mie jebew...</p>
+
+<div class="menu-action">
     <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE JEBEW')">-</button>
-        <span class="qty" id="qty-jebew">0</span>
-        <button class="plus" onclick="tambah('MIE JEBEW')">+</button>
+        <button>-</button>
+        <span>0</span>
+        <button>+</button>
     </div>
 </div>
 <div id="popupForm" class="popup">
