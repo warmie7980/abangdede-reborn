@@ -235,22 +235,6 @@ button:hover {
     color:#ffd700;
     font-weight:bold;
 }
-.image-row{
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.small-img{
-    width: 100px;
-    height: 100px;
-}
-
-.small-img img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 </style>
 </head>
 <body>
@@ -268,34 +252,30 @@ button:hover {
     <div class="container">
 
         <!-- MIE JEBEW -->
-        <div class="image-row">
-            <div class="image-box">
-                <img src="mie jebew.jpg" alt="Mie Jebew">
-            </div>
-            <div class="image-box small-img">
-                <img src="gambar-baru.jpg" alt="Gambar Tambahan">
-            </div>    
-                <h2>MIE JEBEW</h2>
-                    <p>
-                    Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
-                    dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
-                    </p>
-            <div class="menu-action">
-            <div class="qty-box">
-                <button class="minus" onclick="kurang('MIE JEBEW')">-</button>
-                <span class="qty" id="qty-jebew">0</span>
-                <button class="plus" onclick="tambah('MIE JEBEW')">+</button>
-            </div>
+        <div class="image-box">
+            <img src="mie jebew.jpg" alt="Mie Jebew">
         </div>
-            <div id="popupForm" class="popup">
-            <div class="popup-content">
-                <h2>DATA PEMBELI</h2>
-                    <input id="nama" placeholder="Nama">
-                    <input id="alamat" placeholder="Alamat">
-                    <input id="telp" placeholder="No HP">
-                    <button onclick="lanjutStruk()">OK</button>
-            </div>
-        </div>
+        <h2>MIE JEBEW</h2>
+        <p>
+            Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
+            dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
+        </p>
+        <div class="menu-action">
+    <div class="qty-box">
+        <button class="minus" onclick="kurang('MIE JEBEW')">-</button>
+        <span class="qty" id="qty-jebew">0</span>
+        <button class="plus" onclick="tambah('MIE JEBEW')">+</button>
+    </div>
+</div>
+<div id="popupForm" class="popup">
+    <div class="popup-content">
+        <h2>DATA PEMBELI</h2>
+        <input id="nama" placeholder="Nama">
+        <input id="alamat" placeholder="Alamat">
+        <input id="telp" placeholder="No HP">
+        <button onclick="lanjutStruk()">OK</button>
+    </div>
+</div>
 
         <!-- MIE YAMIN -->
         <div class="image-box">
