@@ -220,7 +220,16 @@ button:hover {
     top: 50%;
     transform: translateY(-50%);       
 }
-
+.qty-box jebew{
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);       
+}
 .minus, .plus{
     width:35px;
     height:35px;
@@ -293,7 +302,7 @@ button:hover {
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
         <div class="menu-action">
-    <div class="qty-box">
+    <div class="qty-box jebew">
         <button class="minus" onclick="kurang('MIE JEBEW')">-</button>
         <span class="qty" id="qty-jebew">0</span>
         <button class="plus" onclick="tambah('MIE JEBEW')">+</button>
