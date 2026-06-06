@@ -108,38 +108,6 @@ button:hover {
     margin-bottom: 25px;
     margin-top: 50px;
 }
-/* === WRAPPER BARU KIRI-KANAN === */
-.menu-row{
-    display:flex;
-    gap:20px;
-    align-items:flex-start;
-    margin-bottom:30px;
-}
-
-/* kanan area */
-.menu-right{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-/* extra topping box */
-.extra-box{
-    display:flex;
-    gap:10px;
-}
-
-.extra-item{
-    text-align:center;
-}
-
-.extra-item img{
-    width:70px;
-    height:70px;
-    object-fit:cover;
-    border:2px solid #0f0;
-}
 .image-box img {
     width: 100%;
     height: 100%;
@@ -284,54 +252,19 @@ button:hover {
     <main>    
     <div class="container">
         <!-- MIE JEBEW -->        
-        <div class="menu-row">
-
-    <!-- KIRI: GAMBAR UTAMA -->
-    <div class="image-box">
-        <img src="mie jebew.jpg">
-    </div>
-
-    <!-- KANAN -->
-    <div class="menu-right">
-
+        <div class="image-box">
+            <img src="mie jebew.jpg" alt="Mie Jebew">
+        </div>                    
         <h2>MIE JEBEW</h2>
-
         <p>
-            Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE.
+            Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
+            dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
-
-        <!-- EXTRA TOPPING -->
-        <div class="extra-box">
-
-            <div class="extra-item">
-                <img src="bakso.jpg">
-                <div class="qty-box">
-                    <button>-</button>
-                    <span>0</span>
-                    <button>+</button>
-                </div>
-            </div>
-
-            <div class="extra-item">
-                <img src="telur.jpg">
-                <div class="qty-box">
-                    <button>-</button>
-                    <span>0</span>
-                    <button>+</button>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- QTY MENU -->
         <div class="menu-action">
-            <div class="qty-box">
-                <button class="minus">-</button>
-                <span class="qty" id="qty-jebew">0</span>
-                <button class="plus">+</button>
-            </div>
-        </div>
-
+    <div class="qty-box">
+        <button class="minus" onclick="kurang('MIE JEBEW')">-</button>
+        <span class="qty" id="qty-jebew">0</span>
+        <button class="plus" onclick="tambah('MIE JEBEW')">+</button>
     </div>
 </div>
 <div id="popupForm" class="popup">
