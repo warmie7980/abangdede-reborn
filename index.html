@@ -91,7 +91,6 @@ button {
     margin-bottom: 25px;
     display: block;
 }
-
 button:hover {
     background: #ccc;
 }
@@ -121,27 +120,6 @@ button:hover {
     background: #111;
     padding: 8px;    
 }
-.menu-action{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
-    position: relative;
-    width: 100%;
-    margin-bottom: 25px;
-    margin-top: 20px;
-}
-
-.pesan{
-    order: 1;
-    display: block;
-    margin: 0 auto;    
-    position: relative;
-    left: 80px;  /* geser kanan */
-    top: 65px;   /* geser bawah */
-}
-
 .minus,
 .plus {
     width: 40px;
@@ -153,7 +131,6 @@ button:hover {
     font-size: 22px;
     font-weight: bold;
 }
-
 .qty {
     min-width: 25px;
     text-align: center;
@@ -200,25 +177,14 @@ button:hover {
     color: white;
     font-family: "Courier New", monospace;
 }
-.menu-action{
-    display:flex;
-    justify-content: flex-start;
-    align-items:50px;
-    margin-bottom:25px;
-}
-
 /* tombol + qty - jadi satu group */
 .qty-box{
-    order: 2;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);       
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    margin-top:5px;
 }
-
 .minus, .plus{
     width:35px;
     height:35px;
@@ -234,6 +200,49 @@ button:hover {
     text-align:center;
     color:#ffd700;
     font-weight:bold;
+}
+.menu-block{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    margin-bottom:40px;
+}
+
+.topping-area{
+    display:flex;
+    flex-direction:column;
+}
+
+.topping-area h3{
+    color:#ffd700;
+    font-family:"Courier New", monospace;
+    margin-bottom:10px;
+}
+
+.topping-row{
+    display:flex;
+    gap:12px;
+}
+
+.topping-item{
+    text-align:center;
+}
+
+.topping-item img{
+    width:80px;
+    height:80px;
+    border:2px solid #00ff00;
+    object-fit:cover;
+}
+
+.pesan-lagi{
+    margin-top:10px;
+    background:#1e90ff;
+    color:white;
+    border:none;
+    padding:8px;
+    cursor:pointer;
+    border-radius:5px;
 }
 
 </style>
@@ -253,19 +262,21 @@ button:hover {
     <div class="container">
         <!-- MIE JEBEW -->        
         <div class="menu-block">
-
+        <h2>MIE JEBEW</h2>
+<p>deskripsi mie jebew...</p>
+<div class="qty-box">
+    <button>-</button>
+    <span>0</span>
+    <button>+</button>
+</div>
     <!-- FOTO -->
     <div class="image-box">
         <img src="mie jebew.jpg">
     </div>
-
     <!-- TOPPING -->
     <div class="topping-area">
-
         <h3>EXTRA TOPING</h3>
-
         <div class="topping-row">
-
             <div class="topping-item">
                 <img src="bakso.jpg">
                 <div class="qty-box">
@@ -282,26 +293,14 @@ button:hover {
                     <button>+</button>
                 </div>
             </div>
-
         </div>
-
         <button class="pesan-lagi">PESAN LAGI</button>
-
     </div>
-
 </div>
 
 <!-- INI BARU DI BAWAHNYA -->
 <h2>MIE JEBEW</h2>
 <p>deskripsi mie jebew...</p>
-
-<div class="menu-action">
-    <div class="qty-box">
-        <button>-</button>
-        <span>0</span>
-        <button>+</button>
-    </div>
-</div>
 <div id="popupForm" class="popup">
     <div class="popup-content">
         <h2>DATA PEMBELI</h2>
@@ -320,14 +319,7 @@ button:hover {
         <p>
             Mie Yamin dengan rasa manis gurih khas, mie kenyal dipadukan dengan bumbu spesial yang lembut di lidah dan bikin nagih.
         </p>
-        <div class="menu-action">    
-    <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE YAMIN')">-</button>
-        <span class="qty" id="qty-yamin">0</span>
-        <button class="plus" onclick="tambah('MIE YAMIN')">+</button>
-    </div>
-</div>
-
+        
         <!-- MIE ORIGINAL -->
         <div class="image-box">
             <img src="mie original.jpg" alt="Mie Original">
@@ -351,13 +343,7 @@ button:hover {
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
-        <div class="menu-action">    
-    <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
-        <span class="qty" id="qty-original">0</span>
-        <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
-    </div>
-</div>
+       
         <!-- EXTRA TOPING -->
         <div class="image-box">
             <img src="mie original.jpg" alt="Mie Original">
@@ -365,15 +351,7 @@ button:hover {
         <h2>EXTRA TOPING</h2>
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
-        </p>
-        <div class="menu-action">
-    <button class="pesan" onclick="bukaForm('MIE ORIGINAL')">PESAN LAGI</button>
-    <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
-        <span class="qty" id="qty-original">0</span>
-        <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
-    </div>
-</div>
+        </p>       
 </main>
 <script>
 function updateDateTime() {
