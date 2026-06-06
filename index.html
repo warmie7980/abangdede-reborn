@@ -260,7 +260,45 @@ button:hover {
     text-align:left;
     font-size: 20px;
     gap: 10px;
+}
+.topping-box{
+    display:flex;
+    gap:10px;
+    flex-wrap:nowrap;
+}
 
+.topping-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.topping-item img{
+    width:90px;
+    height:90px;
+    object-fit:cover;
+}
+
+.qty-topping{
+    display:flex;
+    gap:5px;
+    align-items:center;
+    margin-top:5px;
+}
+
+.qty-topping button{
+    width:25px;
+    height:25px;
+    background:#444;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+}
+
+.qty-topping span{
+    color:#ffd700;
+    font-weight:bold;
+}
 </style>
 </head>
 <body>    
@@ -600,6 +638,16 @@ function resetAll() {
     document.getElementById("nama").value = "";
     document.getElementById("alamat").value = "";
     document.getElementById("telp").value = "";
+}
+function plusTop(id){
+    let el = document.getElementById(id);
+    el.textContent = parseInt(el.textContent) + 1;
+}
+
+function minTop(id){
+    let el = document.getElementById(id);
+    let val = parseInt(el.textContent);
+    if(val > 0) el.textContent = val - 1;
 }
 </script>
 </body>    
