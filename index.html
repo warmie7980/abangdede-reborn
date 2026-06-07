@@ -476,15 +476,29 @@ function bukaForm(){
 
     cart.forEach(item=>{
 
-        let subTotal = harga;
+    let subTotal = harga;
 
-subTotal += item.topping.bakso * hargaTopping.bakso;
-subTotal += item.topping.pangsit * hargaTopping.pangsit;
-subTotal += item.topping.telur * hargaTopping.telur;
+    subTotal += item.topping.bakso * hargaTopping.bakso;
+    subTotal += item.topping.pangsit * hargaTopping.pangsit;
+    subTotal += item.topping.telur * hargaTopping.telur;
 
-total += subTotal;
+    total += subTotal;
 
-    });
+    detail += item.menu + "\n";
+
+    if(item.topping.bakso > 0)
+        detail += "Bakso x" + item.topping.bakso + "\n";
+
+    if(item.topping.pangsit > 0)
+        detail += "Pangsit x" + item.topping.pangsit + "\n";
+
+    if(item.topping.telur > 0)
+        detail += "Telur x" + item.topping.telur + "\n";
+
+    detail += "Subtotal : Rp " +
+        subTotal.toLocaleString("id-ID") + "\n\n";
+
+});
 
     document.getElementById("namaMenu").innerText =
         nama;
