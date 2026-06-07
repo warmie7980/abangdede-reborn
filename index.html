@@ -272,6 +272,15 @@ button:hover {
     font-size:14px;
     line-height:1.5;
 }
+.popup-content select{
+    width:100%;
+    padding:8px;
+    margin:8px 0;
+    background:#000;
+    border:1px solid #00ff00;
+    color:white;
+    font-family:"Courier New", monospace;
+}
 </style>
 </head>
 <body>    
@@ -317,7 +326,31 @@ button:hover {
         <input id="nama" placeholder="Nama">
         <input id="alamat" placeholder="Alamat">
         <input id="telp" placeholder="No HP">
+        <select id="pembayaran">
+    <option value="">-- Pilih Pembayaran --</option>
+    <option>Cash</option>
+    <option>QRIS</option>
+    <option>Transfer BCA</option>
+    <option>Transfer BRI</option>
+    <option>DANA</option>
+    <option>OVO</option>
+    <option>GoPay</option>
+</select>
         <button onclick="lanjutStruk()">OK</button>
+        let msg =
+`*WARMIE ORDER*
+
+Nama : ${nama}
+Alamat : ${alamat}
+No HP : ${telp}
+Pembayaran : ${pembayaran}
+
+`;
+
+if(!nama || !alamat || !telp || !pembayaran){
+    alert("Lengkapi data");
+    return;
+}
     </div>
 </div>
 
@@ -551,7 +584,8 @@ function bukaForm(){
     document.getElementById("dataPembeli").innerText =
     "Nama : " + nama +
     "\nAlamat : " + alamat +
-    "\nNo HP : " + telp;
+    "\nNo HP : " + telp +
+    "\nPembayaran : " + pembayaran;
 
     document.getElementById("detailPesanan").innerText =
     detail;
@@ -576,6 +610,8 @@ function kirimWa(){
 
     let telp =
         document.getElementById("telp").value;
+    let pembayaran =
+    document.getElementById("pembayaran").value;
 
     let msg =
 `*WARMIE ORDER*
@@ -627,6 +663,8 @@ function resetAll(){
     document.getElementById("nama").value = "";
     document.getElementById("alamat").value = "";
     document.getElementById("telp").value = "";
+
+    document.getElementById("pembayaran").value = "";
 }
 let menuAktif = "";
 function pilihMenu(menu){
