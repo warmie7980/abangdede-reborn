@@ -422,17 +422,12 @@ setInterval(updateDateTime, 1000);
 <div id="popupStruk" class="popup">
     <div class="popup-content">
         <h2>STRUK PEMBELIAN</h2>
-
         <hr>
-
-        <p id="namaMenu"></p>
-        <p id="jumlahMenu"></p>
-        <p id="hargaMenu"></p>
-
+        <p id="dataPembeli"></p>
         <hr>
-
+        <p id="detailPesanan"></p>
+        <hr>
         <h3 id="totalMenu"></h3>
-
         <button onclick="kirimWa()">KIRIM KE WHATSAPP</button>
     </div>
 </div>
@@ -500,11 +495,13 @@ function bukaForm(){
 
 });
 
-    document.getElementById("namaMenu").innerText =
-        nama;
+    document.getElementById("dataPembeli").innerText =
+    "Nama : " + nama +
+    "\nAlamat : " + alamat +
+    "\nNo HP : " + telp;
 
-    document.getElementById("jumlahMenu").innerText =
-        detail;
+    document.getElementById("detailPesanan").innerText =
+    detail;
 
     document.getElementById("totalMenu").innerText =
         "TOTAL : Rp " +
