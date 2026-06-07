@@ -497,6 +497,16 @@ function bukaForm(){
     let alamat = document.getElementById("alamat").value.trim();
     let telp = document.getElementById("telp").value.trim();
     let pembayaran = document.getElementById("pembayaran").value;
+    const now = new Date();
+        const tanggal =
+        now.toLocaleDateString("id-ID",{
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+        });
+    const jam =
+    now.toLocaleTimeString("id-ID");
+        
     dataOrder = {
     nama,
     alamat,
@@ -584,10 +594,12 @@ function bukaForm(){
     });
 
     document.getElementById("dataPembeli").innerText =
-        "Nama : " + nama +
-        "\nAlamat : " + alamat +
-        "\nNo HP : " + telp +
-        "\nPembayaran : " + pembayaran;
+    "Tanggal : " + tanggal +
+    "\nJam : " + jam +
+    "\nNama : " + nama +
+    "\nAlamat : " + alamat +
+    "\nNo HP : " + telp +
+    "\nPembayaran : " + pembayaran;
 
     document.getElementById("detailPesanan").innerText =
         detail;
@@ -607,9 +619,19 @@ function kirimWa(){
     let alamat = document.getElementById("alamat").value;
     let telp = document.getElementById("telp").value;
     let pembayaran = document.getElementById("pembayaran").value;
+    const now = new Date();
+
+const tanggal =
+now.toLocaleDateString("id-ID");
+
+const jam =
+now.toLocaleTimeString("id-ID");
 
     let msg =
 `*WARMIE ORDER*
+
+Tanggal : ${tanggal}
+Jam : ${jam}
 
 Nama : ${nama}
 Alamat : ${alamat}
