@@ -397,6 +397,11 @@ button:hover {
         <div class="menu-action">   
     </div>
 </div>
+<div style="text-align:center;margin-top:50px;">
+    <button onclick="bukaForm()">
+        PESAN SEKARANG
+    </button>
+</div>
 </main>
 <script>
 function updateDateTime() {
@@ -437,104 +442,128 @@ let cart = [];
 let harga = 12000;
 
 // ================= OPEN FORM =================
-function bukaForm(menu) {
-    let total =
-    cart["MIE JEBEW"] +
-    cart["MIE YAMIN"] +
-    cart["MIE ORIGINAL"] +
-    cart["MIE TELUR KORNET"];
+function bukaForm(){
 
-    if (total === 0) {
-        alert("Pilih menu dulu!");
+    if(cart.length === 0){
+        alert("Keranjang masih kosong");
         return;
     }
 
-    document.getElementById("popupForm").style.display = "flex";
-}
+    document.getElementById("popupForm").style.display="flex";
+}function lanjutStruk(){
 
-// ================= STRUK =================
-function lanjutStruk() {
+    let nama =
+        document.getElementById("nama").value.trim();
 
-    let nama = document.getElementById("nama").value.trim();
-    let alamat = document.getElementById("alamat").value.trim();
-    let telp = document.getElementById("telp").value.trim();
+    let alamat =
+        document.getElementById("alamat").value.trim();
 
-    if (!nama || !alamat || !telp) {
-        alert("Lengkapi data!");
+    let telp =
+        document.getElementById("telp").value.trim();
+
+    if(!nama || !alamat || !telp){
+        alert("Lengkapi data");
         return;
     }
 
     let detail = "";
     let total = 0;
 
-    for (let m in cart) {
-        if (cart[m] > 0) {
-            let sub = cart[m] * harga;
-            total += sub;
+    cart.forEach(item=>{
 
-            detail += `\n${m}\nQty: ${cart[m]}\nSubtotal: Rp ${sub.toLocaleString("id-ID")}\n`;
-        }
-    }
+        total += harga;
 
-    document.getElementById("popupForm").style.display = "none";
+        detail += item.menu + "\n";
 
-    document.getElementById("namaMenu").innerText = "Nama: " + nama;
+        if(item.topping.bakso)
+            detail += "Bakso x"+item.topping.bakso+"\n";
+
+        if(item.topping.pangsit)
+            detail += "Pangsit x"+item.topping.pangsit+"\n";
+
+        if(item.topping.telur)
+            detail += "Telur x"+item.topping.telur+"\n";
+
+        detail += "\n";
+
+    });
+
+    document.getElementById("namaMenu").innerText =
+        nama;
+
     document.getElementById("jumlahMenu").innerText =
-        "Alamat: " + alamat + "\nNo HP: " + telp + "\n" + detail;
+        detail;
 
     document.getElementById("totalMenu").innerText =
-        "TOTAL: Rp " + total.toLocaleString("id-ID");
+        "TOTAL : Rp " +
+        total.toLocaleString("id-ID");
 
-    document.getElementById("popupStruk").style.display = "flex";
+    document.getElementById("popupForm").style.display="none";
+
+    document.getElementById("popupStruk").style.display="flex";
 }
 
 // ================= WHATSAPP =================
-function kirimWa() {
+function kirimWa(){
 
-    let nama = document.getElementById("nama").value;
-    let alamat = document.getElementById("alamat").value;
-    let telp = document.getElementById("telp").value;
+    let nama =
+        document.getElementById("nama").value;
 
-    let msg = `*WARMIE ORDER*
+    let alamat =
+        document.getElementById("alamat").value;
 
-Nama: ${nama}
-Alamat: ${alamat}
-No HP: ${telp}
+    let telp =
+        document.getElementById("telp").value;
 
---------------------`;
+    let msg =
+`*WARMIE ORDER*
+
+Nama : ${nama}
+Alamat : ${alamat}
+No HP : ${telp}
+
+`;
 
     let total = 0;
 
-    for (let m in cart) {
-        if (cart[m] > 0) {
-            let sub = cart[m] * harga;
-            total += sub;
+    cart.forEach(item=>{
 
-            msg += `\n${m} - Qty: ${cart[m]} - Rp ${sub.toLocaleString("id-ID")}`;
-        }
-    }
+        total += harga;
 
-    msg += `\n\nTOTAL: Rp ${total.toLocaleString("id-ID")}`;
+        msg += "\n" + item.menu;
 
-    let url = "https://wa.me/62895401287059?text=" + encodeURIComponent(msg);
+        if(item.topping.bakso)
+            msg += "\n- Bakso x"+item.topping.bakso;
 
-    window.open(url, "_blank");
+        if(item.topping.pangsit)
+            msg += "\n- Pangsit x"+item.topping.pangsit;
+
+        if(item.topping.telur)
+            msg += "\n- Telur x"+item.topping.telur;
+
+        msg += "\n";
+
+    });
+
+    msg +=
+        "\nTOTAL : Rp " +
+        total.toLocaleString("id-ID");
+
+    window.open(
+        "https://wa.me/62895401287059?text="+
+        encodeURIComponent(msg)
+    );
 
     resetAll();
 }
 
 // ================= RESET =================
-function resetAll() {
+function resetAll(){
 
-    cart = {
-        "MIE JEBEW": 0,
-        "MIE YAMIN": 0,
-        "MIE ORIGINAL": 0,
-        "MIE TELUR KORNET": 0
-    };
-    updateQty();
+    cart = [];
 
-    document.getElementById("popupStruk").style.display = "none";
+    document.getElementById("popupStruk").style.display =
+        "none";
 
     document.getElementById("nama").value = "";
     document.getElementById("alamat").value = "";
