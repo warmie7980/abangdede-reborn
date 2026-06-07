@@ -323,34 +323,23 @@ button:hover {
 <div id="popupForm" class="popup">
     <div class="popup-content">
         <h2>DATA PEMBELI</h2>
+
         <input id="nama" placeholder="Nama">
         <input id="alamat" placeholder="Alamat">
         <input id="telp" placeholder="No HP">
+
         <select id="pembayaran">
-    <option value="">-- Pilih Pembayaran --</option>
-    <option>Cash</option>
-    <option>QRIS</option>
-    <option>Transfer BCA</option>
-    <option>Transfer BRI</option>
-    <option>DANA</option>
-    <option>OVO</option>
-    <option>GoPay</option>
-</select>
+            <option value="">-- Pilih Pembayaran --</option>
+            <option>Cash</option>
+            <option>QRIS</option>
+            <option>Transfer BCA</option>
+            <option>Transfer BRI</option>
+            <option>DANA</option>
+            <option>OVO</option>
+            <option>GoPay</option>
+        </select>
+
         <button onclick="lanjutStruk()">OK</button>
-        let msg =
-`*WARMIE ORDER*
-
-Nama : ${nama}
-Alamat : ${alamat}
-No HP : ${telp}
-Pembayaran : ${pembayaran}
-
-`;
-
-if(!nama || !alamat || !telp || !pembayaran){
-    alert("Lengkapi data");
-    return;
-}
     </div>
 </div>
 
@@ -511,7 +500,10 @@ function bukaForm(){
     let telp =
         document.getElementById("telp").value.trim();
 
-    if(!nama || !alamat || !telp){
+    let pembayaran =
+    document.getElementById("pembayaran").value;
+
+    if(!nama || !alamat || !telp || !pembayaran){
         alert("Lengkapi data");
         return;
     }
@@ -523,7 +515,7 @@ function bukaForm(){
 
     let subTotal = item.harga;
 
-    msg += "\n*" + item.menu + "*";
+    detail += "\n" + item.menu;
     msg += "\n1 x " + item.menu +
            " = Rp." +
            item.harga.toLocaleString("id-ID");
@@ -619,6 +611,7 @@ function kirimWa(){
 Nama : ${nama}
 Alamat : ${alamat}
 No HP : ${telp}
+Pembayaran : ${pembayaran}
 
 `;
 
