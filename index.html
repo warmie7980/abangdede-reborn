@@ -482,13 +482,14 @@ function bukaForm(){
 
     cart.forEach(item=>{
 
-    let subTotal = harga;
+    let subTotal = item.harga;
 
     detail += item.menu + "\n";
 
 detail +=
-"1 x Mie           Rp." +
-harga.toLocaleString("id-ID") +
+"1 x " + item.menu +
+"     Rp." +
+item.harga.toLocaleString("id-ID") +
 "\n";
 
 if(item.topping.bakso > 0){
@@ -584,7 +585,7 @@ No HP : ${telp}
 
     cart.forEach(item=>{
 
-        let subTotal = harga;
+        let subTotal = item.harga;
 
 subTotal += item.topping.bakso * hargaTopping.bakso;
 subTotal += item.topping.pangsit * hargaTopping.pangsit;
