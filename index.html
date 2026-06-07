@@ -281,6 +281,32 @@ button:hover {
     color:white;
     font-family:"Courier New", monospace;
 }
+.thermal{
+    width:58mm;
+    max-width:58mm;
+    background:#fff;
+    color:#000;
+    font-family:"Courier New", monospace;
+    font-size:12px;
+}
+
+.thermal hr{
+    border:none;
+    border-top:1px dashed #000;
+    margin:5px 0;
+}
+
+#detailPesanan,
+#dataPembeli,
+#tanggalStruk{
+    white-space:pre-line;
+    line-height:1.3;
+}
+
+#totalMenu{
+    text-align:right;
+    font-size:14px;
+}
 </style>
 </head>
 <body>    
@@ -453,15 +479,47 @@ updateDateTime();
 setInterval(updateDateTime, 1000);
 </script>
 <div id="popupStruk" class="popup">
-    <div class="popup-content">
-        <h2>STRUK PEMBELIAN</h2>
-        <hr>
-        <p id="dataPembeli"></p>
-        <hr>
-        <p id="detailPesanan"></p>
-        <hr>
-        <h3 id="totalMenu"></h3>
-        <button onclick="kirimWa()">KIRIM KE WHATSAPP</button>
+    <div class="popup-content thermal">
+
+        <div id="areaPrint">
+
+            <center>
+                <h3>WARMIE</h3>
+                <small>ABANG-DEDE REBORN</small>
+            </center>
+
+            <hr>
+
+            <div id="tanggalStruk"></div>
+
+            <hr>
+
+            <div id="dataPembeli"></div>
+
+            <hr>
+
+            <div id="detailPesanan"></div>
+
+            <hr>
+
+            <h3 id="totalMenu"></h3>
+
+            <hr>
+
+            <center>
+                TERIMA KASIH
+            </center>
+
+        </div>
+
+        <button onclick="printStruk()">
+            CETAK STRUK
+        </button>
+
+        <button onclick="kirimWa()">
+            KIRIM WHATSAPP
+        </button>
+
     </div>
 </div>
 <script>
@@ -755,6 +813,58 @@ function lanjutStrukFinal(){
     let pembayaran = dataOrder.pembayaran;
 
     // isi kode pembuatan struk yang sekarang
+}
+function printStruk(){
+
+    let isi =
+        document.getElementById("areaPrint").innerHTML;
+
+    let win = window.open("", "", "width=300,height=600");
+
+    win.document.write(`
+    <html>
+    <head>
+        <title>Struk WARMIE</title>
+        <style>
+            body{
+                width:58mm;
+                margin:0;
+                padding:5px;
+                font-family:Courier New;
+                font-size:12px;
+            }
+
+            hr{
+                border:none;
+                border-top:1px dashed #000;
+            }
+
+            #detailPesanan,
+            #dataPembeli,
+            #tanggalStruk{
+                white-space:pre-line;
+            }
+        </style>
+    </head>
+    <body>
+        ${isi}
+    </body>
+    </html>
+    `);
+
+    win.document.close();
+    win.print();
+}
+        </style>
+    </head>
+    <body>
+        ${isi}
+    </body>
+    </html>
+    `);
+
+    win.document.close();
+    win.print();
 }
 </script>
 <div id="popupMenu" class="popup">
