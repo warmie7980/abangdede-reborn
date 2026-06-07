@@ -290,6 +290,9 @@ button:hover {
 </div>
 </div>                    
         <h2>MIE JEBEW</h2>
+        <button onclick="pilihMenu('MIE JEBEW')">
+    PILIH & TAMBAH
+</button>
         <p>
             Mie Jebew adalah perpaduan mie kenyal, bumbu pedas gurih khas WARMIE,
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
@@ -344,6 +347,9 @@ button:hover {
 </div>
 </div> 
         <h2>MIE ORIGINAL</h2>
+        <button onclick="pilihMenu('MIE ORIGINAL')">
+    PILIH & TAMBAH
+</button>
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
@@ -363,6 +369,9 @@ button:hover {
 </div>
 </div> 
         <h2>MIE TELUR KORNET</h2>
+        <button onclick="pilihMenu('MIE TELUR KORNET')">
+    PILIH & TAMBAH
+</button>
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
@@ -385,14 +394,7 @@ button:hover {
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
-        <div class="menu-action">    
-    <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
-        <span class="qty" id="qty-original">0</span>
-        <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>        
-        <div style="text-align:center;margin-top:40px;">
-        <button onclick="bukaForm()">PESAN SEKARANG</button>
-        </div>
+        <div class="menu-action">   
     </div>
 </div>
 </main>
@@ -433,32 +435,6 @@ setInterval(updateDateTime, 1000);
 let cart = [];
 
 let harga = 12000;
-
-// ================= QTY =================
-function tambah(menu) {
-    cart[menu]++;
-    updateQty(menu);
-}
-
-function kurang(menu) {
-    if (cart[menu] > 0) cart[menu]--;
-    updateQty(menu);
-}
-
-function updateQty() {
-
-    document.getElementById("qty-jebew").innerText =
-        cart["MIE JEBEW"];
-
-    document.getElementById("qty-yamin").innerText =
-        cart["MIE YAMIN"];
-
-    document.getElementById("qty-original").innerText =
-        cart["MIE ORIGINAL"];
-
-    document.getElementById("qty-kornet").innerText =
-        cart["MIE TELUR KORNET"];
-}
 
 // ================= OPEN FORM =================
 function bukaForm(menu) {
