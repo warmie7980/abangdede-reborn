@@ -490,61 +490,60 @@ function bukaForm(){
 
     let subTotal = item.harga;
 
-    detail += item.menu + "\n";
+    msg += "\n*" + item.menu + "*";
+    msg += "\n1 x " + item.menu +
+           " = Rp." +
+           item.harga.toLocaleString("id-ID");
 
-detail +=
-("1 x " + item.menu).padEnd(25, " ") +
-"Rp." +
-item.harga.toLocaleString("id-ID") +
-"\n";
+    if(item.topping.bakso > 0){
 
-if(item.topping.bakso > 0){
+        let totalBakso =
+            item.topping.bakso *
+            hargaTopping.bakso;
 
-    let totalBakso =
-        item.topping.bakso * hargaTopping.bakso;
+        msg +=
+            "\n" +
+            item.topping.bakso +
+            " x Bakso = Rp." +
+            totalBakso.toLocaleString("id-ID");
 
-    detail +=
-    item.topping.bakso +
-    " x Bakso         Rp." +
-    totalBakso.toLocaleString("id-ID") +
-    "\n";
+        subTotal += totalBakso;
+    }
 
-    subTotal += totalBakso;
-}
+    if(item.topping.pangsit > 0){
 
-if(item.topping.pangsit > 0){
+        let totalPangsit =
+            item.topping.pangsit *
+            hargaTopping.pangsit;
 
-    let totalPangsit =
-        item.topping.pangsit * hargaTopping.pangsit;
+        msg +=
+            "\n" +
+            item.topping.pangsit +
+            " x Pangsit = Rp." +
+            totalPangsit.toLocaleString("id-ID");
 
-    detail +=
-    item.topping.pangsit +
-    " x Pangsit       Rp." +
-    totalPangsit.toLocaleString("id-ID") +
-    "\n";
+        subTotal += totalPangsit;
+    }
 
-    subTotal += totalPangsit;
-}
+    if(item.topping.telur > 0){
 
-if(item.topping.telur > 0){
+        let totalTelur =
+            item.topping.telur *
+            hargaTopping.telur;
 
-    let totalTelur =
-        item.topping.telur * hargaTopping.telur;
+        msg +=
+            "\n" +
+            item.topping.telur +
+            " x Telur = Rp." +
+            totalTelur.toLocaleString("id-ID");
 
-    detail +=
-    item.topping.telur +
-    " x Telur         Rp." +
-    totalTelur.toLocaleString("id-ID") +
-    "\n";
+        subTotal += totalTelur;
+    }
 
-    subTotal += totalTelur;
-}
-
-detail +=
-"--------------------------\n" +
-"Subtotal       Rp." +
-subTotal.toLocaleString("id-ID") +
-"\n\n";
+    msg +=
+        "\nSubtotal = Rp." +
+        subTotal.toLocaleString("id-ID") +
+        "\n";
 
     total += subTotal;
 });
