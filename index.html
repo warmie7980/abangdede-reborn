@@ -526,20 +526,17 @@ No HP : ${telp}
 
     cart.forEach(item=>{
 
-        total += harga;
+        let subTotal = harga;
 
-        msg += "\n" + item.menu;
+subTotal += item.topping.bakso * hargaTopping.bakso;
+subTotal += item.topping.pangsit * hargaTopping.pangsit;
+subTotal += item.topping.telur * hargaTopping.telur;
 
-        if(item.topping.bakso)
-            msg += "\n- Bakso x"+item.topping.bakso;
+total += subTotal;
 
-        if(item.topping.pangsit)
-            msg += "\n- Pangsit x"+item.topping.pangsit;
-
-        if(item.topping.telur)
-            msg += "\n- Telur x"+item.topping.telur;
-
-        msg += "\n";
+        msg += "\nSubtotal : Rp " +
+        subTotal.toLocaleString("id-ID") +
+        "\n";
 
     });
 
