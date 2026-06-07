@@ -473,56 +473,60 @@ function bukaForm(){
 
     let subTotal = harga;
 
-    detail += item.menu + " x1";
-    detail += " Rp." + harga.toLocaleString("id-ID");
-    detail += " = Rp." + harga.toLocaleString("id-ID") + "\n";
+    detail += item.menu + "\n";
 
-    if(item.topping.bakso > 0){
+detail +=
+"1 x Mie           Rp." +
+harga.toLocaleString("id-ID") +
+"\n";
 
-        let totalBakso =
-            item.topping.bakso * hargaTopping.bakso;
+if(item.topping.bakso > 0){
 
-        detail +=
-            "Bakso x" + item.topping.bakso +
-            " Rp." + hargaTopping.bakso.toLocaleString("id-ID") +
-            " = Rp." + totalBakso.toLocaleString("id-ID") +
-            "\n";
-
-        subTotal += totalBakso;
-    }
-
-    if(item.topping.pangsit > 0){
-
-        let totalPangsit =
-            item.topping.pangsit * hargaTopping.pangsit;
-
-        detail +=
-            "Pangsit x" + item.topping.pangsit +
-            " Rp." + hargaTopping.pangsit.toLocaleString("id-ID") +
-            " = Rp." + totalPangsit.toLocaleString("id-ID") +
-            "\n";
-
-        subTotal += totalPangsit;
-    }
-
-    if(item.topping.telur > 0){
-
-        let totalTelur =
-            item.topping.telur * hargaTopping.telur;
-
-        detail +=
-            "Telur x" + item.topping.telur +
-            " Rp." + hargaTopping.telur.toLocaleString("id-ID") +
-            " = Rp." + totalTelur.toLocaleString("id-ID") +
-            "\n";
-
-        subTotal += totalTelur;
-    }
+    let totalBakso =
+        item.topping.bakso * hargaTopping.bakso;
 
     detail +=
-        "Subtotal : Rp." +
-        subTotal.toLocaleString("id-ID") +
-        "\n\n";
+    item.topping.bakso +
+    " x Bakso         Rp." +
+    totalBakso.toLocaleString("id-ID") +
+    "\n";
+
+    subTotal += totalBakso;
+}
+
+if(item.topping.pangsit > 0){
+
+    let totalPangsit =
+        item.topping.pangsit * hargaTopping.pangsit;
+
+    detail +=
+    item.topping.pangsit +
+    " x Pangsit       Rp." +
+    totalPangsit.toLocaleString("id-ID") +
+    "\n";
+
+    subTotal += totalPangsit;
+}
+
+if(item.topping.telur > 0){
+
+    let totalTelur =
+        item.topping.telur * hargaTopping.telur;
+
+    detail +=
+    item.topping.telur +
+    " x Telur         Rp." +
+    totalTelur.toLocaleString("id-ID") +
+    "\n";
+
+    subTotal += totalTelur;
+}
+
+detail +=
+"--------------------------\n" +
+"Subtotal       Rp." +
+subTotal.toLocaleString("id-ID") +
+"\n\n";
 
     total += subTotal;
 });
