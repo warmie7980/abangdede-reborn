@@ -260,7 +260,7 @@ button:hover {
     text-align:left;
     font-size: 20px;
     gap: 10px;
-
+}
 </style>
 </head>
 <body>    
@@ -362,9 +362,9 @@ button:hover {
         </p>
         <div class="menu-action">    
     <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
-        <span class="qty" id="qty-original">0</span>
-        <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
+        <button class="minus" onclick="kurang('MIE TELUR KORNET')">-</button>
+        <span class="qty" id="qty-kornet">0</span>
+        <button class="plus" onclick="tambah('MIE TELUR KORNET')">+</button>
     </div>
 </div>
         <!-- EXTRA TOPING -->
@@ -375,12 +375,15 @@ button:hover {
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
-        <div class="menu-action">
-    <button class="pesan" onclick="bukaForm('MIE ORIGINAL')">PESAN</button>
+        <div class="menu-action">    
     <div class="qty-box">
         <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
         <span class="qty" id="qty-original">0</span>
         <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
+        <button class="pesan" onclick="bukaForm('MIE ORIGINAL')">PESAN</button>
+        <div style="text-align:center;margin-top:40px;">
+        <button onclick="bukaForm()">PESAN SEKARANG</button>
+        </div>
     </div>
 </div>
 </main>
@@ -399,21 +402,6 @@ function updateDateTime() {
 }
 updateDateTime();
 setInterval(updateDateTime, 1000);
-</script>
-<script>
-function tambah(btn) {
-    let qty = btn.parentElement.querySelector(".qty");
-    qty.textContent = parseInt(qty.textContent) + 1;
-}
-
-function kurang(btn) {
-    let qty = btn.parentElement.querySelector(".qty");
-    let nilai = parseInt(qty.textContent);
-
-    if (nilai > 0) {
-        qty.textContent = nilai - 1;
-    }
-}
 </script>
 <div id="popupStruk" class="popup">
     <div class="popup-content">
@@ -434,10 +422,11 @@ function kurang(btn) {
 </div>
 <script>
 let cart = {
-    "MIE JEBEW": 0,
-    "MIE YAMIN": 0,
-    "MIE ORIGINAL": 0
-};
+        "MIE JEBEW": 0,
+        "MIE YAMIN": 0,
+        "MIE ORIGINAL": 0,
+        "MIE TELUR KORNET": 0
+    };
 
 let harga = 12000;
 
@@ -452,10 +441,19 @@ function kurang(menu) {
     updateQty(menu);
 }
 
-function updateQty(menu) {
-    document.getElementById("qty-jebew").innerText = cart["MIE JEBEW"];
-    document.getElementById("qty-yamin").innerText = cart["MIE YAMIN"];
-    document.getElementById("qty-original").innerText = cart["MIE ORIGINAL"];
+function updateQty() {
+
+    document.getElementById("qty-jebew").innerText =
+        cart["MIE JEBEW"];
+
+    document.getElementById("qty-yamin").innerText =
+        cart["MIE YAMIN"];
+
+    document.getElementById("qty-original").innerText =
+        cart["MIE ORIGINAL"];
+
+    document.getElementById("qty-kornet").innerText =
+        cart["MIE TELUR KORNET"];
 }
 
 // ================= OPEN FORM =================
@@ -547,9 +545,9 @@ function resetAll() {
     cart = {
         "MIE JEBEW": 0,
         "MIE YAMIN": 0,
-        "MIE ORIGINAL": 0
+        "MIE ORIGINAL": 0,
+        "MIE TELUR KORNET": 0
     };
-
     updateQty();
 
     document.getElementById("popupStruk").style.display = "none";
