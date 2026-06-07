@@ -439,7 +439,12 @@ setInterval(updateDateTime, 1000);
 <script>
 let cart = [];
 
-let harga = 12000;
+let harga = 13000;
+const hargaTopping = {
+    bakso: 3000,
+    pangsit: 2000,
+    telur: 3000
+};
 
 // ================= OPEN FORM =================
 function bukaForm(){
@@ -471,20 +476,13 @@ function bukaForm(){
 
     cart.forEach(item=>{
 
-        total += harga;
+        let subTotal = harga;
 
-        detail += item.menu + "\n";
+subTotal += item.topping.bakso * hargaTopping.bakso;
+subTotal += item.topping.pangsit * hargaTopping.pangsit;
+subTotal += item.topping.telur * hargaTopping.telur;
 
-        if(item.topping.bakso)
-            detail += "Bakso x"+item.topping.bakso+"\n";
-
-        if(item.topping.pangsit)
-            detail += "Pangsit x"+item.topping.pangsit+"\n";
-
-        if(item.topping.telur)
-            detail += "Telur x"+item.topping.telur+"\n";
-
-        detail += "\n";
+total += subTotal;
 
     });
 
