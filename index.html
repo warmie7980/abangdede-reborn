@@ -457,7 +457,11 @@ function updateQty() {
 
 // ================= OPEN FORM =================
 function bukaForm(menu) {
-    let total = cart["MIE JEBEW"] + cart["MIE YAMIN"] + cart["MIE ORIGINAL"];
+    let total =
+    cart["MIE JEBEW"] +
+    cart["MIE YAMIN"] +
+    cart["MIE ORIGINAL"] +
+    cart["MIE TELUR KORNET"];
 
     if (total === 0) {
         alert("Pilih menu dulu!");
