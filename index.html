@@ -466,6 +466,7 @@ setInterval(updateDateTime, 1000);
 </div>
 <script>
 let cart = [];
+let dataOrder = {};
 
 const hargaMenu = {
     "MIE JEBEW": 13000,
@@ -496,9 +497,20 @@ function bukaForm(){
     let alamat = document.getElementById("alamat").value.trim();
     let telp = document.getElementById("telp").value.trim();
     let pembayaran = document.getElementById("pembayaran").value;
+    dataOrder = {
+    nama,
+    alamat,
+    telp,
+    pembayaran
+    };
 
     if(!nama || !alamat || !telp || !pembayaran){
         alert("Lengkapi data");
+        return;
+    }
+    if(pembayaran === "QRIS"){
+        document.getElementById("popupForm").style.display = "none";
+        document.getElementById("popupQris").style.display = "flex";
         return;
     }
 
@@ -726,6 +738,15 @@ function tambahKeranjang(){
     document.getElementById("popupMenu").style.display = "none";
     alert("Masuk keranjang");
 }
+function lanjutStrukFinal(){
+
+    let nama = dataOrder.nama;
+    let alamat = dataOrder.alamat;
+    let telp = dataOrder.telp;
+    let pembayaran = dataOrder.pembayaran;
+
+    // isi kode pembuatan struk yang sekarang
+}
 </script>
 <div id="popupMenu" class="popup">
     <div class="popup-content">
@@ -759,6 +780,22 @@ function tambahKeranjang(){
 
         <button onclick="tambahKeranjang()">
             TAMBAH KE KERANJANG
+        </button>
+
+    </div>
+</div>
+<div id="popupQris" class="popup">
+    <div class="popup-content">
+
+        <h2>SCAN QRIS</h2>
+
+        <img src="qris.png"
+             style="width:250px;display:block;margin:auto;">
+
+        <br>
+
+        <button onclick="selesaiBayarQris()">
+            SUDAH BAYAR
         </button>
 
     </div>
