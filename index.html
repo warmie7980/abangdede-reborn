@@ -473,26 +473,58 @@ function bukaForm(){
 
     let subTotal = harga;
 
-    subTotal += item.topping.bakso * hargaTopping.bakso;
-    subTotal += item.topping.pangsit * hargaTopping.pangsit;
-    subTotal += item.topping.telur * hargaTopping.telur;
+    detail += item.menu + " x1";
+    detail += " Rp." + harga.toLocaleString("id-ID");
+    detail += " = Rp." + harga.toLocaleString("id-ID") + "\n";
+
+    if(item.topping.bakso > 0){
+
+        let totalBakso =
+            item.topping.bakso * hargaTopping.bakso;
+
+        detail +=
+            "Bakso x" + item.topping.bakso +
+            " Rp." + hargaTopping.bakso.toLocaleString("id-ID") +
+            " = Rp." + totalBakso.toLocaleString("id-ID") +
+            "\n";
+
+        subTotal += totalBakso;
+    }
+
+    if(item.topping.pangsit > 0){
+
+        let totalPangsit =
+            item.topping.pangsit * hargaTopping.pangsit;
+
+        detail +=
+            "Pangsit x" + item.topping.pangsit +
+            " Rp." + hargaTopping.pangsit.toLocaleString("id-ID") +
+            " = Rp." + totalPangsit.toLocaleString("id-ID") +
+            "\n";
+
+        subTotal += totalPangsit;
+    }
+
+    if(item.topping.telur > 0){
+
+        let totalTelur =
+            item.topping.telur * hargaTopping.telur;
+
+        detail +=
+            "Telur x" + item.topping.telur +
+            " Rp." + hargaTopping.telur.toLocaleString("id-ID") +
+            " = Rp." + totalTelur.toLocaleString("id-ID") +
+            "\n";
+
+        subTotal += totalTelur;
+    }
+
+    detail +=
+        "Subtotal : Rp." +
+        subTotal.toLocaleString("id-ID") +
+        "\n\n";
 
     total += subTotal;
-
-    detail += item.menu + "\n";
-
-    if(item.topping.bakso > 0)
-        detail += "Bakso x" + item.topping.bakso + "\n";
-
-    if(item.topping.pangsit > 0)
-        detail += "Pangsit x" + item.topping.pangsit + "\n";
-
-    if(item.topping.telur > 0)
-        detail += "Telur x" + item.topping.telur + "\n";
-
-    detail += "Subtotal : Rp " +
-        subTotal.toLocaleString("id-ID") + "\n\n";
-
 });
 
     document.getElementById("dataPembeli").innerText =
