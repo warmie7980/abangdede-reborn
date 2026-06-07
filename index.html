@@ -489,19 +489,13 @@ function bukaForm(){
     }
 
     document.getElementById("popupForm").style.display="flex";
-}function lanjutStruk(){
+}
+    function lanjutStruk(){
 
-    let nama =
-        document.getElementById("nama").value.trim();
-
-    let alamat =
-        document.getElementById("alamat").value.trim();
-
-    let telp =
-        document.getElementById("telp").value.trim();
-
-    let pembayaran =
-    document.getElementById("pembayaran").value;
+    let nama = document.getElementById("nama").value.trim();
+    let alamat = document.getElementById("alamat").value.trim();
+    let telp = document.getElementById("telp").value.trim();
+    let pembayaran = document.getElementById("pembayaran").value;
 
     if(!nama || !alamat || !telp || !pembayaran){
         alert("Lengkapi data");
@@ -513,97 +507,94 @@ function bukaForm(){
 
     cart.forEach(item=>{
 
-    let subTotal = item.harga;
+        let subTotal = item.harga;
 
-    detail += "\n" + item.menu;
-    msg += "\n1 x " + item.menu +
-           " = Rp." +
-           item.harga.toLocaleString("id-ID");
+        detail += item.menu + "\n";
 
-    if(item.topping.bakso > 0){
-
-        let totalBakso =
-            item.topping.bakso *
-            hargaTopping.bakso;
-
-        msg +=
-            "\n" +
-            item.topping.bakso +
-            " x Bakso = Rp." +
-            totalBakso.toLocaleString("id-ID");
-
-        subTotal += totalBakso;
-    }
-
-    if(item.topping.pangsit > 0){
-
-        let totalPangsit =
-            item.topping.pangsit *
-            hargaTopping.pangsit;
-
-        msg +=
-            "\n" +
-            item.topping.pangsit +
-            " x Pangsit = Rp." +
-            totalPangsit.toLocaleString("id-ID");
-
-        subTotal += totalPangsit;
-    }
-
-    if(item.topping.telur > 0){
-
-        let totalTelur =
-            item.topping.telur *
-            hargaTopping.telur;
-
-        msg +=
-            "\n" +
-            item.topping.telur +
-            " x Telur = Rp." +
-            totalTelur.toLocaleString("id-ID");
-
-        subTotal += totalTelur;
-    }
-
-    msg +=
-        "\nSubtotal = Rp." +
-        subTotal.toLocaleString("id-ID") +
+        detail +=
+        "1 x " + item.menu +
+        " = Rp." +
+        item.harga.toLocaleString("id-ID") +
         "\n";
 
-    total += subTotal;
-});
+        if(item.topping.bakso > 0){
+
+            let totalBakso =
+                item.topping.bakso *
+                hargaTopping.bakso;
+
+            detail +=
+                item.topping.bakso +
+                " x Bakso = Rp." +
+                totalBakso.toLocaleString("id-ID") +
+                "\n";
+
+            subTotal += totalBakso;
+        }
+
+        if(item.topping.pangsit > 0){
+
+            let totalPangsit =
+                item.topping.pangsit *
+                hargaTopping.pangsit;
+
+            detail +=
+                item.topping.pangsit +
+                " x Pangsit = Rp." +
+                totalPangsit.toLocaleString("id-ID") +
+                "\n";
+
+            subTotal += totalPangsit;
+        }
+
+        if(item.topping.telur > 0){
+
+            let totalTelur =
+                item.topping.telur *
+                hargaTopping.telur;
+
+            detail +=
+                item.topping.telur +
+                " x Telur = Rp." +
+                totalTelur.toLocaleString("id-ID") +
+                "\n";
+
+            subTotal += totalTelur;
+        }
+
+        detail +=
+        "--------------------------\n" +
+        "Subtotal = Rp." +
+        subTotal.toLocaleString("id-ID") +
+        "\n\n";
+
+        total += subTotal;
+    });
 
     document.getElementById("dataPembeli").innerText =
-    "Nama : " + nama +
-    "\nAlamat : " + alamat +
-    "\nNo HP : " + telp +
-    "\nPembayaran : " + pembayaran;
+        "Nama : " + nama +
+        "\nAlamat : " + alamat +
+        "\nNo HP : " + telp +
+        "\nPembayaran : " + pembayaran;
 
     document.getElementById("detailPesanan").innerText =
-    detail;
+        detail;
 
     document.getElementById("totalMenu").innerText =
-        "TOTAL : Rp " +
+        "TOTAL : Rp." +
         total.toLocaleString("id-ID");
 
     document.getElementById("popupForm").style.display="none";
-
     document.getElementById("popupStruk").style.display="flex";
 }
 
 // ================= WHATSAPP =================
 function kirimWa(){
 
-    let nama =
-        document.getElementById("nama").value;
-
-    let alamat =
-        document.getElementById("alamat").value;
-
-    let telp =
-        document.getElementById("telp").value;
-    let pembayaran =
-    document.getElementById("pembayaran").value;
+    let nama = document.getElementById("nama").value;
+    let alamat = document.getElementById("alamat").value;
+    let telp = document.getElementById("telp").value;
+    let pembayaran = document.getElementById("pembayaran").value;
 
     let msg =
 `*WARMIE ORDER*
@@ -621,24 +612,72 @@ Pembayaran : ${pembayaran}
 
         let subTotal = item.harga;
 
-subTotal += item.topping.bakso * hargaTopping.bakso;
-subTotal += item.topping.pangsit * hargaTopping.pangsit;
-subTotal += item.topping.telur * hargaTopping.telur;
+        msg += "\n*" + item.menu + "*\n";
 
-total += subTotal;
+        msg +=
+        "1 x " + item.menu +
+        " = Rp." +
+        item.harga.toLocaleString("id-ID") +
+        "\n";
 
-        msg += "\nSubtotal : Rp " +
+        if(item.topping.bakso > 0){
+
+            let totalBakso =
+                item.topping.bakso *
+                hargaTopping.bakso;
+
+            msg +=
+                item.topping.bakso +
+                " x Bakso = Rp." +
+                totalBakso.toLocaleString("id-ID") +
+                "\n";
+
+            subTotal += totalBakso;
+        }
+
+        if(item.topping.pangsit > 0){
+
+            let totalPangsit =
+                item.topping.pangsit *
+                hargaTopping.pangsit;
+
+            msg +=
+                item.topping.pangsit +
+                " x Pangsit = Rp." +
+                totalPangsit.toLocaleString("id-ID") +
+                "\n";
+
+            subTotal += totalPangsit;
+        }
+
+        if(item.topping.telur > 0){
+
+            let totalTelur =
+                item.topping.telur *
+                hargaTopping.telur;
+
+            msg +=
+                item.topping.telur +
+                " x Telur = Rp." +
+                totalTelur.toLocaleString("id-ID") +
+                "\n";
+
+            subTotal += totalTelur;
+        }
+
+        msg +=
+        "Subtotal = Rp." +
         subTotal.toLocaleString("id-ID") +
         "\n";
 
+        total += subTotal;
     });
 
     msg +=
-        "\nTOTAL : Rp " +
-        total.toLocaleString("id-ID");
+`\nTOTAL : Rp.${total.toLocaleString("id-ID")}`;
 
     window.open(
-        "https://wa.me/62895401287059?text="+
+        "https://wa.me/62895401287059?text=" +
         encodeURIComponent(msg)
     );
 
