@@ -619,31 +619,23 @@ Pembayaran : ${pembayaran}
 `;
 
     let total = 0;
-
     cart.forEach(item=>{
-
         let subTotal = item.harga;
-
         msg += "\n*" + item.menu + "*\n";
-
         msg +=
         "1 x " + item.menu +
         " = Rp." +
         item.harga.toLocaleString("id-ID") +
         "\n";
-
         if(item.topping.bakso > 0){
-
             let totalBakso =
                 item.topping.bakso *
                 hargaTopping.bakso;
-
             msg +=
                 item.topping.bakso +
                 " x Bakso = Rp." +
                 totalBakso.toLocaleString("id-ID") +
                 "\n";
-
             subTotal += totalBakso;
         }
 
@@ -667,24 +659,19 @@ Pembayaran : ${pembayaran}
             let totalTelur =
                 item.topping.telur *
                 hargaTopping.telur;
-
             msg +=
                 item.topping.telur +
                 " x Telur = Rp." +
                 totalTelur.toLocaleString("id-ID") +
                 "\n";
-
             subTotal += totalTelur;
         }
-
         msg +=
         "Subtotal = Rp." +
         subTotal.toLocaleString("id-ID") +
         "\n";
-
         total += subTotal;
     });
-
     msg +=
 `\nTOTAL : Rp.${total.toLocaleString("id-ID")}`;
 
@@ -789,7 +776,7 @@ function lanjutStrukFinal(){
 
         <h2>SCAN QRIS</h2>
 
-        <img src="qris.png"
+        <img src="gopay.jpg"
              style="width:250px;display:block;margin:auto;">
 
         <br>
