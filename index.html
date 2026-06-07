@@ -539,9 +539,11 @@ const hargaMenu = {
 };
 
 const hargaTopping = {
-    bakso: 3000,
+    bakso: 1000,
     pangsit: 2000,
-    telur: 3000
+    telur: 5000,
+    kornet: 5000,
+    krupuk: 2000
 };
 
 // ================= OPEN FORM =================
@@ -655,6 +657,35 @@ function bukaForm(){
 
             subTotal += totalTelur;
         }
+        if(item.topping.kornet > 0){
+
+    let totalKornet =
+        item.topping.kornet *
+        hargaTopping.kornet;
+
+    detail +=
+        item.topping.kornet +
+        " x Kornet = Rp." +
+        totalKornet.toLocaleString("id-ID") +
+        "\n";
+
+    subTotal += totalKornet;
+}
+
+if(item.topping.krupuk > 0){
+
+    let totalKrupuk =
+        item.topping.krupuk *
+        hargaTopping.krupuk;
+
+    detail +=
+        item.topping.krupuk +
+        " x Kerupuk Pangsit = Rp." +
+        totalKrupuk.toLocaleString("id-ID") +
+        "\n";
+
+    subTotal += totalKrupuk;
+}
 
         detail +=
         "--------------------------\n" +
@@ -760,6 +791,35 @@ Pembayaran : ${pembayaran}
                 "\n";
             subTotal += totalTelur;
         }
+        if(item.topping.kornet > 0){
+
+    let totalKornet =
+        item.topping.kornet *
+        hargaTopping.kornet;
+
+    msg +=
+        item.topping.kornet +
+        " x Kornet = Rp." +
+        totalKornet.toLocaleString("id-ID") +
+        "\n";
+
+    subTotal += totalKornet;
+}
+
+if(item.topping.krupuk > 0){
+
+    let totalKrupuk =
+        item.topping.krupuk *
+        hargaTopping.krupuk;
+
+    msg +=
+        item.topping.krupuk +
+        " x Kerupuk Pangsit = Rp." +
+        totalKrupuk.toLocaleString("id-ID") +
+        "\n";
+
+    subTotal += totalKrupuk;
+}
         msg +=
         "Subtotal = Rp." +
         subTotal.toLocaleString("id-ID") +
@@ -813,7 +873,9 @@ function tambahKeranjang(){
     topping : {
         bakso : Number(document.getElementById("bakso").value),
         pangsit : Number(document.getElementById("pangsit").value),
-        telur : Number(document.getElementById("telur").value)
+        telur : Number(document.getElementById("telur").value),
+        kornet : Number(document.getElementById("kornet").value),
+        krupuk : Number(document.getElementById("krupuk").value)
     }
 });
     document.getElementById("popupMenu").style.display = "none";
@@ -901,6 +963,21 @@ function selesaiBayarQris(){
 
         Telur
         <select id="telur">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        <select id="kornet">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        Kerupuk Pangsit
+        <select id="krupuk">
             <option>0</option>
             <option>1</option>
             <option>2</option>
