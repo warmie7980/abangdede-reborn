@@ -577,10 +577,19 @@ function bukaForm(){
         return;
     }
     if(pembayaran === "QRIS"){
-        document.getElementById("popupForm").style.display = "none";
-        document.getElementById("popupQris").style.display = "flex";
-        return;
-    }
+
+    dataOrder = {
+        nama,
+        alamat,
+        telp,
+        pembayaran
+    };
+
+    document.getElementById("popupForm").style.display = "none";
+    document.getElementById("popupQris").style.display = "flex";
+
+    return;
+}
 
     let detail = "";
     let total = 0;
@@ -855,16 +864,12 @@ function printStruk(){
     win.document.close();
     win.print();
 }
-        </style>
-    </head>
-    <body>
-        ${isi}
-    </body>
-    </html>
-    `);
+        
+function selesaiBayarQris(){
 
-    win.document.close();
-    win.print();
+    document.getElementById("popupQris").style.display = "none";
+
+    lanjutStrukFinal();
 }
 </script>
 <div id="popupMenu" class="popup">
