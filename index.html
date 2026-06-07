@@ -295,12 +295,7 @@ button:hover {
             dan topping pilihan yang menghasilkan sensasi pedas, nikmat, dan bikin ketagihan.
         </p>
         
-        <div class="menu-action">
-    <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE JEBEW')">-</button>
-        <span class="qty" id="qty-jebew">0</span>
-        <button class="plus" onclick="tambah('MIE JEBEW')">+</button>
-    </div>
+        <div class="menu-action">    
 </div>
 <div id="popupForm" class="popup">
     <div class="popup-content">
@@ -326,15 +321,13 @@ button:hover {
 </div>
 </div>        
         <h2>MIE YAMIN</h2>
+        <button onclick="pilihMenu('MIE YAMIN')">
+            PILIH & TAMBAH
+        </button>
         <p>
             Mie Yamin dengan rasa manis gurih khas, mie kenyal dipadukan dengan bumbu spesial yang lembut di lidah dan bikin nagih.
         </p>
-        <div class="menu-action">            
-    <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE YAMIN')">-</button>
-        <span class="qty" id="qty-yamin">0</span>
-        <button class="plus" onclick="tambah('MIE YAMIN')">+</button>
-    </div>
+        <div class="menu-action">    
 </div>
 
         <!-- MIE ORIGINAL -->
@@ -355,11 +348,6 @@ button:hover {
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
         <div class="menu-action">    
-    <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE ORIGINAL')">-</button>
-        <span class="qty" id="qty-original">0</span>
-        <button class="plus" onclick="tambah('MIE ORIGINAL')">+</button>
-    </div>
 </div>
         <!-- MIE TELUR KORNET -->
         <div class="menu-row">        
@@ -378,12 +366,7 @@ button:hover {
         <p>
             Mie Original dengan rasa klasik gurih sederhana, cocok untuk kamu yang suka rasa ringan tapi tetap nikmat dan bikin kenyang.
         </p>
-        <div class="menu-action">    
-    <div class="qty-box">
-        <button class="minus" onclick="kurang('MIE TELUR KORNET')">-</button>
-        <span class="qty" id="qty-kornet">0</span>
-        <button class="plus" onclick="tambah('MIE TELUR KORNET')">+</button>
-    </div>
+        <div class="menu-action">      
 </div>
         <!-- EXTRA TOPING -->
         <div class="menu-row">        
@@ -447,12 +430,7 @@ setInterval(updateDateTime, 1000);
     </div>
 </div>
 <script>
-let cart = {
-        "MIE JEBEW": 0,
-        "MIE YAMIN": 0,
-        "MIE ORIGINAL": 0,
-        "MIE TELUR KORNET": 0
-    };
+let cart = [];
 
 let harga = 12000;
 
@@ -586,6 +564,73 @@ function resetAll() {
     document.getElementById("alamat").value = "";
     document.getElementById("telp").value = "";
 }
+let menuAktif = "";
+
+function pilihMenu(menu){
+
+    menuAktif = menu;
+
+    document.getElementById("judulMenu").innerText = menu;
+
+    document.getElementById("popupMenu").style.display = "flex";
+}
+function tambahKeranjang(){
+
+    cart.push({
+
+        menu : menuAktif,
+
+        topping : {
+
+            bakso : Number(document.getElementById("bakso").value),
+
+            pangsit : Number(document.getElementById("pangsit").value),
+
+            telur : Number(document.getElementById("telur").value)
+
+        }
+
+    });
+
+    document.getElementById("popupMenu").style.display = "none";
+
+    alert("Masuk keranjang");
+}
 </script>
+<div id="popupMenu" class="popup">
+    <div class="popup-content">
+
+        <h2 id="judulMenu"></h2>
+
+        Bakso
+        <select id="bakso">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        Pangsit
+        <select id="pangsit">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        Telur
+        <select id="telur">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        <button onclick="tambahKeranjang()">
+            TAMBAH KE KERANJANG
+        </button>
+
+    </div>
+</div>
 </body>    
 </html>
