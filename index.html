@@ -487,8 +487,8 @@ function bukaForm(){
     detail += item.menu + "\n";
 
 detail +=
-"1 x " + item.menu +
-"     Rp." +
+("1 x " + item.menu).padEnd(25, " ") +
+"Rp." +
 item.harga.toLocaleString("id-ID") +
 "\n";
 
