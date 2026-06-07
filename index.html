@@ -864,18 +864,36 @@ function pilihMenu(menu){
 function tambahKeranjang(){
 
     cart.push({
-    menu : menuAktif,
-    harga : hargaMenu[menuAktif],
-    topping : {
-        bakso : Number(document.getElementById("bakso").value),
-        pangsit : Number(document.getElementById("pangsit").value),
-        telur : Number(document.getElementById("telur").value),
-        kornet : Number(document.getElementById("kornet").value),
-        krupuk : Number(document.getElementById("krupuk").value)
-    }
-});
+        menu : menuAktif,
+        harga : hargaMenu[menuAktif],
+        topping : {
+            bakso : Number(document.getElementById("bakso").value),
+            pangsit : Number(document.getElementById("pangsit").value),
+            telur : Number(document.getElementById("telur").value),
+            kornet : Number(document.getElementById("kornet").value),
+            krupuk : Number(document.getElementById("krupuk").value)
+        }
+    });
+
     document.getElementById("popupMenu").style.display = "none";
-    alert("Masuk keranjang");
+}
+function checkoutLangsung(){
+
+    cart.push({
+        menu : menuAktif,
+        harga : hargaMenu[menuAktif],
+        topping : {
+            bakso : Number(document.getElementById("bakso").value),
+            pangsit : Number(document.getElementById("pangsit").value),
+            telur : Number(document.getElementById("telur").value),
+            kornet : Number(document.getElementById("kornet").value),
+            krupuk : Number(document.getElementById("krupuk").value)
+        }
+    });
+
+    document.getElementById("popupMenu").style.display = "none";
+
+    bukaForm();
 }
 function lanjutStrukFinal(){
 
@@ -981,11 +999,12 @@ function selesaiBayarQris(){
             <option>3</option>
         </select>
 
-        <button onclick="tambahKeranjang()">
-            TAMBAH KE KERANJANG
-        </button>
-        <button onclick="bukaForm()">
+        <button onclick="checkoutLangsung()">
             PESAN SEKARANG
+        </button>
+        
+        <button onclick="tambahKeranjang()">
+            TAMBAH MENU LAGI
         </button>
 
     </div>
