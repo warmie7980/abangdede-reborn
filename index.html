@@ -175,7 +175,7 @@ button:hover {
 }
 
 .popup-content {
-    width: 520px;
+    width: 350px;
     background: #111;
     border: 2px solid #00ff00;
     padding: 20px;
@@ -326,81 +326,6 @@ button:hover {
     margin-top:10px;
     font-family:"Courier New", monospace;
 }
-.ready{
-    color:#00ff00;
-    font-weight:bold;
-    font-size:20px;
-    text-shadow:
-        0 0 5px #00ff00,
-        0 0 10px #00ff00,
-        0 0 20px #00ff00;
-    animation: kedip 0.8s infinite;
-}
-
-@keyframes kedip{
-    0%,100%{
-        opacity:1;
-    }
-    50%{
-        opacity:0;
-    }
-}
-.btn-lihat{
-    background:#0000ff;
-    color:white;
-    border:none;
-    padding:8px 15px;
-    cursor:pointer;
-    border-radius:5px;
-    font-family:"Courier New", monospace;
-    font-weight:bold;
-    margin-left:10px;
-}
-
-.btn-lihat:hover{
-    background:#2222ff;
-}
-.item-topping{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin:10px 0;
-    border-bottom:1px dashed #444;
-    padding-bottom:10px;
-}
-
-.item-topping img{
-    width:50px;
-    height:50px;
-    border-radius:5px;
-    object-fit:cover;
-}
-
-.info-topping{
-    flex:1;
-    color:white;
-}
-
-.info-topping b{
-    display:block;
-}
-
-.info-topping small{
-    color:#ffd700;
-}
-
-.item-topping select{
-    width:60px;
-}
-
-.btn-lihat{
-    background:#0000ff;
-    color:white;
-    border:none;
-    padding:7px 12px;
-    border-radius:5px;
-    cursor:pointer;
-}
 </style>
 </head>
 <body>    
@@ -523,28 +448,22 @@ button:hover {
     <h2>EXTRA TOPPING</h2>
     <div class="topping-box">
         <div>
-            <img src="bakso.png">
-            <div class="ready">READY</div>
+            <img src="bakso.png">            
         </div>
         <div>
-            <img src="pangsit.png">
-            <div class="ready">READY</div>
+            <img src="pangsit.png">            
         </div>
         <div>
-            <img src="telurrebus.png">
-            <div class="ready">READY</div>
+            <img src="telurrebus.png">            
         </div>
         <div>
-            <img src="kornet.png">
-            <div class="ready">READY</div>
+            <img src="kornet.png">            
         </div>
         <div>
-            <img src="keju.png">
-            <div class="ready">READY</div>
+            <img src="keju.png">            
         </div>
         <div>
-            <img src="krupukpangsit.png">
-            <div class="ready">READY</div>
+            <img src="krupukpangsit.png">            
         </div>
     </div>
 </div>   
@@ -1039,59 +958,44 @@ function selesaiBayarQris(){
 
     lanjutStrukFinal();
 }
-function lihatTopping(nama,gambar){
-
-    document.getElementById("judulTopping").innerText =
-        nama;
-
-    document.getElementById("gambarTopping").src =
-        gambar;
-
-    document.getElementById("popupLihat").style.display =
-        "flex";
-}
-
-function tutupLihat(){
-
-    document.getElementById("popupLihat").style.display =
-        "none";
-}
 </script>
-<div class="item-topping">
-    <img src="bakso.png">
-    <div class="info-topping">
-        <b>BAKSO</b>
-        <small>Rp. 1.000</small>
-    </div>  
-    <button class="btn-lihat"
-    onclick="lihatTopping('BAKSO','bakso.png')">
-        LIHAT
-    </button>
-</div>
+<div id="popupMenu" class="popup">
+    <div class="popup-content">
+
+        <h2 id="judulMenu"></h2>
+        <h3 id="hargaMenuPopup"></h3>
+
+        Bakso #1.000
+        <select id="bakso">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        Pangsit Rebus #2.000
+        <select id="pangsit">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        Telur #5.000
+        <select id="telur">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
         
-        <div class="item-topping">
-    <img src="pangsitrebus.png">
-    <div class="info-topping">
-        <b>PANGSIT REBUS</b>
-        <small>Rp. 2.000</small>
-    </div>  
-    <button class="btn-lihat"
-    onclick="lihatTopping('PANGSIT REBUS','bakso.png')">
-        LIHAT
-    </button>
-</div>
-    
-        <div class="item-topping">
-    <img src="telurrebus.png">
-    <div class="info-topping">
-        <b>TELUR REBUS</b>
-        <small>Rp. 5.000</small>
-    </div>  
-    <button class="btn-lihat"
-    onclick="lihatTopping('TELUR REBUS','bakso.png')">
-        LIHAT
-    </button>
-</div>
+        Kornet #5.000
+        <select id="kornet">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
 
         Kerupuk Pangsit #2.000
         <select id="krupuk">
@@ -1123,22 +1027,6 @@ function tutupLihat(){
 
         <button onclick="selesaiBayarQris()">
             SUDAH BAYAR
-        </button>
-
-    </div>
-</div>
-<div id="popupLihat" class="popup">
-    <div class="popup-content">
-
-        <h2 id="judulTopping"></h2>
-
-        <img id="gambarTopping"
-             style="width:250px;display:block;margin:auto;">
-
-        <br>
-
-        <button onclick="tutupLihat()">
-            TUTUP
         </button>
 
     </div>
