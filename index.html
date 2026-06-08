@@ -345,6 +345,21 @@ button:hover {
         opacity:0;
     }
 }
+.btn-lihat{
+    background:#0000ff;
+    color:white;
+    border:none;
+    padding:8px 15px;
+    cursor:pointer;
+    border-radius:5px;
+    font-family:"Courier New", monospace;
+    font-weight:bold;
+    margin-left:10px;
+}
+
+.btn-lihat:hover{
+    background:#2222ff;
+}
 </style>
 </head>
 <body>    
@@ -983,6 +998,23 @@ function selesaiBayarQris(){
 
     lanjutStrukFinal();
 }
+function lihatTopping(nama,gambar){
+
+    document.getElementById("judulTopping").innerText =
+        nama;
+
+    document.getElementById("gambarTopping").src =
+        gambar;
+
+    document.getElementById("popupLihat").style.display =
+        "flex";
+}
+
+function tutupLihat(){
+
+    document.getElementById("popupLihat").style.display =
+        "none";
+}
 </script>
 <div id="popupMenu" class="popup">
     <div class="popup-content">
@@ -1052,6 +1084,22 @@ function selesaiBayarQris(){
 
         <button onclick="selesaiBayarQris()">
             SUDAH BAYAR
+        </button>
+
+    </div>
+</div>
+<div id="popupLihat" class="popup">
+    <div class="popup-content">
+
+        <h2 id="judulTopping"></h2>
+
+        <img id="gambarTopping"
+             style="width:250px;display:block;margin:auto;">
+
+        <br>
+
+        <button onclick="tutupLihat()">
+            TUTUP
         </button>
 
     </div>
