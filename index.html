@@ -348,6 +348,23 @@ button:hover {
     overflow-y:auto; /* supaya popup bisa discroll */
     padding:20px 0;
 }
+.topping-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.topping-item img{
+    width:28px;
+    height:28px;
+    object-fit:cover;
+}
+
+.topping-item select{
+    flex:1;
+    margin:0;
+}
 </style>
 </head>
 <body>    
@@ -1064,50 +1081,60 @@ function baris(nama, harga){
 }
 </script>
 <div id="popupMenu" class="popup">
-    <div class="popup-content">
+    <div class="topping-item">
+    <img src="bakso.png">
+    <span>Bakso #1.000</span>
+    <select id="bakso">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+    </select>
+</div>
 
-        <h2 id="judulMenu"></h2>
-        <h3 id="hargaMenuPopup"></h3>
+        <div class="topping-item">
+    <img src="bakso.png">
+    <span>Bakso #1.000</span>
+    <select id="bakso">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+    </select>
+</div>
 
-        Bakso #1.000
-        <select id="bakso">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
-
-        Pangsit Rebus #2.000
-        <select id="pangsit">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
-
-        Telur #5.000
-        <select id="telur">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
+        <div class="topping-item">
+    <img src="bakso.png">
+    <span>Bakso #1.000</span>
+    <select id="bakso">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+    </select>
+</div>
         
-        Kornet #5.000
-        <select id="kornet">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
+        <div class="topping-item">
+    <img src="bakso.png">
+    <span>Bakso #1.000</span>
+    <select id="bakso">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+    </select>
+</div>
 
-        Kerupuk Pangsit #2.000
-        <select id="krupuk">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
+        <div class="topping-item">
+    <img src="bakso.png">
+    <span>Bakso #1.000</span>
+    <select id="bakso">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+    </select>
+</div>
 
         <button onclick="checkoutLangsung()">
             PESAN SEKARANG
