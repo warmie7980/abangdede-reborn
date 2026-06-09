@@ -505,6 +505,10 @@ function updateDateTime() {
 }
 updateDateTime();
 setInterval(updateDateTime, 1000);
+function baris(nama, harga){
+    return nama.padEnd(22, " ") +
+           ("Rp." + harga.toLocaleString("id-ID")).padStart(12, " ");
+}
 </script>
 <div id="popupStruk" class="popup">
     <div class="popup-content thermal">
@@ -631,11 +635,10 @@ function bukaForm(){
 
         detail += item.menu + "\n";
 
-        detail +=
-        "1 x " + item.menu +
-        " = Rp." +
-        item.harga.toLocaleString("id-ID") +
-        "\n";
+        detail += baris(
+            "1x " + item.menu,
+            item.harga
+        ) + "\n";
 
         if(item.topping.bakso > 0){
 
@@ -643,11 +646,10 @@ function bukaForm(){
                 item.topping.bakso *
                 hargaTopping.bakso;
 
-            detail +=
-                item.topping.bakso +
-                " x Bakso = Rp." +
-                totalBakso.toLocaleString("id-ID") +
-                "\n";
+            detail += baris(
+                item.topping.bakso + "x Bakso",
+                totalBakso
+            ) + "\n";
 
             subTotal += totalBakso;
         }
@@ -658,11 +660,10 @@ function bukaForm(){
                 item.topping.pangsit *
                 hargaTopping.pangsit;
 
-            detail +=
-                item.topping.pangsit +
-                " x Pangsit = Rp." +
-                totalPangsit.toLocaleString("id-ID") +
-                "\n";
+            detail += baris(
+                item.topping.pangsit + "x Pangsit",
+                totalPangsit
+            ) + "\n";
 
             subTotal += totalPangsit;
         }
@@ -673,11 +674,10 @@ function bukaForm(){
                 item.topping.telur *
                 hargaTopping.telur;
 
-            detail +=
-                item.topping.telur +
-                " x Telur = Rp." +
-                totalTelur.toLocaleString("id-ID") +
-                "\n";
+            detail += baris(
+                item.topping.telur + "x Telur",
+                totalTelur
+            ) + "\n";
 
             subTotal += totalTelur;
         }
@@ -687,11 +687,10 @@ function bukaForm(){
         item.topping.kornet *
         hargaTopping.kornet;
 
-    detail +=
-        item.topping.kornet +
-        " x Kornet = Rp." +
-        totalKornet.toLocaleString("id-ID") +
-        "\n";
+    detail += baris(
+            item.topping.kornet + "x Kornet",
+            totalKornet
+        ) + "\n";
 
     subTotal += totalKornet;
 }
@@ -702,20 +701,21 @@ if(item.topping.krupuk > 0){
         item.topping.krupuk *
         hargaTopping.krupuk;
 
-    detail +=
-        item.topping.krupuk +
-        " x Kerupuk Pangsit = Rp." +
-        totalKrupuk.toLocaleString("id-ID") +
-        "\n";
+    detail += baris(
+        item.topping.krupuk + "x Krupuk",
+        totalKrupuk
+    ) + "\n";
 
     subTotal += totalKrupuk;
 }
 
-        detail +=
-        "--------------------------\n" +
-        "Subtotal = Rp." +
-        subTotal.toLocaleString("id-ID") +
-        "\n\n";
+       detail +=
+"------------------------------\n";
+
+detail += baris(
+    "Subtotal",
+    subTotal
+) + "\n\n";
 
         total += subTotal;
     });
