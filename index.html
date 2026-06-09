@@ -174,13 +174,15 @@ button:hover {
     align-items: center;
 }
 
-.popup-content {
-    width: 350px;
-    background: #111;
-    border: 2px solid #00ff00;
-    padding: 20px;
-    border-radius: 10px;
-    font-family: "Courier New", monospace;
+.popup-content{
+    width:350px;
+    max-height:90vh; /* tinggi maksimal popup */
+    overflow-y:auto; /* isi popup bisa discroll */
+    background:#111;
+    border:2px solid #00ff00;
+    padding:20px;
+    border-radius:10px;
+    font-family:"Courier New", monospace;
 }
 
 .popup-content h2 {
@@ -325,6 +327,19 @@ button:hover {
     font-size:14px;
     margin-top:10px;
     font-family:"Courier New", monospace;
+}
+.popup{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    z-index:9999;
+
+    justify-content:center;
+    align-items:center;
+
+    overflow-y:auto; /* supaya popup bisa discroll */
+    padding:20px 0;
 }
 </style>
 </head>
