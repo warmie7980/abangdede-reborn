@@ -506,8 +506,12 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 function baris(nama, harga){
-    return nama.padEnd(22, " ") +
-           ("Rp." + harga.toLocaleString("id-ID")).padStart(12, " ");
+
+    let hargaText =
+        "Rp." + harga.toLocaleString("id-ID");
+
+    return nama.padEnd(20, " ") +
+           hargaText.padStart(12, " ");
 }
 </script>
 <div id="popupStruk" class="popup">
