@@ -405,6 +405,33 @@ button:hover {
     display:block;
     margin-bottom:3px;
 }
+.topping-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px;
+}
+
+.topping-item img{
+    width:50px;
+    height:50px;
+    object-fit:cover;
+    border-radius:5px;
+}
+
+.topping-info{
+    flex:1;
+}
+
+.topping-info label{
+    display:block;
+    color:#fff;
+    margin-bottom:4px;
+}
+
+.topping-info select{
+    width:80px;
+}
 </style>
 </head>
 <body>    
@@ -530,7 +557,7 @@ button:hover {
             <img src="bakso.png">            
         </div>
         <div>
-            <img src="pangsit.png">            
+            <img src="pangsitbasah.png">            
         </div>
         <div>
             <img src="telurrebus.png">            
@@ -1120,86 +1147,85 @@ function baris(nama, harga){
            hargaText;
 }
 </script>
-<div id="popupMenu" class="popup">    
-<div class="popup-content">
-    <h2 id="judulMenu">MENU</h2>
-    <h3 id="hargaMenuPopup">Rp.0</h3>
-    
-    <div class="topping-item">
-    <img src="bakso.png" alt="Bakso">
-    <div class="topping-info">
-        <label>Bakso #1.000</label>
-        <select id="bakso">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
-    </div>
-</div>
-    
-    <div class="topping-item">
-    <img src="pangsitbasah.png" alt="Pangsit Basah">
-    <div class="topping-info">
-    <div>
-        Pangsit Basah #1.000
-        <select id="pangsit">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
-    </div>
-</div>
+<div id="popupMenu" class="popup">
+    <div class="popup-content">
 
-    <div class="topping-item">
-    <img src="telurrebus.png" alt="Telur Rebus">
-    <div class="topping-info">
-    <div>
-        Telur Rebus #1.000
-        <select id="telur">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
-    </div>
-</div>
+        <h2 id="judulMenu">MENU</h2>
+        <h3 id="hargaMenuPopup">Rp.0</h3>
 
-    <div class="topping-item">
-    <img src="kornet.png" alt="Kornet">
-    <div class="topping-info">
-    <div>
-        Kornet #1.000
-        <select id="kornet">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
-    </div>
-</div>
+        <div class="topping-item">
+            <img src="bakso.png">
+            <div class="topping-info">
+                <label>Bakso #1.000</label>
+                <select id="bakso">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </div>
 
-    <div class="topping-item">
-    <img src="krupukpangsit.png" alt="Krupuk Pangsit">
-    <div class="topping-info">
-    <div>
-        Krupuk Pangsit #1.000
-        <select id="krupuk">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
-    </div>
-</div>
+        <div class="topping-item">
+            <img src="pangsit.png">
+            <div class="topping-info">
+                <label>Pangsit Basah #2.000</label>
+                <select id="pangsit">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="topping-item">
+            <img src="telurrebus.png">
+            <div class="topping-info">
+                <label>Telur Rebus #5.000</label>
+                <select id="telur">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="topping-item">
+            <img src="kornet.png">
+            <div class="topping-info">
+                <label>Kornet #5.000</label>
+                <select id="kornet">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="topping-item">
+            <img src="krupukpangsit.png">
+            <div class="topping-info">
+                <label>Krupuk Pangsit #2.000</label>
+                <select id="krupuk">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </div>
 
         <button onclick="checkoutLangsung()">
             PESAN SEKARANG
-        </button>        
+        </button>
+
         <button onclick="tambahKeranjang()">
             TAMBAH MENU LAINNYA
-        </button>        
+        </button>
+
         <button onclick="lihatPesanan()">
             LIHAT PESANAN
         </button>
