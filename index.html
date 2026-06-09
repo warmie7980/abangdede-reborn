@@ -276,10 +276,10 @@ button:hover {
     margin-bottom:15px;
 }
 #detailPesanan{
-    white-space: pre-line;
+    white-space: pre;
     font-family: "Courier New", monospace;
-    font-size:10px;
-    line-height:1.5;
+    font-size: 11px;
+    line-height: 1.4;
 }
 .popup-content select{
     width:100%;
@@ -1047,6 +1047,20 @@ function lihatPesanan(){
 }
 function info(label, value){
     return label.padEnd(12, " ") + ": " + value;
+}
+function baris(nama, harga){
+
+    let hargaText =
+        "Rp." + harga.toLocaleString("id-ID");
+
+    let spasi =
+        30 - nama.length - hargaText.length;
+
+    if(spasi < 1) spasi = 1;
+
+    return nama +
+           " ".repeat(spasi) +
+           hargaText;
 }
 </script>
 <div id="popupMenu" class="popup">
