@@ -661,6 +661,7 @@ const hargaTopping = {
     pangsit: 2000,
     telur: 5000,
     kornet: 5000,
+    keju: 5000,
     krupuk: 2000
 };
 
@@ -771,31 +772,38 @@ function bukaForm(){
 
             subTotal += totalTelur;
         }
-        if(item.topping.kornet > 0){
-
+        
+    if(item.topping.kornet > 0){
     let totalKornet =
         item.topping.kornet *
         hargaTopping.kornet;
-
     detail += baris(
             item.topping.kornet + "x Kornet",
             totalKornet
         ) + "\n";
-
     subTotal += totalKornet;
 }
 
-if(item.topping.krupuk > 0){
-
+    
+    if(item.topping.keju > 0){
+    let totalKeju =
+        item.topping.keju *
+        hargaTopping.keju;
+    detail += baris(
+        item.topping.keju + "x Keju",
+        totalKeju
+    ) + "\n";
+    subTotal += totalKeju;
+}
+        
+    if(item.topping.krupuk > 0){
     let totalKrupuk =
         item.topping.krupuk *
         hargaTopping.krupuk;
-
     detail += baris(
         item.topping.krupuk + "x Krupuk",
         totalKrupuk
     ) + "\n";
-
     subTotal += totalKrupuk;
 }
 
@@ -883,23 +891,19 @@ Pembayaran : ${pembayaran}
             subTotal += totalBakso;
         }
 
-        if(item.topping.pangsit > 0){
-
+            if(item.topping.pangsit > 0){
             let totalPangsit =
                 item.topping.pangsit *
                 hargaTopping.pangsit;
-
             msg +=
                 item.topping.pangsit +
                 " x Pangsit = Rp." +
                 totalPangsit.toLocaleString("id-ID") +
                 "\n";
-
             subTotal += totalPangsit;
-        }
+            }
 
-        if(item.topping.telur > 0){
-
+            if(item.topping.telur > 0){
             let totalTelur =
                 item.topping.telur *
                 hargaTopping.telur;
@@ -909,36 +913,46 @@ Pembayaran : ${pembayaran}
                 totalTelur.toLocaleString("id-ID") +
                 "\n";
             subTotal += totalTelur;
+            }
+        
+            if(item.topping.kornet > 0){
+            let totalKornet =
+            item.topping.kornet *
+            hargaTopping.kornet;
+    
+            msg +=
+                item.topping.kornet +
+                " x Kornet = Rp." +
+                totalKornet.toLocaleString("id-ID") +
+                "\n";
+            subTotal += totalKornet;
+            }
+
+        if(item.topping.keju > 0){
+            let totalKeju =
+            item.topping.keju *
+            hargaTopping.keju;
+    
+            msg +=
+                item.topping.keju +
+                " x Keju = Rp." +
+                totalKeju.toLocaleString("id-ID") +
+                "\n";
+            subTotal += totalKeju;
+            }
+        
+        if(item.topping.krupuk > 0){
+        let totalKrupuk =
+            item.topping.krupuk *
+            hargaTopping.krupuk;
+    
+        msg +=
+            item.topping.krupuk +
+            " x Kerupuk Pangsit = Rp." +
+            totalKrupuk.toLocaleString("id-ID") +
+            "\n";
+        subTotal += totalKrupuk;
         }
-        if(item.topping.kornet > 0){
-
-    let totalKornet =
-        item.topping.kornet *
-        hargaTopping.kornet;
-
-    msg +=
-        item.topping.kornet +
-        " x Kornet = Rp." +
-        totalKornet.toLocaleString("id-ID") +
-        "\n";
-
-    subTotal += totalKornet;
-}
-
-if(item.topping.krupuk > 0){
-
-    let totalKrupuk =
-        item.topping.krupuk *
-        hargaTopping.krupuk;
-
-    msg +=
-        item.topping.krupuk +
-        " x Kerupuk Pangsit = Rp." +
-        totalKrupuk.toLocaleString("id-ID") +
-        "\n";
-
-    subTotal += totalKrupuk;
-}
         msg +=
         "Subtotal = Rp." +
         subTotal.toLocaleString("id-ID") +
@@ -990,10 +1004,11 @@ function tambahKeranjang(){
         menu : menuAktif,
         harga : hargaMenu[menuAktif],
         topping : {
-            bakso : Number(document.getElementById("bakso").value),
+           bakso : Number(document.getElementById("bakso").value),
             pangsit : Number(document.getElementById("pangsit").value),
             telur : Number(document.getElementById("telur").value),
             kornet : Number(document.getElementById("kornet").value),
+            keju : Number(document.getElementById("keju").value),
             krupuk : Number(document.getElementById("krupuk").value)
         }
     });
@@ -1106,11 +1121,17 @@ function lihatPesanan(){
             text += "- Telur x" + item.topping.telur + "\n";
         }
 
+        if(item.topping.keju > 0){
+            subtotal += item.topping.keju * hargaTopping.keju;
+            text += "- Keju x" + item.topping.keju + "\n";
+        }
+        
         if(item.topping.kornet > 0){
             subtotal += item.topping.kornet * hargaTopping.kornet;
             text += "- Kornet x" + item.topping.kornet + "\n";
         }
 
+        
         if(item.topping.krupuk > 0){
             subtotal += item.topping.krupuk * hargaTopping.krupuk;
             text += "- Kerupuk Pangsit x" + item.topping.krupuk + "\n";
@@ -1206,7 +1227,20 @@ function baris(nama, harga){
                 </select>
             </div>
         </div>
-
+        
+        <div class="topping-item">
+            <img src="keju.png">
+            <div class="topping-info">
+                <label>Keju #5.000</label>
+                <select id="keju">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </div>
+        
         <div class="topping-item">
             <img src="krupukpangsit.png">
             <div class="topping-info">
