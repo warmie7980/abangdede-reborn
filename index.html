@@ -958,6 +958,62 @@ function selesaiBayarQris(){
 
     lanjutStrukFinal();
 }
+function lihatPesanan(){
+
+    if(cart.length === 0){
+        alert("Keranjang masih kosong");
+        return;
+    }
+
+    let text = "";
+    let total = 0;
+
+    cart.forEach((item,index)=>{
+
+        let subtotal = item.harga;
+
+        text += (index+1) + ". " + item.menu + "\n";
+
+        if(item.topping.bakso > 0){
+            subtotal += item.topping.bakso * hargaTopping.bakso;
+            text += "- Bakso x" + item.topping.bakso + "\n";
+        }
+
+        if(item.topping.pangsit > 0){
+            subtotal += item.topping.pangsit * hargaTopping.pangsit;
+            text += "- Pangsit x" + item.topping.pangsit + "\n";
+        }
+
+        if(item.topping.telur > 0){
+            subtotal += item.topping.telur * hargaTopping.telur;
+            text += "- Telur x" + item.topping.telur + "\n";
+        }
+
+        if(item.topping.kornet > 0){
+            subtotal += item.topping.kornet * hargaTopping.kornet;
+            text += "- Kornet x" + item.topping.kornet + "\n";
+        }
+
+        if(item.topping.krupuk > 0){
+            subtotal += item.topping.krupuk * hargaTopping.krupuk;
+            text += "- Kerupuk Pangsit x" + item.topping.krupuk + "\n";
+        }
+
+        text += "Subtotal : Rp." +
+                subtotal.toLocaleString("id-ID") +
+                "\n\n";
+
+        total += subtotal;
+    });
+
+    text += "====================\n";
+    text += "TOTAL : Rp." +
+            total.toLocaleString("id-ID");
+
+    document.getElementById("isiPesanan").innerText = text;
+
+    document.getElementById("popupPesanan").style.display = "flex";
+}
 </script>
 <div id="popupMenu" class="popup">
     <div class="popup-content">
@@ -1007,10 +1063,12 @@ function selesaiBayarQris(){
 
         <button onclick="checkoutLangsung()">
             PESAN SEKARANG
-        </button>
-        
+        </button>        
         <button onclick="tambahKeranjang()">
             TAMBAH MENU LAGI
+        </button>        
+        <button onclick="lihatPesanan()">
+            LIHAT PESANAN
         </button>
 
     </div>
@@ -1027,6 +1085,31 @@ function selesaiBayarQris(){
 
         <button onclick="selesaiBayarQris()">
             SUDAH BAYAR
+        </button>
+
+    </div>
+</div>
+<div id="popupPesanan" class="popup">
+    <div class="popup-content">
+
+        <h2>PESANAN ANDA</h2>
+
+        <div id="isiPesanan"
+             style="white-space:pre-line;
+                    max-height:300px;
+                    overflow:auto;">
+        </div>
+
+        <br>
+
+        <button onclick="bukaForm()">
+            CHECKOUT
+        </button>
+
+        <button onclick="
+            document.getElementById('popupPesanan').style.display='none'
+        ">
+            TUTUP
         </button>
 
     </div>
