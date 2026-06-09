@@ -383,6 +383,28 @@ button:hover {
     width:80px;
     margin-top:3px;
 }
+.topping-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.topping-item img{
+    width:40px;
+    height:40px;
+    object-fit:cover;
+    border-radius:5px;
+}
+
+.topping-info{
+    flex:1;
+}
+
+.topping-info label{
+    display:block;
+    margin-bottom:3px;
+}
 </style>
 </head>
 <body>    
@@ -1101,8 +1123,9 @@ function baris(nama, harga){
 <div id="popupMenu" class="popup">
     <div class="topping-item">
     <img src="bakso.png" alt="Bakso">
-    <div>
-        Bakso #1.000
+
+    <div class="topping-info">
+        <label>Bakso #1.000</label>
         <select id="bakso">
             <option>0</option>
             <option>1</option>
